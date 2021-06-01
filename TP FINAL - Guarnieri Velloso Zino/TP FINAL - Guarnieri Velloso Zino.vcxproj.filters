@@ -45,9 +45,6 @@
     <ClCompile Include="cTropa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sTropas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cArquero.h">

@@ -149,7 +149,6 @@
     <ClCompile Include="cPais.cpp" />
     <ClCompile Include="cTropa.cpp" />
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="sTropas.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cArquero.h" />

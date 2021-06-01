@@ -80,9 +80,6 @@
     <ClInclude Include="Enums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sTropas.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cListaT.h">
       <Filter>Header Files</Filter>
     </ClInclude>

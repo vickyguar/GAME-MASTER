@@ -139,7 +139,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cArquero.cpp" />
+    <ClCompile Include="cCaballero.cpp" />
+    <ClCompile Include="cGuerrero.cpp" />
+    <ClCompile Include="cJuego.cpp" />
+    <ClCompile Include="cJugador.cpp" />
+    <ClCompile Include="cLimítrofes.cpp" />
+    <ClCompile Include="cMago.cpp" />
+    <ClCompile Include="cPais.cpp" />
+    <ClCompile Include="cTropa.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="sTropas.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cArquero.h" />
+    <ClInclude Include="cCaballero.h" />
+    <ClInclude Include="cGuerrero.h" />
+    <ClInclude Include="cJuego.h" />
+    <ClInclude Include="cJugador.h" />
+    <ClInclude Include="cLimitrofes.h" />
+    <ClInclude Include="cListaT.h" />
+    <ClInclude Include="cMago.h" />
+    <ClInclude Include="cPais.h" />
+    <ClInclude Include="cTropa.h" />
+    <ClInclude Include="Enums.h" />
+    <ClInclude Include="sTropas.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,7 +7,7 @@
 
 int main()
 {
-	cJuego* GAME_MASTER = new cJuego();
+	cJuego* GAME_MASTER = new cJuego(2);
 	bool ListoXaJugar = Menu();
 	cJugador* Jugador_1;
 

@@ -14,6 +14,10 @@ cJuego::cJuego(){
 
 
 
+cJuego::cJuego(unsigned int cantjugadores)
+{
+}
+
 cJuego::~cJuego(){
 
 }

@@ -16,7 +16,7 @@ class cJuego
 private:
 	cListaT<cJugador>* Jugadores;
 public:
-	cJuego();
+	cJuego(unsigned int cantjugadores);
 	~cJuego();
 
 	void AsignarTurno(cJugador* Jugador);

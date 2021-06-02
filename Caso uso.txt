@@ -1,7 +1,0 @@
-Caso de uso
-1. Se imprime en pantalla los paises. 
-2. Cada jugador posiciona sus tropas.
-3. El JUGADOR1, debe decidir desde qué pais (de su poseción) atacara a otro pais limítrofe (que busca conquistar), y con qué grupo de tropa atacar. 
-3. Se localiza quién se debe defender y, luego, se desarrolla la batalla. 
-Segun los tipos de guerreros enfrentados, se analizan las variables en cuanto a su fortaleza. Por ejemplo, el JUGADOR1 ataca desde Argentina a Chile con un grupo de tres magos. Chile se defiende con 3 caballeros, por lo tanto, los magos son fuertes contra estos últimos (tienen un 25% más de su fuerza total). Como los caballeros se están defendiendo, tienen un contrataque (con 25% de aumento de daño).
-Batallan hasta que uno pierda

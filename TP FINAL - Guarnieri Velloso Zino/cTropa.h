@@ -19,7 +19,7 @@ private:
 
 public:
 	cTropa();
-	virtual ~cTropa();
+	~cTropa();
 	cListaT<cGuerrero> Guerreros;
 
 	unsigned int CalcularAT_Total();

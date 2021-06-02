@@ -19,7 +19,7 @@ public:
 	cJuego();
 	~cJuego();
 
-	AsignarTurno(cJugador Jugador);
+	void AsignarTurno(cJugador* Jugador);
 	void Batalla(cJugador* Jugador1, cPais* PaisAtacado, cPais* PaisAtacante, cTropa*** Tropas);
 	void ImprimirEstados() const;
 	cJugador* SetUp();

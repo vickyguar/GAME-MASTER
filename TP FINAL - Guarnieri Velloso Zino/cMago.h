@@ -15,7 +15,7 @@ class cMago : public cGuerrero
 
 public:
 	cMago();
-	virtual ~cMago();
+	~cMago();
 
 	unsigned int CondicionAtaque(cGuerrero* Atacado);
 	unsigned int GenerarAT();

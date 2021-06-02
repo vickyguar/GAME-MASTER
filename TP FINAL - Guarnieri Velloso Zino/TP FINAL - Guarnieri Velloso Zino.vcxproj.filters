@@ -62,9 +62,6 @@
     <ClInclude Include="cJugador.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cLimitrofes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cMago.h">
       <Filter>Header Files</Filter>
     </ClInclude>

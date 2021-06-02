@@ -15,7 +15,7 @@ class cCaballero : public cGuerrero
 
 public:
 	cCaballero();
-	virtual ~cCaballero();
+	~cCaballero();
 
 	unsigned int CondicionAtaque(cGuerrero* Atacado);
 	void Contrataque();

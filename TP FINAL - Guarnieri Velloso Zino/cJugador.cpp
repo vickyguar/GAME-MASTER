@@ -12,14 +12,9 @@ cJugador::cJugador(){
 
 }
 
-
-
 cJugador::~cJugador(){
 
 }
-
-
-
 
 
 /**

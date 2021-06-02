@@ -8,7 +8,7 @@
 #if !defined(EA_B34E5789_D7AB_47b3_BFBB_ABFA2C7A92ED__INCLUDED_)
 #define EA_B34E5789_D7AB_47b3_BFBB_ABFA2C7A92ED__INCLUDED_
 
-#include "string.h"
+
 #include "cPais.h"
 
 class cJugador
@@ -16,8 +16,8 @@ class cJugador
 
 public:
 	cJugador();
-	virtual ~cJugador();
-	cPais *m_cPais;
+	~cJugador();
+
 
 	unsigned int AtaqueEfectivo(cPais* PaisAtacante, cTropa*** Tropas);
 	void Defender(cPais* PaisAtacado, unsigned int AT_Contrincante);
@@ -27,6 +27,7 @@ public:
 private:
 	eEstadoJugador Estado;
 	const string Username;
+	cListaT<cPais>* Paises;
 
 };
 #endif // !defined(EA_B34E5789_D7AB_47b3_BFBB_ABFA2C7A92ED__INCLUDED_)

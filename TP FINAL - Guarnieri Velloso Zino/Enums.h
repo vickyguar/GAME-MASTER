@@ -19,7 +19,7 @@ enum class eEstadoJugador
 
 enum class eTipoGuerrero
 {
-	CABALLERO,
+	CABALLERO = 0,
 	MAGO,
 	ARQUERO
 };

@@ -15,7 +15,7 @@ class cArquero : public cGuerrero
 
 public:
 	cArquero();
-	virtual ~cArquero();
+	~cArquero();
 
 	bool AtaqueAleatorio();
 	unsigned int CondicionAtaque(cGuerrero* Atacado);

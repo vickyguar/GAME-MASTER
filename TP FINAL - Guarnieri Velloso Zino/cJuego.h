@@ -15,14 +15,18 @@ class cJuego
 {
 private:
 	cListaT<cJugador>* Jugadores;
+	unsigned int Rondas;
+	unsigned int TurnoPrevio;
 public:
 	cJuego(unsigned int cantjugadores);
 	~cJuego();
 
-	void AsignarTurno(cJugador* Jugador);
-	void Batalla(cJugador* Jugador1, cPais* PaisAtacado, cPais* PaisAtacante, cTropa*** Tropas);
+	void AsignarTurno();
+	void JugadorAtacando(unsigned int pos);
+	void Batallar(cJugador* Jugador1, cPais* PaisAtacado, cPais* PaisAtacante, cTropa*** Tropas);
 	void ImprimirEstados() const;
-	cJugador* SetUp(unsigned int mundo);
+	void SetUp(unsigned int mundo);
+	void SetUpJugadores(string nombre);
 
 };
 #endif // !defined(EA_D34FED27_7152_41ec_81AD_94CE58A64212__INCLUDED_)

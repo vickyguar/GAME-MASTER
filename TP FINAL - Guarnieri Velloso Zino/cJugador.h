@@ -10,12 +10,12 @@
 
 
 #include "cPais.h"
-
+#include "Enums.h"
 class cJugador
 {
 
 public:
-	cJugador();
+	cJugador(string _Username,eEstadoJugador _Estado=eEstadoJugador::ESPERANDO);
 	~cJugador();
 
 
@@ -23,6 +23,7 @@ public:
 	void Defender(cPais* PaisAtacado, unsigned int AT_Contrincante);
 	void Reagrupar(cPais* PaisOrigen, cPais* PaisDestino, unsigned int CantTropas, unsigned int NumTropa);
 	bool RenunciarTurno();
+	void setEstado(eEstadoJugador _Estado=eEstadoJugador::ATACANDO);
 
 private:
 	eEstadoJugador Estado;

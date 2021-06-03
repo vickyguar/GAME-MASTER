@@ -8,8 +8,10 @@
 #include "cJugador.h"
 
 
-cJugador::cJugador(){
-
+cJugador::cJugador(string _Username, eEstadoJugador _Estado):Username(_Username)
+{
+	Estado = _Estado;
+	Paises = new cListaT<cPais>[]; //TODO: cantidad de paises inciales para jugar??
 }
 
 cJugador::~cJugador(){
@@ -39,4 +41,9 @@ void cJugador::Reagrupar(cPais* PaisOrigen, cPais* PaisDestino, unsigned int Can
 bool cJugador::RenunciarTurno(){
 
 	return false;
+}
+
+void cJugador::setEstado(eEstadoJugador _Estado)
+{
+	Estado = _Estado;
 }

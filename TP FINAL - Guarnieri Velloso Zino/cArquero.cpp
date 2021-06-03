@@ -8,7 +8,7 @@
 #include "cArquero.h"
 
 
-cArquero::cArquero(unsigned int _AT, unsigned int _AT_ESPECIAL, unsigned int _HP_ACTUAL, unsigned int _HP_INICIAL, unsigned int _LimiteVida)::cGuerrero(_AT,_AT_ESPECIAL,_HP_ACTUAL,_HP_INICIAL,_LimiteVida){
+cArquero::cArquero(unsigned int _AT, unsigned int _AT_ESPECIAL, unsigned int _HP_ACTUAL, unsigned int _HP_INICIAL, unsigned int _LimiteVida):cGuerrero(_AT,_AT_ESPECIAL,_HP_ACTUAL,_HP_INICIAL,_LimiteVida){
 	HP_Inicial = (rand() % 21) + 60;
 	HP_Actual = HP_Inicial;
 	AT = (rand() % 11) + 20;

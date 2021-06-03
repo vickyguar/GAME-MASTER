@@ -30,7 +30,8 @@ void cJuego::AsignarTurno(){
 	}
 	if (TurnoPrevio < Jugadores->getCA())
 	{
-		(*Jugadores)[TurnoPrevio++]->setEstado();
+		TurnoPrevio++;
+		(*Jugadores)[TurnoPrevio]->setEstado();
 		JugadorAtacando(TurnoPrevio);
 	}
 	else {

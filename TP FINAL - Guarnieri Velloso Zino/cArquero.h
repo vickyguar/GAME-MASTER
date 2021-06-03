@@ -12,9 +12,9 @@
 
 class cArquero : public cGuerrero
 {
-
+	
 public:
-	cArquero();
+	cArquero(unsigned int _AT,unsigned int _AT_ESPECIAL,unsigned int _HP_ACTUAL,unsigned int _HP_INICIAL,unsigned int _LimiteVida);
 	~cArquero();
 
 	bool AtaqueAleatorio();

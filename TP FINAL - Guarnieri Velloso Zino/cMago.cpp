@@ -8,7 +8,7 @@
 #include "cMago.h"
 
 
-cMago::cMago(){
+cMago::cMago(unsigned int _AT, unsigned int _AT_ESPECIAL, unsigned int _HP_ACTUAL, unsigned int _HP_INICIAL, unsigned int _LimiteVida):cGuerrero(_AT, _AT_ESPECIAL, _HP_ACTUAL, _HP_INICIAL, _LimiteVida){
 
 }
 

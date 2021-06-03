@@ -14,7 +14,7 @@ class cCaballero : public cGuerrero
 {
 
 public:
-	cCaballero();
+	cCaballero(unsigned int _AT, unsigned int _AT_ESPECIAL, unsigned int _HP_ACTUAL, unsigned int _HP_INICIAL, unsigned int _LimiteVida);
 	~cCaballero();
 
 	unsigned int CondicionAtaque(cGuerrero* Atacado);

@@ -8,8 +8,13 @@
 #include "cMago.h"
 
 
-cMago::cMago(){
-
+cMago::cMago(unsigned int _AT, unsigned int _AT_ESPECIAL, unsigned int _HP_ACTUAL, unsigned int _HP_INICIAL, unsigned int _LimiteVida):cGuerrero(_AT, _AT_ESPECIAL, _HP_ACTUAL, _HP_INICIAL, _LimiteVida){
+	//10 - 20 y entre 40 y 60 de vida
+	AT = (rand() % 11) + 10;
+	AT_Especial = AT;
+	HP_Inicial = (rand() % 21) + 40;
+	HP_Actual = HP_Inicial;
+	LimiteVida = HP_Inicial - (0.05 * HP_Inicial);
 }
 
 

@@ -14,7 +14,7 @@ class cMago : public cGuerrero
 {
 
 public:
-	cMago();
+	cMago(unsigned int _AT, unsigned int _AT_ESPECIAL, unsigned int _HP_ACTUAL, unsigned int _HP_INICIAL, unsigned int _LimiteVida);
 	~cMago();
 
 	unsigned int CondicionAtaque(cGuerrero* Atacado);

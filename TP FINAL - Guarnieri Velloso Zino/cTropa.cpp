@@ -8,28 +8,25 @@
 #include "cTropa.h"
 
 
-cTropa::cTropa(){
-
+cTropa::cTropa(unsigned int _NumTropa,unsigned int _AT_Total){
+	NumTropa = _NumTropa;
+	AT_Total = _AT_Total;
+	Guerreros = new cListaT<cGuerrero>();
 }
-
-
 
 cTropa::~cTropa(){
-
+	if (Guerreros != NULL)
+		delete Guerreros;
 }
 
 
-
-
-
-/**
- * recorre la lista de guerreros y devuelve la suma de los AT de estas
- */
-unsigned int cTropa::CalcularAT_Total(){
-
-	return 0;
+void cTropa::CalcularAT_Total() {
+	AT_Total = 0;
+	for (unsigned int i = 0; i < Guerreros->getCA(); i++) {
+		AT_Total += (*Guerreros)[i]->getAT();
+	}
+	return;
 }
-
 
 void cTropa::RecibirDanio(unsigned int AT_Ataque){
 

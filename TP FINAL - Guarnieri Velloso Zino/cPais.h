@@ -9,6 +9,7 @@
 #define EA_B1B84F12_99FE_46f8_81E7_71FAB22C81F1__INCLUDED_
 
 #include <string>
+#include "Enums.h"
 #include "cTropa.h"
 
 using namespace std;

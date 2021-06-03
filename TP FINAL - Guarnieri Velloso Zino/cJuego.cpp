@@ -31,7 +31,8 @@ void cJuego::AsignarTurno(){
 	}
 	if (TurnoPrevio < Jugadores->getCA())
 	{
-		(*Jugadores)[TurnoPrevio++]->setEstado();
+		TurnoPrevio++;
+		(*Jugadores)[TurnoPrevio]->setEstado();
 		JugadorAtacando(TurnoPrevio);
 	}
 	else {
@@ -57,7 +58,7 @@ void cJuego::Batallar(cJugador* Jugador1, cPais* PaisAtacado, cPais* PaisAtacant
 }
 
 
-void cJuego::ImprimirEstados(){
+void cJuego::ImprimirEstados() const {
 
 }
 

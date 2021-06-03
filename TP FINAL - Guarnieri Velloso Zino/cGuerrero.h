@@ -17,7 +17,7 @@ class cGuerrero
 {
 
 public:
-	cGuerrero();
+	cGuerrero(unsigned int _AT, unsigned int _AT_Especial, unsigned int _HP_Actual, unsigned int _HP_Inicial, unsigned int _LimiteVide);
 	virtual ~cGuerrero();
 
 	virtual unsigned int CondicionAtaque(cGuerrero* Atacado); //Podemos hacerlo como los chicos con un template

@@ -24,6 +24,8 @@ public:
 	virtual unsigned int GenerarAT();
 	virtual unsigned int GenerarHP();
 
+	unsigned int getAT() const;
+
 protected:
 	unsigned int AT;
 	unsigned int AT_Especial;

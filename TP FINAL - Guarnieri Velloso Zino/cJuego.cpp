@@ -10,7 +10,7 @@
 
 cJuego::cJuego(unsigned int cantjugadores)
 {
-	Jugadores = new cListaT<cJugador>[cantjugadores];
+	Jugadores = new cListaT<cJugador>[cantjugadores]; //TODO: Mepa que no es así, es con ()
 	Rondas = 0;
 	TurnoPrevio = 0;
 }
@@ -57,7 +57,7 @@ void cJuego::Batallar(cJugador* Jugador1, cPais* PaisAtacado, cPais* PaisAtacant
 }
 
 
-void cJuego::ImprimirEstados(){
+void cJuego::ImprimirEstados() const {
 
 }
 

@@ -43,3 +43,8 @@ unsigned int cGuerrero::GenerarHP(){
 
 	return 0;
 }
+
+unsigned int cGuerrero::getAT() const
+{
+	return AT;
+}

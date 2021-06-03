@@ -11,6 +11,7 @@
 cJuego::cJuego(unsigned int cantjugadores)
 {
 	Jugadores = new cListaT<cJugador>[cantjugadores];
+	Mundo = new cMundo(); 
 	Rondas = 0;
 	TurnoPrevio = 0;
 }
@@ -63,7 +64,10 @@ void cJuego::ImprimirEstados(){
 
 void cJuego::SetUp(unsigned int mundo){
 	
-	//TODO:
+	string str = "MUNDO " + to_string(mundo)+ ".txt"; //nombre del archivo
+	const char* Filename = str.c_str();
+	Mundo->LeerArchivo(Filename);
+
 }
 void cJuego::SetUpJugadores(string nombre)
 {

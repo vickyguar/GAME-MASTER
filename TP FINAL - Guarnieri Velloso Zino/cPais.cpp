@@ -8,19 +8,15 @@
 #include "cPais.h"
 
 
-cPais::cPais(){
-
+cPais::cPais(string Nombre)
+{
+	this->Nombre = Nombre;
+	this->Limitrofes = new cListaT<cPais>[]; 
 }
-
-
 
 cPais::~cPais(){
 
 }
-
-
-
-
 
 unsigned int cPais::CalcularAT_Tropas(cTropa*** Tropas){
 

@@ -146,6 +146,7 @@
     <ClCompile Include="cJugador.cpp" />
     <ClCompile Include="cLimítrofes.cpp" />
     <ClCompile Include="cMago.cpp" />
+    <ClCompile Include="cMundo.cpp" />
     <ClCompile Include="cPais.cpp" />
     <ClCompile Include="cTropa.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="cJugador.h" />
     <ClInclude Include="cListaT.h" />
     <ClInclude Include="cMago.h" />
+    <ClInclude Include="cMundo.h" />
     <ClInclude Include="cPais.h" />
     <ClInclude Include="cTropa.h" />
     <ClInclude Include="Enums.h" />

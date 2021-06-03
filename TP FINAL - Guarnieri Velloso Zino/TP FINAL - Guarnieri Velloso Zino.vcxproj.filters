@@ -45,6 +45,9 @@
     <ClCompile Include="cTropa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cMundo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cArquero.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cMundo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

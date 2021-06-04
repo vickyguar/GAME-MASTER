@@ -47,3 +47,13 @@ void cJugador::setEstado(eEstadoJugador _Estado)
 {
 	Estado = _Estado;
 }
+
+eEstadoJugador cJugador::getEstado()
+{
+	return Estado;
+}
+
+string cJugador::getUsername()
+{
+	return Username;
+}

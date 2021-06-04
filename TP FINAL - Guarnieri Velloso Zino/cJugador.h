@@ -24,6 +24,8 @@ public:
 	void Reagrupar(cPais* PaisOrigen, cPais* PaisDestino, unsigned int CantTropas, unsigned int NumTropa);
 	bool RenunciarTurno();
 	void setEstado(eEstadoJugador _Estado=eEstadoJugador::ATACANDO);
+	eEstadoJugador getEstado();
+	string getUsername();
 
 private:
 	eEstadoJugador Estado;

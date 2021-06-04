@@ -7,12 +7,12 @@
 
 #include "cJuego.h"
 
+unsigned int cJuego::Rondas = 0;
 
 cJuego::cJuego(unsigned int cantjugadores)
 {
 	Jugadores = new cListaT<cJugador>[cantjugadores];
 	Mundo = new cMundo(); 
-	Rondas = 0;
 	TurnoPrevio = 0;
 }
 
@@ -40,7 +40,7 @@ void cJuego::AsignarTurno(){
 		(*Jugadores)[TurnoPrevio]->setEstado();
 		JugadorAtacando(TurnoPrevio);
 	}
-
+	Rondas++; //ternimo la ronda, viene la siguente
 }
 
 void cJuego::JugadorAtacando(unsigned int pos)
@@ -49,7 +49,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 	do {
 		//TODO:INFO PARA BATALLAR
 		cant++;
-	} while (cant < 3 || !((*Jugadores)[pos]->RenunciarTurno()));
+	} while (cant < 3 || !((*Jugadores)[pos]->RenunciarTurno()) || (*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR);
 }
 
 
@@ -67,10 +67,65 @@ void cJuego::SetUp(unsigned int mundo){
 	
 	string str = "MUNDO " + to_string(mundo)+ ".txt"; //nombre del archivo
 	const char* Filename = str.c_str();
-	Mundo->LeerArchivo(Filename);
+	try
+	{
+		Mundo->LeerArchivo(Filename, &Mundo->GetLimitrofes());
+	}
+	catch (exception* ex)
+	{
+		throw ex; //TODO: cambiar ex
+	}
+	
 
 }
 void cJuego::SetUpJugadores(string nombre)
 {
 	Jugadores->Agregar(&cJugador(nombre));
+	if (Mundo->GetLista()->getCA() % Jugadores->getCA());
+	
+}
+
+unsigned int cJuego::CalcularResiduo(int Num1, int Num2)
+{
+	if (Num2 != 0)
+	{
+		float Division = Num1 / Num2;
+		int ParteEntera = Num1 / Num2;
+		int Residuo = (Division - ParteEntera) * Num2;
+		return Residuo;
+	}
+	else
+		throw new exception(" --- Division por cero --- ");
+}
+
+void cJuego::AsignarPaisesRandom()
+{
+	//listem
+	float Division = Mundo->GetLista()->getCA() / Jugadores->getCA();
+	cListaT<cPais>* Temporal = Mundo->GetLista(); //TODO: operador =
+
+	for (unsigned int i = 0; i < (int)Division; i++)
+	{
+		//TODO: random
+		//TODO: asignar tropas random pAIS[1]->AsignarTropa();
+		//TODO: la agrego al jugador el pais con sus tropas (por copia)
+	}
+
+	if (Division - (int)Division != 0) //se reparten la misma cantidad para todos los jugadores
+	{
+		unsigned int PaisesSobrantes = CalcularResiduo(Mundo->GetLista()->getCA(), Jugadores->getCA()); //cantidad paises, cantidad jugadores
+		//TODO: rando para ver quien se queda con paises
+		//TODO: asigno paises
+	}
+
+}
+
+int cJuego::getRondas()
+{
+	return Rondas;
+}
+
+cJugador* cJuego::getJugadorAtacante()
+{
+	//return Jugadores->BuscarEstado(eEstadoJugador::ATACANDO);
 }

@@ -16,7 +16,7 @@ class cJuego
 {
 private:
 	cListaT<cJugador>* Jugadores;
-	unsigned int Rondas;
+	static unsigned int Rondas;
 	unsigned int TurnoPrevio;
 	cMundo* Mundo;
 
@@ -31,5 +31,10 @@ public:
 	void SetUp(unsigned int mundo);
 	void SetUpJugadores(string nombre);
 
+	unsigned int CalcularResiduo(int Num1, int Num2);
+	//int* ReparticionPaises();
+	void AsignarPaisesRandom();
+	static int getRondas();
+	cJugador* getJugadorAtacante();
 };
 #endif // !defined(EA_D34FED27_7152_41ec_81AD_94CE58A64212__INCLUDED_)

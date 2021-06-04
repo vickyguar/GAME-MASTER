@@ -8,10 +8,9 @@
 #include "cPais.h"
 
 
-cPais::cPais(string Nombre)
+cPais::cPais(string Nombre, vector<string> Limitrofes): ListaLimitrofes(Limitrofes)
 {
 	this->Nombre = Nombre;
-	this->Limitrofes = new cListaT<cPais>[]; 
 }
 
 cPais::~cPais(){
@@ -35,4 +34,9 @@ void cPais::ModificarTropa(cTropa* NumTropa1, bool Unificar, cTropa* NumeroTropa
 
 void cPais::VerificarLimitrofes(cPais* PaisLimitrofe){
 
+}
+
+vector<string> cPais::GetListaLimitrofes()
+{
+	return ListaLimitrofes;
 }

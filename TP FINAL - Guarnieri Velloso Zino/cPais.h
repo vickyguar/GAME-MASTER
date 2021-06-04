@@ -9,6 +9,7 @@
 #define EA_B1B84F12_99FE_46f8_81E7_71FAB22C81F1__INCLUDED_
 
 #include <string>
+#include <vector>
 #include "Enums.h"
 #include "cTropa.h"
 
@@ -18,21 +19,22 @@ class cPais
 {
 
 private:
-	//const string Continente;
 	string Nombre;
 	cListaT<cTropa>* cTropas;
-	cListaT<cPais>* Limitrofes;
+	const vector<string> ListaLimitrofes;
 
 public:
-	cPais(string Nombre);
+	cPais(string Nombre, vector<string> Limitrofes);
 	cPais(cPais &Pais);
 	~cPais();
 
 	unsigned int CalcularAT_Tropas(cTropa*** Tropas);
-	void ModificarTropa(cTropa* NumTropa1, bool Unificar, cTropa* NumeroTropa2);
+	void ModificarTropa(cTropa* NumTropa1, cTropa* NumeroTropa2);
 	void VerificarLimitrofes(cPais* PaisLimitrofe);
+	void AsignarTropas(); //es random
+	vector<string> GetListaLimitrofes(); 
 
-	void setLimitrofes(cPais* Limitrofe);
+	//void setLimitrofes(cPais* Limitrofe);
 
 };
 #endif // !defined(EA_B1B84F12_99FE_46f8_81E7_71FAB22C81F1__INCLUDED_)

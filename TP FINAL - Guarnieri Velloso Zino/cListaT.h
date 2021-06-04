@@ -51,6 +51,7 @@ cListaT<T>::cListaT(unsigned int _TAM, bool _Delete)
 	Delete = _Delete;
 	CA = 0;
 
+	Lista = new T * [TAM];
 	//Creo la lista dinamica
 	for (unsigned int i = 0; i < TAM; i++)
 	{
@@ -136,7 +137,7 @@ void cListaT<T>::Eliminar(const string Key)
 template<class T>
 void cListaT<T>::Redimensionar()
 {
-	unisgned int n = 2 * TAM;
+	unsigned int n = 2 * TAM;
 	T** aux = new T * [n]; //se redimensiona al doble del tam original
 	
 	//---------

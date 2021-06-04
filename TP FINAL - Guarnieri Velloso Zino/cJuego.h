@@ -10,6 +10,7 @@
 
 #include "cJugador.h"
 #include "cListaT.h"
+#include "cMundo.h"
 
 class cJuego
 {
@@ -17,6 +18,8 @@ private:
 	cListaT<cJugador>* Jugadores;
 	unsigned int Rondas;
 	unsigned int TurnoPrevio;
+	cMundo* Mundo;
+
 public:
 	cJuego(unsigned int cantjugadores);
 	~cJuego();

@@ -56,7 +56,11 @@ int main()
 	//se juega mientras que el numero de ronda sea < a 10 o que haya un jugador que haya conquistado el MUNDOOOO!
 
 	if (GAME_MASTER->getJugadorAtacante()->getEstado() == eEstadoJugador::GANADOR)
+	{
+		system("color E4");
 		cout << GAME_MASTER->getJugadorAtacante()->getUsername() << " has logrado conquistar el MUNDO :)" << endl;
+	}
+		
 
 	delete GAME_MASTER; //supongo que aca se borra todo lo creado (paises, jugadores, tropas, etc)
 	return 0;

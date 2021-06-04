@@ -28,6 +28,6 @@ void cTropa::CalcularAT_Total() {
 	return;
 }
 
-void cTropa::RecibirDanio(unsigned int AT_Ataque){
+void cTropa::RecibirDanio(unsigned int AT_Ataque) {
 
 }

@@ -19,7 +19,7 @@ private:
 	static unsigned int ContTropas;
 
 public:
-	cTropa(unsigned int _NumTropa, unsigned int _AT_Total = 0);
+	cTropa();
 	~cTropa();
 
 	unsigned int CalcularAT_Total();

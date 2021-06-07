@@ -22,6 +22,7 @@ public:
 
 	virtual unsigned int CondicionAtaque(cGuerrero* Atacado) = 0; //Podemos hacerlo como los chicos con un template
 	unsigned int getAT() const;
+	virtual unsigned int CalcularDanio() const = 0;
 
 protected:
 	unsigned int AT;

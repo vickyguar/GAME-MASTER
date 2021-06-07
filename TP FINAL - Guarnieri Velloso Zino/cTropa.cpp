@@ -6,11 +6,11 @@
 ///////////////////////////////////////////////////////////
 
 #include "cTropa.h"
+unsigned int cTropa::ContTropas = 0;
 
-
-cTropa::cTropa(unsigned int _NumTropa,unsigned int _AT_Total){
-	NumTropa = _NumTropa;
-	AT_Total = _AT_Total;
+cTropa::cTropa(){
+	ContTropas++;
+	NumTropa = ContTropas;
 	Guerreros = new cListaT<cGuerrero>();
 }
 
@@ -20,12 +20,12 @@ cTropa::~cTropa(){
 }
 
 
-void cTropa::CalcularAT_Total() {
-	AT_Total = 0;
+unsigned int cTropa::CalcularAT_Total() {
+	unsigned int AT_Total = 0;
 	for (unsigned int i = 0; i < Guerreros->getCA(); i++) {
 		AT_Total += (*Guerreros)[i]->getAT();
 	}
-	return;
+	return AT_Total;
 }
 
 void cTropa::RecibirDanio(unsigned int AT_Ataque) {

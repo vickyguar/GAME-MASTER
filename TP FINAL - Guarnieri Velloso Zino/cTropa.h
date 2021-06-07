@@ -19,8 +19,12 @@ private:
 	static unsigned int ContTropas;
 
 public:
+#pragma region CONSTRUCTORES & DESTRUCTORES
+
 	cTropa();
 	~cTropa();
+
+#pragma endregion
 
 	unsigned int CalcularAT_Total();
 	void RecibirDanio(unsigned int AT_Ataque);

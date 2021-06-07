@@ -14,12 +14,17 @@ class cMago : public cGuerrero
 {
 
 public:
-	cMago(unsigned int _AT, unsigned int _AT_ESPECIAL, unsigned int _HP_ACTUAL, unsigned int _HP_INICIAL, unsigned int _LimiteVida);
+#pragma region CONSTRUCTORES & DESTRUCTORES
+
+	cMago(unsigned int _AT, unsigned int _HP_ACTUAL, unsigned int _HP_INICIAL);
 	~cMago();
+
+#pragma endregion
+
+	
 
 	unsigned int CondicionAtaque(cGuerrero* Atacado);
 	unsigned int GenerarAT();
-	unsigned int GenerarHP();
 
 };
 #endif // !defined(EA_DDB78A6D_FFB6_43b8_9A90_EB602687C8BF__INCLUDED_)

@@ -1,13 +1,13 @@
 #pragma once
+
+#include <stdlib.h>
 #include "cListaT.h"
 #include "cPais.h"
-#include <stdlib.h>
 
 class cMundo
 {
 private:
 	cListaT<cPais>* ListaPaises;
-
 
 #pragma region METODOS DE ARCHIVOS
 
@@ -15,7 +15,6 @@ private:
 
 #pragma endregion
 	
-
 public:
 #pragma region CONSTRUCTORES & DESTRUCTORES
 
@@ -23,10 +22,18 @@ public:
 	~cMundo();
 #pragma endregion
 
-#
+#pragma region SET UP
+
 	void PaisesLimitrofes(string& Limitrofes, string NombrePais); //Crear array de strings con nombres de paises limitrofes PARA 1 SOLO PAIS
 	string BuscarNombrePais(string str, char separator, int* pos);
 	void SetUp(const char* Filename);
+
+#pragma endregion
+
+#pragma region GETTERS & SETTERS
+
 	cListaT<cPais>* GetLista();
+
+#pragma endregion
 };
 

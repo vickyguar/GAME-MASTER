@@ -13,20 +13,26 @@
 class cCaballero : public cGuerrero
 {
 
+private:
+
+	unsigned int AT_Contrataque; //0.25% AT
+
 public:
-	cCaballero(unsigned int _AT, unsigned int _AT_ESPECIAL, unsigned int _HP_ACTUAL, unsigned int _HP_INICIAL, unsigned int _LimiteVida);
+#pragma region CONSTRUCTORES & DESTRUCTORES
+
+	cCaballero(unsigned int _AT, unsigned int _HP_ACTUAL, unsigned int _HP_INICIAL);
 	~cCaballero();
+
+#pragma endregion
+
+#pragma region GENERADORES
+
+	unsigned int GenerarAT();
+
+#pragma endregion
 
 	unsigned int CondicionAtaque(cGuerrero* Atacado);
 	void Contrataque();
-	unsigned int GenerarAT();
-	unsigned int GenerarHP();
-
-private:
-	/**
-	 * 0.25% AT
-	 */
-	unsigned int AT_Contrataque;
 
 };
 #endif // !defined(EA_9AC6C449_ED7E_4e46_8F84_741DAFDA5EC4__INCLUDED_)

@@ -37,6 +37,12 @@ public:
 	void ModificarTropa(cTropa* NumTropa1, cTropa* NumeroTropa2);
 	void VerificarLimitrofes(cPais* PaisLimitrofe);
 	void AsignarTropasRandom(); //es random
-	vector<string> GetListaLimitrofes(); 
+
+#pragma region GETTERS & SETTERS
+
+	vector<string> GetListaLimitrofes();
+
+#pragma endregion
+
 };
 #endif // !defined(EA_B1B84F12_99FE_46f8_81E7_71FAB22C81F1__INCLUDED_)

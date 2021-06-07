@@ -14,13 +14,14 @@ class cArquero : public cGuerrero
 {
 	
 public:
-	cArquero(unsigned int _AT,unsigned int _AT_ESPECIAL,unsigned int _HP_ACTUAL,unsigned int _HP_INICIAL,unsigned int _LimiteVida);
+#pragma region CONSTRUCTORES & DESTRUCTORES
+	cArquero(unsigned int _AT, unsigned int _HP_ACTUAL, unsigned int _HP_INICIAL);
 	~cArquero();
+#pragma endregion
 
 	bool AtaqueAleatorio();
 	unsigned int CondicionAtaque(cGuerrero* Atacado);
 	unsigned int GenerarAT();
-	unsigned int GenerarHP();
 
 };
 #endif // !defined(EA_1D30E1A9_0ECE_4a1f_8499_7609DA9E69C2__INCLUDED_)

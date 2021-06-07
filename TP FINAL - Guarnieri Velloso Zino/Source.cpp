@@ -46,10 +46,10 @@ int main()
 	}
 	else { return 0; }
 
+	GAME_MASTER->ImprimirEstados(); //lo que tiene cada jugador (osea sus paises)
 	do
 	{
-		GAME_MASTER->ImprimirEstados(); //lo que tiene cada jugador (osea sus paises)
-		GAME_MASTER->AsignarTurno(); //elijo el jugador que empieza
+		GAME_MASTER->AsignarTurno(); //Se asigna el turno, y se envía alusuario a jugar. 
 
 	} while (GAME_MASTER->getRondas() < 10 || GAME_MASTER->getJugadorAtacante()->getEstado() != eEstadoJugador::GANADOR); //TODO: las condiciones serían: que haya un ganador o supere un maximo de 10 turnos
 

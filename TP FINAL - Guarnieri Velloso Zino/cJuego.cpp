@@ -21,7 +21,7 @@ cJuego::~cJuego(){
 }
 
 void cJuego::AsignarTurno(){
-	if (Rondas % (Jugadores->getCA()) == 0)
+	if (Rondas % (Jugadores->getCA()) != 0)
 	{
 		if (Rondas == 0)
 		{
@@ -44,7 +44,8 @@ void cJuego::AsignarTurno(){
 		Rondas++; //ternimo la ronda, viene la siguente
 		
 	}
-	FindeRondaEntera();
+	else
+		FindeRondaEntera();
 }
 
 void cJuego::JugadorAtacando(unsigned int pos)
@@ -53,7 +54,6 @@ void cJuego::JugadorAtacando(unsigned int pos)
 	unsigned int pospais;
 	do {
 		//TODO:INFO PARA BATALLAR. VERIFICACIONES REDUCIR EN METODOS MINIS (RECURSIVIDAD)
-		ImprimirEstados();
 		/*cout << "\n ---- JUGADOR " << (*Jugadores)[pos]->getUsername() <<" ---- "<< endl;
 		cout<<" Introduzca el numero pais desde el que quiere atacar: \n";
 		cin >> pospais;

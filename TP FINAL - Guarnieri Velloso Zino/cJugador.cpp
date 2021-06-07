@@ -55,9 +55,10 @@ void cJugador::AgregarTropas()
 	unsigned int aux = Paises->getCA() / 2;
 	cListaT<cTropa>* auxTropas = new cListaT<cTropa>[aux];
 	cout << Username << " tenes " << aux << "TROPAS NUEVAS PARA AGREGAR A TU EJERCITO";
-	//for(unsigned int i=0;i<aux;i++)
-		//(*auxTropas)+(new cTropa(NUMERO DE TROPA))
-	//TODO:QUE HACEMOS CON EL NUMERO DE TROPA
+	for (unsigned int i = 0; i < aux; i++)
+		(*auxTropas) + (new cTropa());
+
+	//TODO:QUE HACEMOS CON LAS CREADAS
 
 
 }

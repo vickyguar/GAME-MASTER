@@ -73,6 +73,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 
 		Reagrupar(pos);
 		cant++;
+		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
 	} while (cant < 3 || !((*Jugadores)[pos]->RenunciarTurno()) || (*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR);
 }
 

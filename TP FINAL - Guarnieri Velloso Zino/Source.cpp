@@ -28,7 +28,7 @@ int main()
 		
 		GAME_MASTER = new cJuego(CANT); 
 		//abro archivo y creo el mundo
-		GAME_MASTER->SetUp(Mundo); //a esta altura ya tenemos la cantidad de paises
+		GAME_MASTER->SetUpMundo(Mundo); //a esta altura ya tenemos la cantidad de paises
 
 		//pregunto cantidad de jugadores -> por ahora es de a 2 :)
 

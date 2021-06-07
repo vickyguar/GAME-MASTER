@@ -7,7 +7,14 @@ class cMundo
 {
 private:
 	cListaT<cPais>* ListaPaises;
+
+
+#pragma region METODOS DE ARCHIVOS
+
 	void LeerArchivo(const char* Filename);
+
+#pragma endregion
+	
 
 public:
 #pragma region CONSTRUCTORES & DESTRUCTORES
@@ -16,17 +23,10 @@ public:
 	~cMundo();
 #pragma endregion
 
-
-	bool Divisible(int Num1, int Num2);
-
-	void PaisesLimitrofes(string& Limitrofes, string nombre); //Crear array de strings con nombres de paises limitrofes PARA 1 SOLO PAIS
+#
+	void PaisesLimitrofes(string& Limitrofes, string NombrePais); //Crear array de strings con nombres de paises limitrofes PARA 1 SOLO PAIS
 	string BuscarNombrePais(string str, char separator, int* pos);
-	void SetUpMundo(const char* Filename);
+	void SetUp(const char* Filename);
 	cListaT<cPais>* GetLista();
-#pragma region METODOS DE ARCHIVOS
-
-
-#pragma endregion
-
 };
 

@@ -15,29 +15,53 @@
 class cJuego
 {
 private:
-	cListaT<cJugador>* Jugadores;
-	static unsigned int Rondas;
-	unsigned int TurnoPrevio;
-	cMundo* Mundo;
+	cListaT<cJugador>* Jugadores; //lista de jugadores
+	static unsigned int Rondas; //contador de la cantidad de rondas
+	unsigned int TurnoPrevio; //el numero del turno previo
+	cMundo* Mundo; //ptr a mundo
 
 public:
+#pragma region CONSTRUCTORES & DESTRUCTORES
+
 	cJuego(unsigned int cantjugadores);
 	~cJuego();
+
+#pragma endregion
+#pragma region METODOS DEL JUEGO
+
+#pragma endregion
 
 	void AsignarTurno();
 	void JugadorAtacando(unsigned int pos);
 	void Batallar(cJugador* Jugador1, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas);
-	void ImprimirEstados() const;
-	void SetUp(unsigned int mundo);
-	void SetUpJugadores(string nombre);
+	
 	void Reagrupar(unsigned int pos);
 	void FindeRondaEntera();
 
+#pragma region SETUP'S
 
-	unsigned int CalcularResiduo(int Num1, int Num2);
-	//int* ReparticionPaises();
-	void AsignarPaisesRandom();
+	void SetUpMundo(unsigned int mundo);
+	void SetUpJugadores(string username);
+
+#pragma endregion
+
+#pragma region GETTERS & SETTERS
+
 	static int getRondas();
 	cJugador* getJugadorAtacante();
+
+#pragma endregion
+
+#pragma region IMPRIMIR & TO STRING
+
+	void ImprimirEstados() const;
+
+#pragma endregion
+
+	//int* ReparticionPaises();
+	void AsignarPaisesRandom();
+	
 };
+
+static unsigned int CalcularResiduo(int Num1, int Num2);
 #endif // !defined(EA_D34FED27_7152_41ec_81AD_94CE58A64212__INCLUDED_)

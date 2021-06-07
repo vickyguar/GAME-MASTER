@@ -87,22 +87,20 @@ void cJuego::ImprimirEstados() const {
 
 }
 
-
-void cJuego::SetUp(unsigned int mundo){
+void cJuego::SetUpMundo(unsigned int mundo){
 	
 	string str = "MUNDO " + to_string(mundo)+ ".txt"; //nombre del archivo
 	const char* Filename = str.c_str();
 	try
 	{
-		Mundo->LeerArchivo(Filename, &Mundo->GetLimitrofes());
+		Mundo->SetUp(Filename);
 	}
 	catch (exception* ex)
 	{
 		throw ex; //TODO: cambiar ex
 	}
-	
-
 }
+
 void cJuego::SetUpJugadores(string nombre)
 {
 	Jugadores->Agregar(&cJugador(nombre));
@@ -121,19 +119,6 @@ void cJuego::FindeRondaEntera()
 	{
 		(*Jugadores)[i]->AgregarTropas();
 	}
-}
-
-unsigned int cJuego::CalcularResiduo(int Num1, int Num2)
-{
-	if (Num2 != 0)
-	{
-		float Division = Num1 / Num2;
-		int ParteEntera = Num1 / Num2;
-		int Residuo = (Division - ParteEntera) * Num2;
-		return Residuo;
-	}
-	else
-		throw new exception(" --- Division por cero --- ");
 }
 
 void cJuego::AsignarPaisesRandom()
@@ -166,4 +151,17 @@ int cJuego::getRondas()
 cJugador* cJuego::getJugadorAtacante()
 {
 	//return Jugadores->BuscarEstado(eEstadoJugador::ATACANDO);
+}
+
+unsigned int CalcularResiduo(int Num1, int Num2)
+{
+	if (Num2 != 0)
+	{
+		float Division = Num1 / Num2;
+		int ParteEntera = Num1 / Num2;
+		int Residuo = (Division - ParteEntera) * Num2;
+		return Residuo;
+	}
+	else
+		throw new exception(" --- Division por cero --- ");
 }

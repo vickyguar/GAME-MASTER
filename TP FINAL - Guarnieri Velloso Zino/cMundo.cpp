@@ -10,11 +10,6 @@ cMundo::~cMundo()
 {
 }
 
-bool cMundo::Divisible(int Num1, int Num2)
-{
-	return false;
-}
-
 void cMundo::LeerArchivo(const char* Filename)
 {
 
@@ -90,7 +85,14 @@ cListaT<cPais>* cMundo::GetLista()
 	return ListaPaises;
 }
 
-void cMundo::SetUpMundo(const char* Filename)
+void cMundo::SetUp(const char* Filename)
 {
-	LeerArchivo(Filename);
+	try
+	{
+		LeerArchivo(Filename);
+	}
+	catch (exception* ex)
+	{
+		//TODO: hacer algo con la excepcion
+	}
 }

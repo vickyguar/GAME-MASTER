@@ -13,6 +13,10 @@ cPais::cPais(string Nombre, vector<string> Limitrofes): ListaLimitrofes(Limitrof
 	this->Nombre = Nombre;
 }
 
+cPais::cPais(cPais& Pais)
+{
+}
+
 cPais::~cPais(){
 
 }

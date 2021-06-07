@@ -22,17 +22,21 @@ private:
 	string Nombre;
 	cListaT<cTropa>* cTropas;
 	const vector<string> ListaLimitrofes;
+	static cListaT<cPais> ListaPaises;
 
 public:
+#pragma region CONSTRUCTORES & DESTRUCTORES
+
 	cPais(string Nombre, vector<string> Limitrofes);
-	cPais(cPais &Pais);
+	cPais(cPais& Pais);
 	~cPais();
 
-	unsigned int CalcularAT_Tropas(cTropa*** Tropas);
+#pragma endregion
+
+	unsigned int CalcularAT_Tropas(cListaT<cTropa>* Tropas);
 	void ModificarTropa(cTropa* NumTropa1, cTropa* NumeroTropa2);
 	void VerificarLimitrofes(cPais* PaisLimitrofe);
-	void AsignarTropas(); //es random
+	void AsignarTropasRandom(); //es random
 	vector<string> GetListaLimitrofes(); 
-
 };
 #endif // !defined(EA_B1B84F12_99FE_46f8_81E7_71FAB22C81F1__INCLUDED_)

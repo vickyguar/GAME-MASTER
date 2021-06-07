@@ -35,7 +35,8 @@ void cJugador::Defender(cPais* PaisAtacado, unsigned int AT_Contrincante){
 
 void cJugador::Reagrupar(){
 	//cPais* PaisOrigen, cPais* PaisDestino, unsigned int CantTropas, unsigned int NumTropa
-	unsigned int aux = Paises->getCA() / 2;
+	
+	
 }
 
 
@@ -51,6 +52,14 @@ void cJugador::setEstado(eEstadoJugador _Estado)
 
 void cJugador::AgregarTropas()
 {
+	unsigned int aux = Paises->getCA() / 2;
+	cListaT<cTropa>* auxTropas = new cListaT<cTropa>[aux];
+	cout << Username << " tenes " << aux << "TROPAS NUEVAS PARA AGREGAR A TU EJERCITO";
+	//for(unsigned int i=0;i<aux;i++)
+		//(*auxTropas)+(new cTropa(NUMERO DE TROPA))
+	//TODO:QUE HACEMOS CON EL NUMERO DE TROPA
+
+
 }
 
 eEstadoJugador cJugador::getEstado()

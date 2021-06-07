@@ -26,10 +26,13 @@ public:
 
 	void AsignarTurno();
 	void JugadorAtacando(unsigned int pos);
-	void Batallar(cJugador* Jugador1, cPais* PaisAtacado, cPais* PaisAtacante, cTropa*** Tropas);
+	void Batallar(cJugador* Jugador1, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas);
 	void ImprimirEstados() const;
 	void SetUp(unsigned int mundo);
 	void SetUpJugadores(string nombre);
+	void Reagrupar(unsigned int pos);
+	void FindeRondaEntera();
+
 
 	unsigned int CalcularResiduo(int Num1, int Num2);
 	//int* ReparticionPaises();

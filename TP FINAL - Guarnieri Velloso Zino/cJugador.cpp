@@ -33,8 +33,9 @@ void cJugador::Defender(cPais* PaisAtacado, unsigned int AT_Contrincante){
 }
 
 
-void cJugador::Reagrupar(cPais* PaisOrigen, cPais* PaisDestino, unsigned int CantTropas, unsigned int NumTropa){
-
+void cJugador::Reagrupar(){
+	//cPais* PaisOrigen, cPais* PaisDestino, unsigned int CantTropas, unsigned int NumTropa
+	unsigned int aux = Paises->getCA() / 2;
 }
 
 
@@ -46,6 +47,10 @@ bool cJugador::RenunciarTurno(){
 void cJugador::setEstado(eEstadoJugador _Estado)
 {
 	Estado = _Estado;
+}
+
+void cJugador::AgregarTropas()
+{
 }
 
 eEstadoJugador cJugador::getEstado()

@@ -13,7 +13,7 @@
 //TODO: sobre carga del ++
 //TODO: >= -> para tropa
 //TODO: == -> para las claves
-//TODO:
+//TODO: constructores y destructores
 
 int main()
 {

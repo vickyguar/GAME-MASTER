@@ -34,7 +34,5 @@ public:
 	void AsignarTropas(); //es random
 	vector<string> GetListaLimitrofes(); 
 
-	//void setLimitrofes(cPais* Limitrofe);
-
 };
 #endif // !defined(EA_B1B84F12_99FE_46f8_81E7_71FAB22C81F1__INCLUDED_)

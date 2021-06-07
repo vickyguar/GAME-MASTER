@@ -21,39 +21,63 @@ cJuego::~cJuego(){
 }
 
 void cJuego::AsignarTurno(){
-	
-	if (Rondas == 0)
+	if (Rondas % (Jugadores->getCA()) == 0)
 	{
-		unsigned int pos = rand() % Jugadores->getCA();
-		(*Jugadores)[pos]->setEstado();//TODO: try catch para operator
-		TurnoPrevio = pos;
-		JugadorAtacando(pos);
+		if (Rondas == 0)
+		{
+			unsigned int pos = rand() % Jugadores->getCA();
+			(*Jugadores)[pos]->setEstado();//TODO: try catch para operator
+			TurnoPrevio = pos;
+			JugadorAtacando(pos);
+		}
+		if (TurnoPrevio < Jugadores->getCA())
+		{
+			TurnoPrevio++;
+			(*Jugadores)[TurnoPrevio]->setEstado();
+			JugadorAtacando(TurnoPrevio);
+		}
+		else {
+			TurnoPrevio = 0;
+			(*Jugadores)[TurnoPrevio]->setEstado();
+			JugadorAtacando(TurnoPrevio);
+		}
+		Rondas++; //ternimo la ronda, viene la siguente
+		
 	}
-	if (TurnoPrevio < Jugadores->getCA())
-	{
-		TurnoPrevio++;
-		(*Jugadores)[TurnoPrevio]->setEstado();
-		JugadorAtacando(TurnoPrevio);
-	}
-	else {
-		TurnoPrevio = 0;
-		(*Jugadores)[TurnoPrevio]->setEstado();
-		JugadorAtacando(TurnoPrevio);
-	}
-	Rondas++; //ternimo la ronda, viene la siguente
+	FindeRondaEntera();
 }
 
 void cJuego::JugadorAtacando(unsigned int pos)
 {
 	unsigned int cant = 0;
+	unsigned int pospais;
 	do {
-		//TODO:INFO PARA BATALLAR
+		//TODO:INFO PARA BATALLAR. VERIFICACIONES REDUCIR EN METODOS MINIS (RECURSIVIDAD)
+		ImprimirEstados();
+		/*cout << "\n ---- JUGADOR " << (*Jugadores)[pos]->getUsername() <<" ---- "<< endl;
+		cout<<" Introduzca el numero pais desde el que quiere atacar: \n";
+		cin >> pospais;
+		cPais* paisAtaque = (*Jugadores)[pos]->(*getListaPaises())[pospais];
+
+		cout << " Introduzca el numero pais al que quiere atacar: \n";
+		cin >> pospais;
+		//busca en la lista static, chequea limitrofes
+		//cPais*paisAtacado=
+
+		//TODO: METODO PARA ELEGIR TRES TROPAS QUE DEVUELVE cListaT TROPAS
+		cout << " Introduzca el numero de tropas con las que quiere atacar: \n";
+		cin >> pospais;
+		cPais* paisAtaque = (*Jugadores)[pos]->(*getListaPaises())[pospais];
+
+		Batallar((*Jugadores)[pos], paisAtaque, paisAtacado, Tropas);*/
+
+		Reagrupar(pos);
 		cant++;
 	} while (cant < 3 || !((*Jugadores)[pos]->RenunciarTurno()) || (*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR);
 }
 
 
-void cJuego::Batallar(cJugador* Jugador1, cPais* PaisAtacado, cPais* PaisAtacante, cTropa*** Tropas){
+void cJuego::Batallar(cJugador* Jugador1, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas){
 
 }
 
@@ -83,6 +107,19 @@ void cJuego::SetUpJugadores(string nombre)
 	Jugadores->Agregar(&cJugador(nombre));
 	if (Mundo->GetLista()->getCA() % Jugadores->getCA());
 	
+}
+
+void cJuego::Reagrupar(unsigned int pos)
+{
+	(*Jugadores)[pos]->Reagrupar();
+}
+
+void cJuego::FindeRondaEntera()
+{
+	for (unsigned int i = 0; i < Jugadores->getCA(); i++)
+	{
+		(*Jugadores)[i]->AgregarTropas();
+	}
 }
 
 unsigned int cJuego::CalcularResiduo(int Num1, int Num2)

@@ -21,9 +21,10 @@ public:
 
 	unsigned int AtaqueEfectivo(cPais* PaisAtacante, cTropa*** Tropas);
 	void Defender(cPais* PaisAtacado, unsigned int AT_Contrincante);
-	void Reagrupar(cPais* PaisOrigen, cPais* PaisDestino, unsigned int CantTropas, unsigned int NumTropa);
+	void Reagrupar();
 	bool RenunciarTurno();
 	void setEstado(eEstadoJugador _Estado=eEstadoJugador::ATACANDO);
+	void AgregarTropas();
 	eEstadoJugador getEstado();
 	string getUsername();
 

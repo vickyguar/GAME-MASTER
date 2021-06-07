@@ -31,8 +31,9 @@ int main()
 		GAME_MASTER->SetUp(Mundo); //a esta altura ya tenemos la cantidad de paises
 
 		//pregunto cantidad de jugadores -> por ahora es de a 2 :)
-		//cout << "Ingrese cantidad de jugadores: " << endl;
-		//cin >> CantidadJugadores;
+
+		/*cout << "Ingrese cantidad de jugadores: " << endl;
+		cin >> CantidadJugadores;*/
 
 		for (int i = 0; i < CANT; i++)
 		{
@@ -45,10 +46,9 @@ int main()
 	}
 	else { return 0; }
 
-	GAME_MASTER->ImprimirEstados(); //lo que tiene cada jugador (osea sus paises)
-
 	do
 	{
+		GAME_MASTER->ImprimirEstados(); //lo que tiene cada jugador (osea sus paises)
 		GAME_MASTER->AsignarTurno(); //elijo el jugador que empieza
 
 	} while (GAME_MASTER->getRondas() < 10 || GAME_MASTER->getJugadorAtacante()->getEstado() != eEstadoJugador::GANADOR); //TODO: las condiciones serían: que haya un ganador o supere un maximo de 10 turnos

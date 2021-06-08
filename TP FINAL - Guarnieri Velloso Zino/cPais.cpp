@@ -36,8 +36,21 @@ void cPais::ModificarTropa(cTropa* NumTropa1, bool Unificar, cTropa* NumeroTropa
 }
 
 
+unsigned int cPais::CalcularAT_Tropas(cListaT<cTropa>* Tropas)
+{
+	return 0;
+}
+
+void cPais::ModificarTropa(cTropa* NumTropa1, cTropa* NumeroTropa2)
+{
+}
+
 void cPais::VerificarLimitrofes(cPais* PaisLimitrofe){
 
+}
+
+void cPais::AsignarTropasRandom()
+{
 }
 
 vector<string> cPais::GetListaLimitrofes()

@@ -15,8 +15,15 @@ class cMago : public cGuerrero
 
 public:
 #pragma region CONSTRUCTORES & DESTRUCTORES
-
+	/**
+	*cMago
+	* constructor de la clase cMago
+	*/
 	cMago();
+	/**
+	* ~cMago
+	* destructor de la clase cMago
+	*/
 	~cMago();
 
 #pragma endregion

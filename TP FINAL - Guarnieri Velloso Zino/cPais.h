@@ -19,24 +19,58 @@ class cPais
 {
 
 private:
-	string Nombre;
-	cListaT<cTropa>* cTropas;
-	const vector<string> ListaLimitrofes;
-	static cListaT<cPais> ListaPaises;
+	string Nombre; //nombre del pais
+	cListaT<cTropa>* cTropas; //lista de tropas que tiene el pais
+	const vector<string> ListaLimitrofes; //lista de nombres de los paises limitrofes
+	static cListaT<cPais> ListaPaises; //lista estatica de paises
 
 public:
 #pragma region CONSTRUCTORES & DESTRUCTORES
 
+	/**
+	*cPais
+	* constructor de la clase cPais (por parametro)
+	* @param nombre, lista limitrofes
+	*/
 	cPais(string Nombre, vector<string> Limitrofes);
+	/**
+	*cPais
+	* constructor de la clase cPais (por copia)
+	*/
 	cPais(cPais& Pais);
+	/**
+	* ~cPais
+	* destructor de la clase cPais
+	*/
 	~cPais();
 
 #pragma endregion
-
+	/**
+	*CalcularAT_Tropas
+	* recibe una lista de tropas (lista pequeña de unidad de ataque), 
+	* la recorre y acumula los AT de cada unidad en particular. Retorna el acumulador
+	* @param Lista Torpa
+	* @return int
+	*/
 	unsigned int CalcularAT_Tropas(cListaT<cTropa>* Tropas);
+	/**
+	* ModificarTropa
+	* transfiere unidades de una tropa a la otra TODO: se tiene que verificar que ambas sean del jugador
+	* @param tropa1, tropa2
+	*/
 	void ModificarTropa(cTropa* NumTropa1, cTropa* NumeroTropa2);
+	/**
+	* VerificarLimitrofes 
+	* verifica que 2 paises sean limitrofes. Se recorre la lista estatica y se la compara con la lista de limitrofes
+	* que tiene el pais
+	* @param cPais*
+	*/
 	void VerificarLimitrofes(cPais* PaisLimitrofe);
-	void AsignarTropasRandom(); //es random
+	/**
+	* AsignarTropasRandom 
+	* al principio del juego, se le asigna a cada jugador un numero random de tropas en sus paises
+	*/
+	void AsignarTropasRandom();
 
 #pragma region GETTERS & SETTERS
 

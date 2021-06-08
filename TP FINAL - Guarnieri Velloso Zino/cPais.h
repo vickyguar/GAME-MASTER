@@ -46,7 +46,7 @@ public:
 
 #pragma endregion
 	/**
-	*CalcularAT_Tropas
+	* CalcularAT_Tropas
 	* recibe una lista de tropas (lista pequeña de unidad de ataque), 
 	* la recorre y acumula los AT de cada unidad en particular. Retorna el acumulador
 	* @param Lista Torpa

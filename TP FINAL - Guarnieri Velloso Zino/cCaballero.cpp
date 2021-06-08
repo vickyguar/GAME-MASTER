@@ -20,11 +20,7 @@ unsigned int cCaballero::CondicionAtaque(cGuerrero* Atacado){
 	return 0;
 }
 
-void cCaballero::Contrataque(){
+unsigned int cCaballero::Contrataque(){
 
 }
 
-unsigned int cCaballero::GenerarAT(){
-
-	return 0;
-}

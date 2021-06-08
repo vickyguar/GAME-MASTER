@@ -18,27 +18,20 @@ cJugador::~cJugador(){
 
 }
 
-
-/**
- * puntero a lista template o puntero triple?
- */
-unsigned int cJugador::AtaqueEfectivo(cPais* PaisAtacante, cTropa*** Tropas){
+unsigned int cJugador::AtaqueEfectivo(cPais* PaisAtacante, cListaT<cTropa>* Tropas){
 
 	return 0;
 }
 
-
 void cJugador::Defender(cPais* PaisAtacado, unsigned int AT_Contrincante){
 
 }
-
 
 void cJugador::Reagrupar(){
 	//cPais* PaisOrigen, cPais* PaisDestino, unsigned int CantTropas, unsigned int NumTropa
 	
 	
 }
-
 
 bool cJugador::RenunciarTurno(){
 
@@ -50,7 +43,7 @@ void cJugador::setEstado(eEstadoJugador _Estado)
 	Estado = _Estado;
 }
 
-void cJugador::AgregarTropas()
+void cJugador::AgregarTropas(int cant)
 {
 	unsigned int aux = Paises->getCA() / 2;
 	cListaT<cTropa>* auxTropas = new cListaT<cTropa>[aux];
@@ -58,8 +51,6 @@ void cJugador::AgregarTropas()
 	//for(unsigned int i=0;i<aux;i++)
 		//(*auxTropas)+(new cTropa(NUMERO DE TROPA))
 	//TODO:QUE HACEMOS CON EL NUMERO DE TROPA
-
-
 }
 
 eEstadoJugador cJugador::getEstado()

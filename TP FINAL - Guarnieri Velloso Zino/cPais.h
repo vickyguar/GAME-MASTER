@@ -20,9 +20,9 @@ class cPais
 
 private:
 	string Nombre; //nombre del pais
-	cListaT<cTropa>* cTropas; //lista de tropas que tiene el pais
+	cListaT<cTropa>* Tropas; //lista de tropas que tiene el pais
 	const vector<string> ListaLimitrofes; //lista de nombres de los paises limitrofes
-	static cListaT<cPais> ListaPaises; //lista estatica de paises
+	static cListaT<cPais>* ListaPaises; //lista estatica de paises
 
 public:
 #pragma region CONSTRUCTORES & DESTRUCTORES

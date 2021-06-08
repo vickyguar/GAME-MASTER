@@ -65,7 +65,7 @@ public:
 	* en su dominio). TODO: terminar de decidir si es ramdom o no
 	* @param int num
 	*/
-	void AgregarTropas(int cant);
+	void AgregarTropas();
 
 #pragma region SETTES & GETTERS
 

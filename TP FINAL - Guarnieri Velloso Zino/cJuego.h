@@ -23,10 +23,19 @@ private:
 public:
 #pragma region CONSTRUCTORES & DESTRUCTORES
 
+	/**
+	* cJuego
+	* constructor de la clase cJuego
+	*/
 	cJuego(unsigned int cantjugadores);
+	/**
+	* ~cJuego
+	* destructor de la clase cJuego
+	*/
 	~cJuego();
 
 #pragma endregion
+
 #pragma region METODOS DEL JUEGO
 
 #pragma endregion

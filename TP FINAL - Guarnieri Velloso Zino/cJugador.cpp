@@ -18,27 +18,20 @@ cJugador::~cJugador(){
 
 }
 
-
-/**
- * puntero a lista template o puntero triple?
- */
-unsigned int cJugador::AtaqueEfectivo(cPais* PaisAtacante, cTropa*** Tropas){
+unsigned int cJugador::AtaqueEfectivo(cPais* PaisAtacante, cListaT<cTropa>* Tropas){
 
 	return 0;
 }
 
-
 void cJugador::Defender(cPais* PaisAtacado, unsigned int AT_Contrincante){
 
 }
-
 
 void cJugador::Reagrupar(){
 	//cPais* PaisOrigen, cPais* PaisDestino, unsigned int CantTropas, unsigned int NumTropa
 	
 	
 }
-
 
 bool cJugador::RenunciarTurno(){
 

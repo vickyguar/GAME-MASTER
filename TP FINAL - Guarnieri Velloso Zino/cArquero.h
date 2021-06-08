@@ -14,13 +14,32 @@ class cArquero : public cGuerrero
 {
 	
 public:
-	cArquero(unsigned int _AT,unsigned int _AT_ESPECIAL,unsigned int _HP_ACTUAL,unsigned int _HP_INICIAL,unsigned int _LimiteVida);
+#pragma region CONSTRUCTORES & DESTRUCTORES
+	/**
+	* cArquero 
+	* constructor de la clase cArquero
+	*/
+	cArquero();
+	/**
+	* ~cArquero
+	* destructor de la clase cArquero
+	*/
 	~cArquero();
+#pragma endregion
 
+	/**
+	* AtaqueAleatorio 
+	* decide si atacar por segunda vez
+	* @return bool
+	*/
 	bool AtaqueAleatorio();
+	
 	unsigned int CondicionAtaque(cGuerrero* Atacado);
+	/**
+	* GenerarAT 
+	* devuelve un numero random entre .Este es la fuerza de ataque de una sola unidad
+	* @return unsigned int
+	*/
 	unsigned int GenerarAT();
-	unsigned int GenerarHP();
-
 };
 #endif // !defined(EA_1D30E1A9_0ECE_4a1f_8499_7609DA9E69C2__INCLUDED_)

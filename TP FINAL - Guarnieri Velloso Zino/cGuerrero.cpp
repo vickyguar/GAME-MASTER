@@ -7,10 +7,7 @@
 
 #include "cGuerrero.h"
 
-
-
-
-cGuerrero::cGuerrero(unsigned int _AT, unsigned int _AT_Especial, unsigned int _HP_Actual, unsigned int _HP_Inicial, unsigned int _LimiteVida)
+cGuerrero::cGuerrero(unsigned int _AT, unsigned int _HP_Actual, unsigned int _HP_Inicial)
 {
 	AT = _AT;
 	HP_Actual = _HP_Actual;

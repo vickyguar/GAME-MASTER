@@ -33,12 +33,7 @@ public:
 	* @return bool
 	*/
 	bool AtaqueAleatorio();
-	/**
-	* CondicionAtaque 
-	* evalua si es fuerte contra el otro -> Arquero es fuerte contra el mago
-	* @param cGuerrro*
-	* @return int
-	*/
+	
 	unsigned int CondicionAtaque(cGuerrero* Atacado);
 	/**
 	* GenerarAT 

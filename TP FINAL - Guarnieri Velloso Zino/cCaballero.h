@@ -41,12 +41,7 @@ public:
 	unsigned int GenerarAT();
 
 #pragma endregion
-	/**
-	* CondicionAtaque
-	* evalua si es fuerte contra el otro -> Caballero es fuerte contra el arquero
-	* @param cGuerrro*
-	* @return int
-	*/
+	
 	unsigned int CondicionAtaque(cGuerrero* Atacado);
 	/**
 	* Contrataque //TODO: terminar comentario

@@ -35,11 +35,6 @@ public:
 	bool AtaqueAleatorio();
 	
 	unsigned int CondicionAtaque(cGuerrero* Atacado);
-	/**
-	* GenerarAT 
-	* devuelve un numero random entre .Este es la fuerza de ataque de una sola unidad
-	* @return unsigned int
-	*/
-	unsigned int GenerarAT();
+
 };
 #endif // !defined(EA_1D30E1A9_0ECE_4a1f_8499_7609DA9E69C2__INCLUDED_)

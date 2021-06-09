@@ -69,7 +69,6 @@ public:
 
 	//int* ReparticionPaises();
 	void AsignarPaisesRandom();
-	
 };
 
 static unsigned int CalcularResiduo(int Num1, int Num2);

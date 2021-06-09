@@ -219,7 +219,9 @@ void cListaT<T>::Listar() const
 template<class T>
 T* cListaT<T>::operator[](unsigned int pos)
 {
-	return BuscarXPos(pos);
+	if (pos >= 0 && pos < CA)
+		return Lista[pos];
+	return NULL;
 }
 
 template<class T>

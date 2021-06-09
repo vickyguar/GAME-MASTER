@@ -78,7 +78,12 @@ void cJuego::JugadorAtacando(unsigned int pos)
 }
 
 
-void cJuego::Batallar(cJugador* Jugador1, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas){
+
+
+
+
+//TODO: VERIFICAR
+void cJuego::Batallar(cJugador* JugadorAtacando, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas){
 
 }
 
@@ -153,15 +158,4 @@ cJugador* cJuego::getJugadorAtacante()
 	//return Jugadores->BuscarEstado(eEstadoJugador::ATACANDO);
 }
 
-unsigned int CalcularResiduo(int Num1, int Num2)
-{
-	if (Num2 != 0)
-	{
-		float Division = Num1 / Num2;
-		int ParteEntera = Num1 / Num2;
-		int Residuo = (Division - ParteEntera) * Num2;
-		return Residuo;
-	}
-	else
-		throw new exception(" --- Division por cero --- ");
-}
+

@@ -40,12 +40,17 @@ unsigned int cPais::CalcularAT_Tropas(cListaT<cTropa>* Tropas)
 	return 0;
 }
 
-void cPais::VerificarLimitrofes(cPais* PaisLimitrofe){
+bool cPais::VerificarLimitrofes(cPais* PaisLimitrofe){
 
 }
 
 void cPais::AsignarTropasRandom()
 {
+}
+
+cListaT<cPais>* cPais::getListaPaises()
+{
+	return ListaPaises;
 }
 
 vector<string> cPais::GetListaLimitrofes()

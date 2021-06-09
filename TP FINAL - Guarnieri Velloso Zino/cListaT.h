@@ -27,11 +27,13 @@ public:
 #pragma endregion
 	void Redimensionar();
 #pragma region BUSCAR
-	T* BuscarItem(const string Key);
+	template<class C>
+	T* BuscarItem(const C Key);
 	T* BuscarXPos(unsigned int Index);
 #pragma endregion
 #pragma region GETTERS
-	unsigned int getIndex(const string Key)const;
+	template<class C>
+	unsigned int getIndex(const C Key)const;
 	unsigned int getCA() const;
 	unsigned int getTAM() const;
 #pragma endregion
@@ -178,11 +180,13 @@ void cListaT<T>::Redimensionar()
 }
 
 template<class T>
-T* cListaT<T>::BuscarItem(const string Key)
+template<class C>
+T* cListaT<T>::BuscarItem(const C Key)
 {
 	int pos = -1;
 	if (Lista != NULL)
 	{
+		
 		try { pos = getIndex(Key); }
 		catch (exception* ex) {
 			string error = ex->what();
@@ -191,6 +195,7 @@ T* cListaT<T>::BuscarItem(const string Key)
 			throw ex;
 		}
 		return Lista[pos];
+		
 	}
 	throw new exception("Error al buscar el item");
 }
@@ -202,9 +207,9 @@ T* cListaT<T>::BuscarXPos(unsigned int Index)
 		throw new exception(("La posicion " + to_string(Index) + " no existe en la lista").c_str());
 	return Lista[Index];
 }
-
+template<class C>
 template<class T>
-unsigned int cListaT<T>::getIndex(const string Key) const
+unsigned int cListaT<T>::getIndex(const C Key) const
 {
 	for (unsigned int i = 0; i < CA; i++)
 	{

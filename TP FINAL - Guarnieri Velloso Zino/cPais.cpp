@@ -43,7 +43,7 @@ unsigned int cPais::CalcularAT_Tropas(cListaT<cTropa>* Tropas)
 bool cPais::VerificarLimitrofes(cPais* PaisLimitrofe) {
 	try
 	{
-		GetListaLimitrofes()->BuscarItem(PaisLimitrofe->Nombre);
+		cPais*aux=GetListaLimitrofes()->BuscarItem(PaisLimitrofe->Nombre);
 	}
 	catch (exception* ex)
 	{
@@ -56,6 +56,14 @@ bool cPais::VerificarLimitrofes(cPais* PaisLimitrofe) {
 void cPais::AsignarTropasRandom()
 {
 	//TODO: ASIGNAR TROPAS RANDOM
+}
+
+cTropa* cPais::VerificarTropa(unsigned int NTropa)
+{
+	cTropa* aux = NULL;
+	try { aux=Tropas->BuscarItem(NTropa); }
+	catch(exception*ex){delete ex; }
+	return aux;
 }
 
 cListaT<cPais>* cPais::getListaPaises()

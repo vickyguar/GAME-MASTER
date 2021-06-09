@@ -53,13 +53,11 @@ void cJuego::JugadorAtacando(unsigned int pos)
 	unsigned int cant = 0;
 	unsigned int pospais;
 	do {
-		//TODO: METODO PARA ELEGIR TRES TROPAS QUE DEVUELVE cListaT TROPAS
-		/* cout << " Introduzca el numero de tropas con las que quiere atacar: \n";
-		cin >> pospais; */
+	
 		cPais* paisAtaque = PosPaisAtaque((*Jugadores)[pos]);
 		cPais* paisAtacado = PosPaisAtacado((*Jugadores)[pos],paisAtaque);
-		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false);
-		MiniListaTropas = TropasdeBatalla(paisAtaque);
+		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false,3);
+		TropasdeBatalla(paisAtaque,MiniListaTropas);
 
 		Batallar((*Jugadores)[pos], paisAtaque, paisAtacado, MiniListaTropas);
 
@@ -70,16 +68,12 @@ void cJuego::JugadorAtacando(unsigned int pos)
 }
 
 
-
-
-
-
-//TODO: VERIFICAR
+//TODO: BATALLAR
 void cJuego::Batallar(cJugador* JugadorAtacando, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas){
 
 }
 
-
+//TODO: IMPRIMIRESTADOS
 void cJuego::ImprimirEstados() const {
 
 }

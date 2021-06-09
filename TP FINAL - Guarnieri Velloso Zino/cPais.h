@@ -71,6 +71,7 @@ public:
 	* al principio del juego, se le asigna a cada jugador un numero random de tropas en sus paises
 	*/
 	void AsignarTropasRandom();
+	cTropa* VerificarTropa(unsigned int NTropa);
 
 	static cListaT<cPais>* getListaPaises();
 

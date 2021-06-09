@@ -133,25 +133,27 @@ cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
 	return (*cPais::getListaPaises())[pospais];
 }
 
-cListaT<cTropa>* TropasdeBatalla(cPais* PaisAtaque)
+void TropasdeBatalla(cPais* PaisAtaque,cListaT<cTropa>*TropasBatalla)
 {
 	int canttropas = 0;
+	unsigned int nTropa = 0;
+	cTropa* aux = NULL;
 	do {
 		cout << " Introduzca la cantidad de tropas con las que quiere atacar. MAXIMO DE 3 : \n";
 		cin >> canttropas;
 	} while (canttropas > 3||canttropas<1);
-	cListaT<cTropa>* ListaAux = new cListaT<cTropa>(false,canttropas);
 
-	do {
-		cout << " Introduzca la cantidad de tropas con las que quiere atacar. MAXIMO DE 3 : \n";
-		cin >> canttropas;
+	for (unsigned int i = 0; i < canttropas; i++)
+	{
+		do
+		{
+			cout << " Introduzca el numero de tropa #" << i << " :";
+			cin >> nTropa;
+			aux = PaisAtaque->VerificarTropa(nTropa);
+		} while (aux==NULL);
 
-
-
-	} while (pospais <0 || pospais>cPais::getListaPaises()->getCA() || Jugador->VerificarPais(pospais) ||
-		!Pais->VerificarLimitrofes((*cPais::getListaPaises())[pospais]));
-
-	return ListaAux;
+		(*TropasBatalla)+aux;
+	}
 }
 
 //Verificación de datos ingresados

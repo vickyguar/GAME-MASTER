@@ -40,12 +40,22 @@ unsigned int cPais::CalcularAT_Tropas(cListaT<cTropa>* Tropas)
 	return 0;
 }
 
-bool cPais::VerificarLimitrofes(cPais* PaisLimitrofe){
-
+bool cPais::VerificarLimitrofes(cPais* PaisLimitrofe) {
+	try
+	{
+		GetListaLimitrofes()->BuscarItem(PaisLimitrofe->Nombre);
+	}
+	catch (exception* ex)
+	{
+		delete ex;
+		return false;
+	}
+	return true;
 }
 
 void cPais::AsignarTropasRandom()
 {
+	//TODO: ASIGNAR TROPAS RANDOM
 }
 
 cListaT<cPais>* cPais::getListaPaises()
@@ -53,7 +63,22 @@ cListaT<cPais>* cPais::getListaPaises()
 	return ListaPaises;
 }
 
-vector<string> cPais::GetListaLimitrofes()
+cListaT<cPais>* cPais::GetListaLimitrofes()
 {
-	return ListaLimitrofes;
+	cListaT<cPais>* ListaLimitrofesAux = new cListaT<cPais>();
+	for (int i = 0; i < ListaLimitrofes.size(); i++)
+	{
+		for (int j = 0; j < ListaPaises->getCA(); j++)
+		{
+			if ((*(*ListaPaises)[j])==ListaLimitrofes[i])
+				(*ListaLimitrofesAux) + (*ListaPaises)[j];
+		}
+	}
+	return ListaLimitrofesAux;
+
+}
+
+bool cPais::operator==(string Nombre)
+{
+	return (Nombre == this->Nombre);
 }

@@ -14,9 +14,6 @@ cTropa::cTropa(){
 	Guerreros = new cListaT<cGuerrero>();
 }
 
-cTropa::cTropa()
-{
-}
 
 cTropa::~cTropa(){
 	if (Guerreros != NULL)

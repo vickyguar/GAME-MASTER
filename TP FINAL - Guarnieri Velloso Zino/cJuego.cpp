@@ -53,23 +53,15 @@ void cJuego::JugadorAtacando(unsigned int pos)
 	unsigned int cant = 0;
 	unsigned int pospais;
 	do {
-		//TODO:INFO PARA BATALLAR. VERIFICACIONES REDUCIR EN METODOS MINIS (RECURSIVIDAD)
-		/*cout << "\n ---- JUGADOR " << (*Jugadores)[pos]->getUsername() <<" ---- "<< endl;
-		cout<<" Introduzca el numero pais desde el que quiere atacar: \n";
-		cin >> pospais;
-		cPais* paisAtaque = (*Jugadores)[pos]->(*getListaPaises())[pospais];
-
-		cout << " Introduzca el numero pais al que quiere atacar: \n";
-		cin >> pospais;
-		//busca en la lista static, chequea limitrofes
-		//cPais*paisAtacado=
-
 		//TODO: METODO PARA ELEGIR TRES TROPAS QUE DEVUELVE cListaT TROPAS
-		cout << " Introduzca el numero de tropas con las que quiere atacar: \n";
-		cin >> pospais;
-		cPais* paisAtaque = (*Jugadores)[pos]->(*getListaPaises())[pospais];
+		/* cout << " Introduzca el numero de tropas con las que quiere atacar: \n";
+		cin >> pospais; */
+		cPais* paisAtaque = PosPaisAtaque((*Jugadores)[pos]);
+		cPais* paisAtacado = PosPaisAtacado((*Jugadores)[pos],paisAtaque);
+		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false);
+		MiniListaTropas = TropasdeBatalla(paisAtaque);
 
-		Batallar((*Jugadores)[pos], paisAtaque, paisAtacado, Tropas);*/
+		Batallar((*Jugadores)[pos], paisAtaque, paisAtacado, MiniListaTropas);
 
 		Reagrupar(pos);
 		cant++;

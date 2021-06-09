@@ -76,9 +76,12 @@ public:
 
 #pragma region GETTERS & SETTERS
 
-	vector<string> GetListaLimitrofes();
+	cListaT<cPais>* GetListaLimitrofes();
 
 #pragma endregion
 
+	bool operator==(string Nombre);
+
 };
 #endif // !defined(EA_B1B84F12_99FE_46f8_81E7_71FAB22C81F1__INCLUDED_)
+

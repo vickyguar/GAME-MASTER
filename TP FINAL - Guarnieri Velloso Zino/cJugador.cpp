@@ -68,7 +68,7 @@ string cJugador::getUsername()
 
 bool cJugador::VerificarPais(int pospais)
 {
-	return ((*Paises)[pospais] == NULL) ? false : true;
+	return ((*Paises)[pospais] == NULL)? false : true;
 
 }
 

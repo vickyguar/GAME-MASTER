@@ -16,7 +16,8 @@ protected:
 	bool Delete;
 public:
 #pragma region CONSTRUCTORES Y DESTRUCTORES
-	cListaT(unsigned int _TAM = NMAX, bool _Delete = true);
+	cListaT(bool _Delete = true, unsigned int _TAM = NMAX);
+	cListaT(cListaT<T>& ListaCopia);
 	virtual ~cListaT();
 #pragma endregion
 #pragma region AGREGAR,QUITAR,ELIMINAR
@@ -40,12 +41,13 @@ public:
 #pragma region SOBRECARGA
 	T* operator[](unsigned int pos);
 	void operator+(T* newItem);
+	void operator=(cListaT<T>* Copia); //ESTO CREA POR COPIA
 #pragma endregion
 
 };
 
 template <class T>
-cListaT<T>::cListaT(unsigned int _TAM, bool _Delete)
+cListaT<T>::cListaT(bool _Delete, unsigned int _TAM)
 {
 	TAM = _TAM;
 	Delete = _Delete;
@@ -56,6 +58,24 @@ cListaT<T>::cListaT(unsigned int _TAM, bool _Delete)
 	for (unsigned int i = 0; i < TAM; i++)
 	{
 		Lista[i] = NULL;
+	}
+}
+template<class T>
+inline cListaT<T>::cListaT(cListaT<T>& ListaCopia)
+{
+	TAM = ListaCopia.TAM;
+	Delete = ListaCopia.Delete;
+	CA = 0;
+
+	Lista = new T * [ListaCopia.TAM];
+	//Creo la lista dinamica
+	for (unsigned int i = 0; i < TAM; i++)
+	{
+		Lista[i] = NULL;
+	}
+	for (unsigned int i = 0; i < ListaCopia.CA; i++)
+	{
+		(*Lista)+(*ListaCopia)[i];
 	}
 }
 template <class T>
@@ -235,6 +255,15 @@ inline void cListaT<T>::operator+(T* newItem)
 		throw ex;
 	}
 	return;
+}
+
+template<class T>
+inline void cListaT<T>::operator=(cListaT<T>* ListaB)
+{
+	for (int i = 0; i < ListaB->CA; i++)
+	{
+		Lista[i] = ListaB[i]; //SUPONEMOS QUE EL COMPILADOR CREA POR DEFECTO EL DE CLASE T
+	}
 }
 
 template<class T>

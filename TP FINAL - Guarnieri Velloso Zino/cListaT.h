@@ -19,20 +19,16 @@ public:
 	cListaT(unsigned int _TAM = NMAX, bool _Delete = true);
 	virtual ~cListaT();
 #pragma endregion
-
 #pragma region AGREGAR,QUITAR,ELIMINAR
 	void Agregar(T* newItem);
 	T* Quitar(const string Key);
 	void Eliminar(const string Key);
 #pragma endregion
-
 	void Redimensionar();
-
 #pragma region BUSCAR
 	T* BuscarItem(const string Key);
 	T* BuscarXPos(unsigned int Index);
 #pragma endregion
-
 #pragma region GETTERS
 	unsigned int getIndex(const string Key)const;
 	unsigned int getCA() const;

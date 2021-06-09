@@ -65,12 +65,14 @@ public:
 	* que tiene el pais
 	* @param cPais*
 	*/
-	void VerificarLimitrofes(cPais* PaisLimitrofe);
+	bool VerificarLimitrofes(cPais* PaisLimitrofe);
 	/**
 	* AsignarTropasRandom 
 	* al principio del juego, se le asigna a cada jugador un numero random de tropas en sus paises
 	*/
 	void AsignarTropasRandom();
+
+	static cListaT<cPais>* getListaPaises();
 
 #pragma region GETTERS & SETTERS
 

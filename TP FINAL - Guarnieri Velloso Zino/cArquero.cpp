@@ -26,7 +26,3 @@ unsigned int cArquero::CondicionAtaque(cGuerrero* Atacado){
 	return 0;
 }
 
-unsigned int cArquero::GenerarAT(){
-
-	return 0;
-}

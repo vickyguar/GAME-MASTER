@@ -11,7 +11,7 @@
 cJugador::cJugador(string _Username, eEstadoJugador _Estado):Username(_Username)
 {
 	Estado = _Estado;
-	Paises = new cListaT<cPais>[]; //TODO: cantidad de paises inciales para jugar??
+	Paises = new cListaT<cPais>(); 
 }
 
 cJugador::~cJugador(){
@@ -65,3 +65,11 @@ string cJugador::getUsername()
 {
 	return Username;
 }
+
+bool cJugador::VerificarPais(int pospais)
+{
+	return ((*Paises)[pospais] == NULL) ? false : true;
+
+}
+
+

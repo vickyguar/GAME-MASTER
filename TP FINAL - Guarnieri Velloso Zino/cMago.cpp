@@ -24,7 +24,3 @@ unsigned int cMago::CondicionAtaque(cGuerrero* Atacado){
 	return 0;
 }
 
-unsigned int cMago::GenerarAT(){
-
-	return 0;
-}

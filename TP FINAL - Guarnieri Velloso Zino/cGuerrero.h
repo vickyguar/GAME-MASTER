@@ -42,7 +42,7 @@ public:
 #pragma endregion
 
 	/**
-	* CondicionAtaque
+	* CondicionAtaque: 
 	* evalua si es fuerte contra el otro -> Caballero es fuerte contra el arquero
 	* @param cGuerrro*
 	* @return int

@@ -50,7 +50,7 @@ public:
 	* reordena las tropas. Es decir que se pueden juntar, en el caso de que queden pocas unidades
 	* o se pueden separar (para tener más unidades)
 	*/
-	void Reagrupar();
+	void Reagrupar(cPais* Pais);
 	/**
 	* RenunciarTurno
 	* le pregunta al usuario si quiere seguir jugando o si termina su turno
@@ -76,8 +76,7 @@ public:
 	string getUsername();
 
 #pragma endregion
-	bool VerificarPais(int pospais);
-
+	bool VerificarPais(int pospais); //verifica si el pais es mio
 
 	bool operator==(cPais* Pais) { //Esto no es para comparar, es para ver si existe en la lista de paises del jugador
 		return (this->Paises->BuscarItem(Pais) != NULL) ? true : false;
@@ -85,5 +84,6 @@ public:
 	bool operator!=(cPais* Pais) {
 		return (this->Paises->BuscarItem(Pais) != NULL) ? false : true;
 	}
+	//TODO: sobrecarga cout (IMPRIME EL NUMERO DEL PAIS CORRESPONDIENTE AL NUMERO DEL JUGADOR)
 };
 #endif // !defined(EA_B34E5789_D7AB_47b3_BFBB_ABFA2C7A92ED__INCLUDED_)

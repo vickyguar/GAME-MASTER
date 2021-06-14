@@ -11,6 +11,7 @@
 #include "cGuerrero.h"
 #include "cListaT.h"
 
+
 class cTropa
 {
 private:

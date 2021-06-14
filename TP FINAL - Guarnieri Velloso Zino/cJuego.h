@@ -46,7 +46,7 @@ public:
 
 	cJugador* DuenioPais(cPais *Pais);
 	
-	void Reagrupar(unsigned int pos);
+	void Reagrupar(unsigned int pos, cPais* PaisAtacado, cPais* PaisAtacante);
 	void FindeRondaEntera();
 
 #pragma region SETUP'S

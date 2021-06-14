@@ -273,10 +273,12 @@ inline void cListaT<T>::operator=(cListaT<T>* ListaB)
 }
 
 template<class T>
-void operator<<(ostream& o, cListaT<T>& obj)
+ostream& operator<<(ostream& o, cListaT<T>& obj)
 {
 	for (unsigned int i = 0; i < obj.getCA(); i++)
 	{
-		o << obj[i]->To_string();
+		o << *obj[i];
 	}
+	o << "Nombre: " << obj->Nombre << "Apellido: " << obj->Apellido << endl;
+	return o;
 }

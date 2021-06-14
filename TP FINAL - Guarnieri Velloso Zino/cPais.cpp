@@ -53,9 +53,11 @@ bool cPais::VerificarLimitrofes(cPais* PaisLimitrofe) {
 	return true;
 }
 
-void cPais::AsignarTropasRandom()
+void cPais::AsignarTropas(cTropa* Tropa)
 {
-	//TODO: ASIGNAR TROPAS RANDOM
+	if(Tropa != NULL)
+		*Tropas + Tropa;
+	//TODO: falta hacer la parte random
 }
 
 cTropa* cPais::VerificarTropa(unsigned int NTropa)

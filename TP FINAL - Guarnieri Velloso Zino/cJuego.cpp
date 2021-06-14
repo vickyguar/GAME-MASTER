@@ -42,7 +42,6 @@ void cJuego::AsignarTurno(){
 			JugadorAtacando(TurnoPrevio);
 		}
 		Rondas++; //ternimo la ronda, viene la siguente
-		
 	}
 	else
 		FindeRondaEntera();
@@ -51,7 +50,7 @@ void cJuego::AsignarTurno(){
 void cJuego::JugadorAtacando(unsigned int pos)
 {
 	unsigned int cant = 0;
-	unsigned int pospais;
+	unsigned int pospais = 0;
 	do {
 	
 		cPais* paisAtaque = PosPaisAtaque((*Jugadores)[pos]);
@@ -61,7 +60,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 
 		Batallar((*Jugadores)[pos], paisAtaque, paisAtacado, MiniListaTropas); //Todo lo que le pasamos a batallar está chequeado
 
-		Reagrupar(pos);
+		Reagrupar(pos, paisAtaque, paisAtacado);
 		cant++;
 		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
 		delete MiniListaTropas;
@@ -129,9 +128,9 @@ void cJuego::SetUpJugadores(string nombre)
 	
 }
 
-void cJuego::Reagrupar(unsigned int pos)
+void cJuego::Reagrupar(unsigned int pos, cPais* PaisAtacado, cPais* PaisAtacante)
 {
-	(*Jugadores)[pos]->Reagrupar();
+	(*Jugadores)[pos]->Reagrupar(PaisAtacante);
 }
 
 void cJuego::FindeRondaEntera()

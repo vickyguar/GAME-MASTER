@@ -70,7 +70,7 @@ public:
 	* AsignarTropasRandom 
 	* al principio del juego, se le asigna a cada jugador un numero random de tropas en sus paises
 	*/
-	void AsignarTropasRandom();
+	void AsignarTropas(cTropa* Tropa = NULL); //si no le paso nada es porque lo estoy llamando para comenzar el juego
 	cTropa* VerificarTropa(unsigned int NTropa);
 
 	static cListaT<cPais>* getListaPaises();
@@ -81,6 +81,8 @@ public:
 #pragma region GETTERS & SETTERS
 
 	cListaT<cPais>* GetListaLimitrofes();
+	string getNombre() { return Nombre; }
+	cListaT<cTropa>* getTropas() { return Tropas; }
 
 #pragma endregion
 

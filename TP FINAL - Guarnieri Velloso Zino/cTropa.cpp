@@ -6,21 +6,33 @@
 ///////////////////////////////////////////////////////////
 
 #include "cTropa.h"
+#include "cMago.h"
+#include "cArquero.h"
+#include "cCaballero.h"
+
+#define MAGO 1
+#define ARQUERO 2
+#define CABALLERO 3
+
 unsigned int cTropa::ContTropas = 0;
 
 cTropa::cTropa(){
 	ContTropas++;
 	NumTropa = ContTropas;
 	
-	Guerreros = new cListaT<cGuerrero>();
+	int random = (rand() % 3) + 1;
+	if (random == MAGO)
+		*Guerreros = new cListaT<cMago>();
+	if (random == ARQUERO)
+		*Guerreros = new cListaT<cArquero>();
+	if (random == CABALLERO)
+		*Guerreros = new cListaT<cCaballero>();
 }
-
 
 cTropa::~cTropa(){
 	if (Guerreros != NULL)
 		delete Guerreros;
 }
-
 
 unsigned int cTropa::CalcularAT_Total() {
 	unsigned int AT_Total = 0;

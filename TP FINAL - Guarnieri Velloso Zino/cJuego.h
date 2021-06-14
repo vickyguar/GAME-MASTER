@@ -43,6 +43,8 @@ public:
 	void AsignarTurno();
 	void JugadorAtacando(unsigned int pos);
 	void Batallar(cJugador* JugadorAtacando, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas);
+
+	cJugador* DuenioPais(cPais *Pais);
 	
 	void Reagrupar(unsigned int pos);
 	void FindeRondaEntera();
@@ -123,12 +125,8 @@ cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
 		cout << " Introduzca el numero pais al que quiere atacar: \n";
 		cin >> pospais;
 
-
-
 	} while (pospais <0 || pospais>cPais::getListaPaises()->getCA() || Jugador->VerificarPais(pospais)||
 		!Pais->VerificarLimitrofes((*cPais::getListaPaises())[pospais]));
-
-	
 
 	return (*cPais::getListaPaises())[pospais];
 }

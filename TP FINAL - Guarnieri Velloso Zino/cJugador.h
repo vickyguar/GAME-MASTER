@@ -38,13 +38,13 @@ public:
 	* @param pais que ataca, unidad de ataque
 	* @return int
 	*/
-	unsigned int AtaqueEfectivo(cPais* PaisAtacante, cListaT<cTropa>* Tropas);
+	unsigned int AtaqueEfectivo(cPais* PaisAtacante, cListaT<cTropa>* TropasAt, cListaT<cTropa>* TropasDef);
 	/**
 	* Defender
 	* el pais atacado se defiende, y recibe el AT del contrincante (el daño que le hace)
 	* @param pais atacado, daño
 	*/
-	void Defender(cPais* PaisAtacado, unsigned int AT_Contrincante);
+	//void Defender(cPais* PaisAtacado, unsigned int AT_Contrincante);
 	/**
 	* Reagrupar
 	* reordena las tropas. Es decir que se pueden juntar, en el caso de que queden pocas unidades
@@ -67,6 +67,8 @@ public:
 	*/
 	void AgregarTropas();
 
+
+
 #pragma region SETTES & GETTERS
 
 	void setEstado(eEstadoJugador _Estado = eEstadoJugador::ATACANDO);
@@ -76,5 +78,12 @@ public:
 #pragma endregion
 	bool VerificarPais(int pospais);
 
+
+	bool operator==(cPais* Pais) { //Esto no es para comparar, es para ver si existe en la lista de paises del jugador
+		return (this->Paises->BuscarItem(Pais) != NULL) ? true : false;
+	}
+	bool operator!=(cPais* Pais) {
+		return (this->Paises->BuscarItem(Pais) != NULL) ? false : true;
+	}
 };
 #endif // !defined(EA_B34E5789_D7AB_47b3_BFBB_ABFA2C7A92ED__INCLUDED_)

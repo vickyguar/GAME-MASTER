@@ -75,6 +75,9 @@ public:
 
 	static cListaT<cPais>* getListaPaises();
 
+	cListaT<cTropa>* CrearMiniListaRandom();
+
+
 #pragma region GETTERS & SETTERS
 
 	cListaT<cPais>* GetListaLimitrofes();

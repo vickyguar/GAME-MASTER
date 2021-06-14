@@ -18,14 +18,15 @@ cJugador::~cJugador(){
 
 }
 
-unsigned int cJugador::AtaqueEfectivo(cPais* PaisAtacante, cListaT<cTropa>* Tropas){
+unsigned int cJugador::AtaqueEfectivo(cPais* PaisAtacante, cListaT<cTropa>* TropasAt, cListaT<cTropa>* TropasDef){
 
+	//Dynamic_cast
 	return 0;
 }
 
-void cJugador::Defender(cPais* PaisAtacado, unsigned int AT_Contrincante){
-
-}
+//void cJugador::Defender(cPais* PaisAtacado, unsigned int AT_Contrincante){
+//
+//}
 
 void cJugador::Reagrupar(){
 	//cPais* PaisOrigen, cPais* PaisDestino, unsigned int CantTropas, unsigned int NumTropa

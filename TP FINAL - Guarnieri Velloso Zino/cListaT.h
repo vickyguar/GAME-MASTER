@@ -207,8 +207,9 @@ T* cListaT<T>::BuscarXPos(unsigned int Index)
 		throw new exception(("La posicion " + to_string(Index) + " no existe en la lista").c_str());
 	return Lista[Index];
 }
-template<class C>
+
 template<class T>
+template<class C>
 unsigned int cListaT<T>::getIndex(const C Key) const
 {
 	for (unsigned int i = 0; i < CA; i++)

@@ -71,6 +71,25 @@ cListaT<cPais>* cPais::getListaPaises()
 	return ListaPaises;
 }
 
+cListaT<cTropa>* cPais::CrearMiniListaRandom()
+{
+	cListaT<cTropa>* aux = new cListaT<cTropa>(false, 3);
+
+	if (Tropas->getCA() > 3) {
+		unsigned int rand1 = 1 + rand() % (Tropas->getCA() - 2);//Que se genere un número random que no incluya los extremos
+		
+		*aux + (*Tropas)[rand1 - 1];
+		*aux + (*Tropas)[rand1];
+		*aux + (*Tropas)[rand1 + 1];
+	}
+	else {
+		for (unsigned int i = 0; i < Tropas->getCA(); i++)
+			*aux + (*Tropas)[i];
+	}
+	
+	return aux;
+}
+
 cListaT<cPais>* cPais::GetListaLimitrofes()
 {
 	cListaT<cPais>* ListaLimitrofesAux = new cListaT<cPais>();

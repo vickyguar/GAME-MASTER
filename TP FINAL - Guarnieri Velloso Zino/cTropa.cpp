@@ -11,6 +11,7 @@ unsigned int cTropa::ContTropas = 0;
 cTropa::cTropa(){
 	ContTropas++;
 	NumTropa = ContTropas;
+	
 	Guerreros = new cListaT<cGuerrero>();
 }
 

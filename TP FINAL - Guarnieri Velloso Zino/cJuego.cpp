@@ -56,22 +56,52 @@ void cJuego::JugadorAtacando(unsigned int pos)
 	
 		cPais* paisAtaque = PosPaisAtaque((*Jugadores)[pos]);
 		cPais* paisAtacado = PosPaisAtacado((*Jugadores)[pos],paisAtaque);
-		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false,3);
+		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false, 3); //le pusimos false :)
 		TropasdeBatalla(paisAtaque,MiniListaTropas);
 
-		Batallar((*Jugadores)[pos], paisAtaque, paisAtacado, MiniListaTropas);
+		Batallar((*Jugadores)[pos], paisAtaque, paisAtacado, MiniListaTropas); //Todo lo que le pasamos a batallar está chequeado
 
 		Reagrupar(pos);
 		cant++;
 		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
+		delete MiniListaTropas;
+
 	} while (cant < 3 || !((*Jugadores)[pos]->RenunciarTurno()) || (*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR);
+
 }
 
 
 //TODO: BATALLAR
-void cJuego::Batallar(cJugador* JugadorAtacando, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas){
+void cJuego::Batallar(cJugador* JugadorAtacando, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas) {
+	
+	cListaT<cTropa>* ListaTropaAux = PaisAtacado->CrearMiniListaRandom();
+
+
+	unsigned int AT_Efectivo = JugadorAtacando->AtaqueEfectivo(PaisAtacante, Tropas, ListaTropaAux);
+	cJugador* JugadorAtacado = DuenioPais(PaisAtacado); //Buscamos el dueño del pais atacado
+
+	if (JugadorAtacado == NULL)
+		throw new exception("El pais no tiene duenio"); //si esto pasa es porque algo hicimos mal
+	
+	
+
+	unsigned int AT_Defensa = JugadorAtacado->AtaqueEfectivo(PaisAtacado, ListaTropaAux);
+
+	JugadorAtacado->RecibirDanio(AT_Efectivo);
+	JugadorAtacando->RecibirDanio(AT_Defensa);
 
 }
+
+
+
+cJugador* cJuego::DuenioPais(cPais *Pais) {
+	for (unsigned int i; i < Jugadores->getCA(); i++)
+		if (*(*Jugadores)[i] == Pais)
+			return (*Jugadores)[i];
+	
+	return NULL;
+}
+
 
 //TODO: IMPRIMIRESTADOS
 void cJuego::ImprimirEstados() const {

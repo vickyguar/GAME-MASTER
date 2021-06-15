@@ -9,13 +9,15 @@
 #define EA_48AC6C59_7B06_45a6_B915_81B52F35D200__INCLUDED_
 
 #include "cGuerrero.h"
+#include "cMago.h"
+#include "cArquero.h"
+#include "cCaballero.h"
 #include "cListaT.h"
-
 
 class cTropa
 {
 private:
-	unsigned int NumTropa; //no es const porque yo puedo agrupar y divir tropas
+	string IDTropa; //no es const porque yo puedo agrupar y divir tropas
 	cListaT<cGuerrero>* Guerreros; //lista de guerreros
 	static unsigned int ContTropas; //contador 
 
@@ -47,5 +49,15 @@ public:
 	* @param int AT_ataque
 	*/
 	void RecibirDanio(unsigned int AT_Ataque);
+	cListaT<cGuerrero>* getGuerreros() { return Guerreros; }
+	bool operator>(cTropa* otra);
+	string getClave() { return IDTropa; }
+	template<class TipoGuerrero>
+	bool AnalizarTipo(cTropa* Tropa);
 };
+template<class TipoGuerrero>
+bool cTropa::AnalizarTipo(cTropa* Tropa)
+{
+	return (dynamic_cast<TipoGuerrero*>((*Tropa->getGuerreros())[0]) != NULL); //TODO: OJO CON FOWARD DECLARATION Y LOS .H
+}
 #endif // !defined(EA_48AC6C59_7B06_45a6_B915_81B52F35D200__INCLUDED_)

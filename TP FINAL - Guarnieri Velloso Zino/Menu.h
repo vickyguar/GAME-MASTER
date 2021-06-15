@@ -40,7 +40,7 @@ eOpcion ElegirOpcion() {
 	eOpcion opcion = eOpcion::SALIR;
 	
 	cout << To_StringMenu() << endl;
-	scanf("%d", &opcion);  //TODO: Despues pasar a CIN
+	scanf_s("%d", &opcion);  //TODO: Despues pasar a CIN
 	
 	if(opcion < eOpcion::SALIR || opcion > eOpcion::IMPRIMIR_PERFILES)
 	{

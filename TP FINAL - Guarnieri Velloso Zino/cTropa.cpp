@@ -6,27 +6,27 @@
 ///////////////////////////////////////////////////////////
 
 #include "cTropa.h"
-#include "cMago.h"
-#include "cArquero.h"
-#include "cCaballero.h"
+#include "Enums.h"
 
-#define MAGO 1
-#define ARQUERO 2
-#define CABALLERO 3
-
+class cMago;
+class cCaballero;
+class cArquero;
 unsigned int cTropa::ContTropas = 0;
 
 cTropa::cTropa(){
 	ContTropas++;
-	NumTropa = ContTropas;
+	IDTropa = to_string(ContTropas);
 	
-	int random = (rand() % 3) + 1;
-	if (random == MAGO)
-		*Guerreros = new cListaT<cMago>();
-	if (random == ARQUERO)
-		*Guerreros = new cListaT<cArquero>();
-	if (random == CABALLERO)
-		*Guerreros = new cListaT<cCaballero>();
+	eTipoGuerrero random = eTipoGuerrero(rand() % 3);
+	switch (random)
+	{
+	case eTipoGuerrero::CABALLERO:
+		*Guerreros = new cListaT<cCaballero>(); break;
+	case eTipoGuerrero::MAGO:
+		*Guerreros = new cListaT<cMago>(); break;
+	case eTipoGuerrero::ARQUERO:
+		*Guerreros = new cListaT<cArquero>(); break;
+	}
 }
 
 cTropa::~cTropa(){
@@ -44,4 +44,38 @@ unsigned int cTropa::CalcularAT_Total() {
 
 void cTropa::RecibirDanio(unsigned int AT_Ataque) {
 
+	//funcion de ordenar HP
+	
+	//verifica si estta -> sino esta vivo lo mato
+	//cambiao el at (at-lo que le saque)
+	int i = 0;
+	do
+	{
+		int aux = (*Guerreros)[i]->getHP();
+		(*(*Guerreros)[i]) -= AT_Ataque;
+		if ((*Guerreros)[i]->VerificarVida())
+		{
+			Guerreros->Eliminar(i);
+			--i;
+		}
+		AT_Ataque -= aux;
+		i++;
+
+	} while (AT_Ataque > 0 && i < Guerreros->getCA());
+}
+
+bool cTropa::operator>(cTropa* otra)
+{
+	//MAGO VS CABALLERO -> fuerte mago
+	//ARQUERO VS MAGO -> fuerte arquero
+	//CABALLERO VS ARQUERO -> fuerte caballero
+
+	if (AnalizarTipo<cMago>(this) && AnalizarTipo<cCaballero>(otra))
+		return true;
+	if (AnalizarTipo<cArquero>(this) && AnalizarTipo<cMago>(otra))
+		return true;
+	if (AnalizarTipo<cCaballero>(this) && AnalizarTipo<cArquero>(otra))
+		return true;
+
+	return false;
 }

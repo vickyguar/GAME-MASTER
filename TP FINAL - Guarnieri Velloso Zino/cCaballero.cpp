@@ -21,6 +21,6 @@ unsigned int cCaballero::CondicionAtaque(cGuerrero* Atacado){
 }
 
 unsigned int cCaballero::Contrataque(){
-
+	return 0;
 }
 

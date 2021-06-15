@@ -144,7 +144,6 @@
     <ClCompile Include="cGuerrero.cpp" />
     <ClCompile Include="cJuego.cpp" />
     <ClCompile Include="cJugador.cpp" />
-    <ClCompile Include="cLimítrofes.cpp" />
     <ClCompile Include="cMago.cpp" />
     <ClCompile Include="cMundo.cpp" />
     <ClCompile Include="cPais.cpp" />

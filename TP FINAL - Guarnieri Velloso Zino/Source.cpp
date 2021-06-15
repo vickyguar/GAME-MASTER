@@ -58,7 +58,7 @@ int main()
 	if (GAME_MASTER->getJugadorAtacante()->getEstado() == eEstadoJugador::GANADOR)
 	{
 		system("color E4");
-		cout << GAME_MASTER->getJugadorAtacante()->getUsername() << " has logrado conquistar el MUNDO :)" << endl;
+		cout << GAME_MASTER->getJugadorAtacante()->getClave() << " has logrado conquistar el MUNDO :)" << endl;
 	}
 		
 

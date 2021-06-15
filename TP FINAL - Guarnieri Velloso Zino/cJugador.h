@@ -11,6 +11,7 @@
 
 #include "cPais.h"
 #include "Enums.h"
+
 class cJugador
 {
 private:
@@ -38,7 +39,7 @@ public:
 	* @param pais que ataca, unidad de ataque
 	* @return int
 	*/
-	unsigned int AtaqueEfectivo(cPais* PaisAtacante, cListaT<cTropa>* TropasAt, cListaT<cTropa>* TropasDef);
+	unsigned int AtaqueEfectivo(cListaT<cTropa>* TropasAt, cListaT<cTropa>* TropasDef);
 	/**
 	* Defender
 	* el pais atacado se defiende, y recibe el AT del contrincante (el daño que le hace)
@@ -67,23 +68,27 @@ public:
 	*/
 	void AgregarTropas();
 
+	void GanarPais(cPais* Pais);
+
+	void PerderPais(cPais* Pais);
 
 
 #pragma region SETTES & GETTERS
 
 	void setEstado(eEstadoJugador _Estado = eEstadoJugador::ATACANDO);
 	eEstadoJugador getEstado();
-	string getUsername();
+	string getClave();
 
 #pragma endregion
 	bool VerificarPais(int pospais); //verifica si el pais es mio
 
 	bool operator==(cPais* Pais) { //Esto no es para comparar, es para ver si existe en la lista de paises del jugador
-		return (this->Paises->BuscarItem(Pais) != NULL) ? true : false;
+		return (this->Paises->BuscarItem(Pais->getClave()) != NULL) ? true : false;
 	}
 	bool operator!=(cPais* Pais) {
-		return (this->Paises->BuscarItem(Pais) != NULL) ? false : true;
+		return (this->Paises->BuscarItem(Pais->getClave()) != NULL) ? false : true;
 	}
 	//TODO: sobrecarga cout (IMPRIME EL NUMERO DEL PAIS CORRESPONDIENTE AL NUMERO DEL JUGADOR)
 };
+
 #endif // !defined(EA_B34E5789_D7AB_47b3_BFBB_ABFA2C7A92ED__INCLUDED_)

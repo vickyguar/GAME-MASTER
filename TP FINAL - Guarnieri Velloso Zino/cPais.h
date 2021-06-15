@@ -76,12 +76,13 @@ public:
 	static cListaT<cPais>* getListaPaises();
 
 	cListaT<cTropa>* CrearMiniListaRandom();
+	void RecibirDanio(unsigned int Daño, cListaT<cTropa>* miTropa);
 
 
 #pragma region GETTERS & SETTERS
 
 	cListaT<cPais>* GetListaLimitrofes();
-	string getNombre() { return Nombre; }
+	string getClave() { return Nombre; }
 	cListaT<cTropa>* getTropas() { return Tropas; }
 
 #pragma endregion

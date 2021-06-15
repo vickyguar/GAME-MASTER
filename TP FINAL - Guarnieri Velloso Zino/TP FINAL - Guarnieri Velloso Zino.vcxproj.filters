@@ -33,9 +33,6 @@
     <ClCompile Include="cJugador.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cLimítrofes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cMago.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

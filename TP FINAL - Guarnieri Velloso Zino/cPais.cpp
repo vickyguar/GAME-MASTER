@@ -63,7 +63,7 @@ void cPais::AsignarTropas(cTropa* Tropa)
 cTropa* cPais::VerificarTropa(unsigned int NTropa)
 {
 	cTropa* aux = NULL;
-	try { aux=Tropas->BuscarItem(NTropa); }
+	try { aux=Tropas->BuscarXPos(NTropa); } //TODO: CHEQUEAR DE QUIEN ES ESE NUMERO :)
 	catch(exception*ex){delete ex; }
 	return aux;
 }
@@ -75,7 +75,7 @@ cListaT<cPais>* cPais::getListaPaises()
 
 cListaT<cTropa>* cPais::CrearMiniListaRandom()
 {
-	cListaT<cTropa>* aux = new cListaT<cTropa>(false, 3);
+	cListaT<cTropa>* aux = new cListaT<cTropa>(true, 3);
 
 	if (Tropas->getCA() > 3) {
 		unsigned int rand1 = 1 + rand() % (Tropas->getCA() - 2);//Que se genere un número random que no incluya los extremos
@@ -90,6 +90,19 @@ cListaT<cTropa>* cPais::CrearMiniListaRandom()
 	}
 	
 	return aux;
+}
+
+void cPais::RecibirDanio(unsigned int Daño, cListaT<cTropa>* miTropa)
+{
+	for (int i = 0; i < miTropa->getCA(); i++)
+	{
+		(*miTropa)[i]->RecibirDanio(Daño);
+		if ((*miTropa)[i]->getGuerreros()->getCA() == 0) //murio toda la tropa
+			miTropa->Eliminar(i); //borro la tropa
+	}
+	if (miTropa->getCA() == 0 && Tropas->getCA() == 0) //si ya no tengo tropas (las que mande se murieron y en el pais tapoco tengo)
+		throw new exception(("Perdiste el dominio del pais: " + Nombre).c_str());
+	return;
 }
 
 cListaT<cPais>* cPais::GetListaLimitrofes()

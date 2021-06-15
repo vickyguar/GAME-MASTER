@@ -69,38 +69,39 @@ void cJuego::JugadorAtacando(unsigned int pos)
 
 }
 
-
-//TODO: BATALLAR
-void cJuego::Batallar(cJugador* JugadorAtacando, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas) {
+//TODO: BATALLAR (bool)
+void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas) {
 	
-	cListaT<cTropa>* ListaTropaAux = PaisAtacado->CrearMiniListaRandom();
+	cListaT<cTropa>* ListaTropaDef = PaisAtacado->CrearMiniListaRandom();
 
-
-	unsigned int AT_Efectivo = JugadorAtacando->AtaqueEfectivo(PaisAtacante, Tropas, ListaTropaAux);
+	unsigned int AT_Efectivo_Base = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef); //calcula el daño base que se va a realizar
 	cJugador* JugadorAtacado = DuenioPais(PaisAtacado); //Buscamos el dueño del pais atacado
 
 	if (JugadorAtacado == NULL)
 		throw new exception("El pais no tiene duenio"); //si esto pasa es porque algo hicimos mal
 	
-	
+	unsigned int AT_Defensa_Base = JugadorAtacado->AtaqueEfectivo(ListaTropaDef, Tropas);
 
-	unsigned int AT_Defensa = JugadorAtacado->AtaqueEfectivo(PaisAtacado, ListaTropaAux);
-
-	JugadorAtacado->RecibirDanio(AT_Efectivo);
-	JugadorAtacando->RecibirDanio(AT_Defensa);
-
+	try
+	{
+		PaisAtacante->RecibirDanio(AT_Defensa_Base, Tropas);
+		PaisAtacado->RecibirDanio(AT_Efectivo_Base, ListaTropaDef); //RecibirDaño(daño base, mis tropas, el enemigo)
+	}
+	catch (exception* ex)
+	{
+		cout << ex->what() << endl;
+		JugadorAtacado->PerderPais(PaisAtacado);
+		JugadorAtacante->GanarPais(PaisAtacado);
+	}	
 }
 
-
-
 cJugador* cJuego::DuenioPais(cPais *Pais) {
-	for (unsigned int i; i < Jugadores->getCA(); i++)
+	for (unsigned int i = 0; i < Jugadores->getCA(); i++)
 		if (*(*Jugadores)[i] == Pais)
 			return (*Jugadores)[i];
 	
 	return NULL;
 }
-
 
 //TODO: IMPRIMIRESTADOS
 void cJuego::ImprimirEstados() const {
@@ -123,7 +124,7 @@ void cJuego::SetUpMundo(unsigned int mundo){
 
 void cJuego::SetUpJugadores(string nombre)
 {
-	Jugadores->Agregar(&cJugador(nombre));
+	Jugadores->Agregar(new cJugador(nombre));
 	if (Mundo->GetLista()->getCA() % Jugadores->getCA());
 	
 }
@@ -171,6 +172,7 @@ int cJuego::getRondas()
 cJugador* cJuego::getJugadorAtacante()
 {
 	//return Jugadores->BuscarEstado(eEstadoJugador::ATACANDO);
+	return NULL;
 }
 
 

@@ -49,7 +49,7 @@ public:
 	void Reagrupar(unsigned int pos, cPais* PaisAtacado, cPais* PaisAtacante);
 	void FindeRondaEntera();
 
-#pragma region SETUP'S
+#pragma region SETUPS
 
 	void SetUpMundo(unsigned int mundo);
 	void SetUpJugadores(string username);
@@ -111,7 +111,7 @@ static unsigned int CalcularResiduo(int Num1, int Num2)
 cPais* PosPaisAtaque(cJugador* Jugador) {
 	int pospais = -1;
 	do {
-		cout << "\n ---- JUGADOR " << Jugador->getUsername() << " ---- " << endl;
+		cout << "\n ---- JUGADOR " << Jugador->getClave() << " ---- " << endl;
 		cout << " Introduzca el numero pais desde el que quiere atacar: \n";
 		cin >> pospais;
 	} while (pospais <0 || pospais>cPais::getListaPaises()->getCA() || !Jugador->VerificarPais(pospais));

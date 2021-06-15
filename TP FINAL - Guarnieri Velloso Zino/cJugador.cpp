@@ -6,7 +6,9 @@
 ///////////////////////////////////////////////////////////
 
 #include "cJugador.h"
-
+#include "cMago.h"
+#include "cCaballero.h"
+#include "cArquero.h"
 
 cJugador::cJugador(string _Username, eEstadoJugador _Estado):Username(_Username)
 {
@@ -18,21 +20,38 @@ cJugador::~cJugador(){
 
 }
 
-unsigned int cJugador::AtaqueEfectivo(cPais* PaisAtacante, cListaT<cTropa>* TropasAt, cListaT<cTropa>* TropasDef){
+unsigned int cJugador::AtaqueEfectivo(cListaT<cTropa>* miTropa, cListaT<cTropa>* TropaEnemiga){
 
-	//Dynamic_cast
-	return 0;
+	unsigned int Fuerza = 0;
+	int modificador = 1;
+	for (int i = 0; i < miTropa->getCA(); i++)
+	{
+		modificador = 1;
+
+		if (dynamic_cast<cCaballero*>((*miTropa)[i]->getGuerreros()) != NULL && Estado == eEstadoJugador::DEFENDIENDO) //si mi tropa son caballeros
+			modificador += 0.25;
+
+		for (int k = 0; k < TropaEnemiga->getCA(); k++)
+		{
+			if ((*(*miTropa)[i]) > (*TropaEnemiga)[k]) //TODO: SOBRE CARGA > (si mi tropa es fuerte contra la otra)
+			{
+				modificador += 0.25; //ser fuerte significa que mi ataque aumenta un 25% (MODIFICADOR ESTA = 1)
+			}
+		}
+		Fuerza += (*miTropa)[i]->CalcularAT_Total() * modificador; //voy acumulando los aumentos que tengo que realizar a la hora del ataque.
+	}
+	return Fuerza;
 }
 
 //void cJugador::Defender(cPais* PaisAtacado, unsigned int AT_Contrincante){
 //
 //}
 
-void cJugador::Reagrupar(cPais* Pais) //este pais es desde el ultio que ataque
+void cJugador::Reagrupar(cPais* PaisOrigen) //este pais es desde el ultio que ataque
 {
 	int opcion = 0;
 	unsigned int pos = 0;
-	cout << "Queres pasar topas desde " << Pais->getNombre() << " a algun pais limitrofe?" << endl;
+	cout << "Queres pasar topas desde " << PaisOrigen->getClave() << " a algun pais limitrofe?" << endl;
 	cout << "1: SI" << endl << "0: NO" << endl;
 	cin >> opcion;
 	if (opcion)
@@ -41,27 +60,25 @@ void cJugador::Reagrupar(cPais* Pais) //este pais es desde el ultio que ataque
 		{
 			system("cls");
 			//cout << *this << endl;
-			cout << "Ingrese el numero de un pais limitrofe de " << Pais->getNombre() << ":";
+			cout << "Ingrese el numero de un pais limitrofe de " << PaisOrigen->getClave() << ":";
 			cin >> pos; //es la posicion de la lista del jugador
-		} while (!(Pais->VerificarLimitrofes((*Paises)[pos])));
+		} while (!(PaisOrigen->VerificarLimitrofes((*Paises)[pos])));
 
 		do
 		{
-			cout << "Cuantas tropas quiere pasar? " << endl;
-			cin >> opcion;
-		} while (opcion >= Pais->getTropas()->getCA() || opcion < 0);
-		
+			cout << "Cuantas tropas quiere pasar? Debe quedar 1 tropa en el pais de origen" << endl;
+			cin >> opcion; //cantidad de tropas que voy a pasar
+		} while (opcion >= PaisOrigen->getTropas()->getCA() || opcion < 0);
+
+		unsigned int rand1 = rand() % (PaisOrigen->getTropas()->getCA() - opcion);//Que se genere un número random que no incluya los extremos
+
 		for (unsigned int i = 0; i < opcion; i++)
 		{
-			//(*Paises)[pos]->CrearMiniListaRandom();
+			cTropa* aux = PaisOrigen->getTropas()->QuitarXPos(rand1 + i); //lo quito del pais de origen
+			(*(*Paises)[pos]->getTropas()) + aux; //TODO: fijarse de que siga existiendo el obj (lo estoy agregando a la lista del pais limitrofe)
+			if (rand1 >= PaisOrigen->getTropas()->getCA())
+				rand1 = 0;
 		}
-
-		(*Paises)[pos]->AsignarTropas();
-
-		//PEDIR NUMERO TROPAS
-		//LO QUITO DE LA LISTA DEL PAIS DE ORIGEN (sobrecarga -)
-		//PARA AGREGARLO A LA DEL PAIS LIMITROFE (sobrecarga del +)
-
 	}
 	else
 	{
@@ -101,12 +118,22 @@ void cJugador::AgregarTropas()
 	}
 }
 
+void cJugador::GanarPais(cPais* Pais)
+{
+	Paises->Agregar(Pais);
+}
+
+void cJugador::PerderPais(cPais* Pais)
+{
+	Paises->Quitar(Pais->getClave());
+}
+
 eEstadoJugador cJugador::getEstado()
 {
 	return Estado;
 }
 
-string cJugador::getUsername()
+string cJugador::getClave()
 {
 	return Username;
 }

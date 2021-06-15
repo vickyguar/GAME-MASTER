@@ -23,17 +23,16 @@ public:
 #pragma region AGREGAR,QUITAR,ELIMINAR
 	void Agregar(T* newItem);
 	T* Quitar(const string Key);
-	void Eliminar(const string Key);
+	T* QuitarXPos(unsigned int pos);
+	void Eliminar(unsigned int pos);
 #pragma endregion
 	void Redimensionar();
 #pragma region BUSCAR
-	template<class C>
-	T* BuscarItem(const C Key);
+	T* BuscarItem(const string Key);
 	T* BuscarXPos(unsigned int Index);
 #pragma endregion
 #pragma region GETTERS
-	template<class C>
-	unsigned int getIndex(const C Key)const;
+	unsigned int getIndex(const string Key)const;
 	unsigned int getCA() const;
 	unsigned int getTAM() const;
 #pragma endregion
@@ -139,12 +138,31 @@ T* cListaT<T>::Quitar(const string Key)
 }
 
 template<class T>
-void cListaT<T>::Eliminar(const string Key)
+inline T* cListaT<T>::QuitarXPos(unsigned int pos)
+{
+	T* aux = NULL;
+	try { aux = BuscarXPos(pos); } //busco el elemento
+	catch (exception* ex) {
+		string error = ex->what();
+		delete ex;
+		ex = new exception(("No se puede quitar el item: " + error).c_str());
+		throw ex;
+	}
+	for (int i = pos; i < CA - 1; i++)
+	{
+		Lista[i] = Lista[i + 1]; //corro todo una posicion para arriba 
+	}
+	Lista[--CA] = NULL;
+	return aux;
+}
+
+template<class T>
+void cListaT<T>::Eliminar(unsigned int pos)
 {
 	T* aux = NULL;
 	if (Lista != NULL)
 	{
-		try { aux = Quitar(Key); }
+		try { aux = QuitarXPos(pos); }
 		catch (exception* ex) {
 			string error = ex->what();
 			delete ex;
@@ -180,8 +198,7 @@ void cListaT<T>::Redimensionar()
 }
 
 template<class T>
-template<class C>
-T* cListaT<T>::BuscarItem(const C Key)
+T* cListaT<T>::BuscarItem(const string Key)
 {
 	int pos = -1;
 	if (Lista != NULL)
@@ -203,14 +220,13 @@ T* cListaT<T>::BuscarItem(const C Key)
 template<class T>
 T* cListaT<T>::BuscarXPos(unsigned int Index)
 {
-	if (Index > CA)
+	if (Index < 0 ||Index > CA)
 		throw new exception(("La posicion " + to_string(Index) + " no existe en la lista").c_str());
 	return Lista[Index];
 }
 
 template<class T>
-template<class C>
-unsigned int cListaT<T>::getIndex(const C Key) const
+unsigned int cListaT<T>::getIndex(const string Key) const
 {
 	for (unsigned int i = 0; i < CA; i++)
 	{

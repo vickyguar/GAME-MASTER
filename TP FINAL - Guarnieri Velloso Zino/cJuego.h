@@ -8,9 +8,9 @@
 #if !defined(EA_D34FED27_7152_41ec_81AD_94CE58A64212__INCLUDED_)
 #define EA_D34FED27_7152_41ec_81AD_94CE58A64212__INCLUDED_
 
-#include "cJugador.h"
-#include "cListaT.h"
 #include "cMundo.h"
+
+class cJugador;
 
 class cJuego
 {
@@ -98,7 +98,7 @@ static unsigned int CalcularResiduo(int Num1, int Num2)
 	{
 		float Division = (float)Num1 / Num2;
 		int ParteEntera = Num1 / Num2;
-		int Residuo = (Division - ParteEntera) * Num2;
+		int Residuo = (int)(Division - ParteEntera) * Num2;
 		return Residuo;
 	}
 	else
@@ -108,51 +108,7 @@ static unsigned int CalcularResiduo(int Num1, int Num2)
 //Funciones
 
 //Ingreso de datos
-cPais* PosPaisAtaque(cJugador* Jugador) {
-	int pospais = -1;
-	do {
-		cout << "\n ---- JUGADOR " << Jugador->getClave() << " ---- " << endl;
-		cout << " Introduzca el numero pais desde el que quiere atacar: \n";
-		cin >> pospais;
-	} while (pospais <0 || pospais>cPais::getListaPaises()->getCA() || !Jugador->VerificarPais(pospais));
 
-	return (*cPais::getListaPaises())[pospais];
-}
-
-cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
-	int pospais = -1;
-	do {
-		cout << " Introduzca el numero pais al que quiere atacar: \n";
-		cin >> pospais;
-
-	} while (pospais <0 || pospais>cPais::getListaPaises()->getCA() || Jugador->VerificarPais(pospais)||
-		!Pais->VerificarLimitrofes((*cPais::getListaPaises())[pospais]));
-
-	return (*cPais::getListaPaises())[pospais];
-}
-
-void TropasdeBatalla(cPais* PaisAtaque,cListaT<cTropa>*TropasBatalla)
-{
-	int canttropas = 0;
-	unsigned int nTropa = 0;
-	cTropa* aux = NULL;
-	do {
-		cout << " Introduzca la cantidad de tropas con las que quiere atacar. MAXIMO DE 3 : \n";
-		cin >> canttropas;
-	} while (canttropas > 3||canttropas<1);
-
-	for (unsigned int i = 0; i < canttropas; i++)
-	{
-		do
-		{
-			cout << " Introduzca el numero de tropa #" << i << " :";
-			cin >> nTropa;
-			aux = PaisAtaque->VerificarTropa(nTropa);
-		} while (aux==NULL);
-
-		(*TropasBatalla)+aux;
-	}
-}
 
 //Verificación de datos ingresados
 

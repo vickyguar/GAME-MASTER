@@ -10,7 +10,6 @@
 
 
 #include "cPais.h"
-#include "Enums.h"
 
 class cJugador
 {

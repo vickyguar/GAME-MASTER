@@ -1,6 +1,7 @@
 //Source
 #include <iostream>
 #include "cJuego.h"
+#include "cJugador.h"
 #include "Menu.h"
 #include <random>
 #include<ctime>

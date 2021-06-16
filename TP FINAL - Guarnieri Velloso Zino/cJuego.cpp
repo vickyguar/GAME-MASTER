@@ -6,8 +6,57 @@
 ///////////////////////////////////////////////////////////
 
 #include "cJuego.h"
+#include "cJugador.h"
 
 unsigned int cJuego::Rondas = 0;
+
+cPais* PosPaisAtaque(cJugador* Jugador) {
+	unsigned int pospais = -1;
+	do {
+		cout << "\n ---- JUGADOR " << Jugador->getClave() << " ---- " << endl;
+		cout << " Introduzca el numero pais desde el que quiere atacar: \n";
+		cin >> pospais;
+	} while (pospais <0 || pospais>cPais::getListaPaises()->getCA() || !Jugador->VerificarPais(pospais));
+
+	return (*cPais::getListaPaises())[pospais];
+}
+
+cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
+	unsigned int pospais = -1;
+	do {
+		cout << " Introduzca el numero pais al que quiere atacar: \n";
+		cin >> pospais;
+
+	} while (pospais <0 || pospais>cPais::getListaPaises()->getCA() || Jugador->VerificarPais(pospais) ||
+		!Pais->VerificarLimitrofes((*cPais::getListaPaises())[pospais]));
+
+	return (*cPais::getListaPaises())[pospais];
+}
+
+void TropasdeBatalla(cPais* PaisAtaque, cListaT<cTropa>* TropasBatalla)
+{
+	unsigned int canttropas = 0;
+	unsigned int nTropa = 0;
+	cTropa* aux = NULL;
+	do {
+		cout << " Introduzca la cantidad de tropas con las que quiere atacar. MAXIMO DE 3 : \n";
+		cin >> canttropas;
+	} while (canttropas > 3 || canttropas < 1);
+
+	for (unsigned int i = 0; i < canttropas; i++)
+	{
+		do
+		{
+			cout << " Introduzca el numero de tropa #" << i << " :";
+			cin >> nTropa;
+			aux = PaisAtaque->VerificarTropa(nTropa);
+		} while (aux == NULL);
+
+		(*TropasBatalla) + aux;
+	}
+}
+
+
 
 cJuego::cJuego(unsigned int cantjugadores)
 {
@@ -125,7 +174,8 @@ void cJuego::SetUpMundo(unsigned int mundo){
 void cJuego::SetUpJugadores(string nombre)
 {
 	Jugadores->Agregar(new cJugador(nombre));
-	if (Mundo->GetLista()->getCA() % Jugadores->getCA());
+	if (Mundo->GetLista()->getCA() % Jugadores->getCA())
+		return;
 	
 }
 
@@ -145,10 +195,10 @@ void cJuego::FindeRondaEntera()
 void cJuego::AsignarPaisesRandom()
 {
 	//listem
-	float Division = Mundo->GetLista()->getCA() / Jugadores->getCA();
+	float Division = (float)Mundo->GetLista()->getCA() / Jugadores->getCA();
 	cListaT<cPais>* Temporal = Mundo->GetLista(); //TODO: operador =
 
-	for (unsigned int i = 0; i < (int)Division; i++)
+	for (unsigned int i = 0; i < (unsigned int)Division; i++)
 	{
 		//TODO: random
 		//TODO: asignar tropas random pAIS[1]->AsignarTropa();

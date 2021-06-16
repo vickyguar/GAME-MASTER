@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "windows.h""
+#include "windows.h"
 
 using namespace std;
 
@@ -74,6 +74,7 @@ bool Menu() {
 	case eOpcion::SALIR:
 		return false;
 	}
+	return false;
 }
 
 unsigned int ElegirMundo()

@@ -8,6 +8,7 @@ class cMundo
 {
 private:
 	cListaT<cPais>* ListaPaises; //lista de paises que constituyen al mundo
+	string Nombre;
 
 #pragma region METODOS DE ARCHIVOS
 	/**
@@ -59,6 +60,14 @@ public:
 #pragma region GETTERS & SETTERS
 
 	cListaT<cPais>* GetLista();
+
+#pragma region IMPRIMIR
+
+	void Imprimir() const;
+	
+
+#pragma endregion
+
 
 #pragma endregion
 };

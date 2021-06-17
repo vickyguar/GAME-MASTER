@@ -87,6 +87,8 @@ public:
 
 #pragma endregion
 
+	string To_string()const;
+
 	bool operator==(string Nombre);
 
 };

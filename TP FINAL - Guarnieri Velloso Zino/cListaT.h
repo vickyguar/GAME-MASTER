@@ -38,6 +38,7 @@ public:
 #pragma endregion
 
 	void Listar()const;
+	string To_String()const;
 
 #pragma region SOBRECARGA
 	T* operator[](unsigned int pos);
@@ -108,8 +109,7 @@ void cListaT<T>::Agregar(T* newItem)
 		}
 		catch (exception* ex) { //si el elemento no existe
 			delete ex;
-			Lista[CA] = newItem; //lo agrego a la lista
-			CA++;
+			Lista[CA++] = newItem; //lo agrego a la lista
 			return;
 		}
 		throw new exception("El item ya esta en la lista");
@@ -288,13 +288,20 @@ inline void cListaT<T>::operator=(cListaT<T>* ListaB)
 	}
 }
 
-template<class T>
-ostream& operator<<(ostream& o, cListaT<T>& obj)
+template <class T>
+ostream& operator<<(ostream& os, const cListaT<T>& Lista)
 {
-	for (unsigned int i = 0; i < obj.getCA(); i++)
+	os << Lista.To_String() << endl;
+	return os;
+}
+
+template<class T>
+string cListaT<T>::To_String() const
+{
+	string Total;
+	for (unsigned int i = 0; i < CA; i++)
 	{
-		o << *obj[i];
+		Total += Lista[i]->To_string();// imprimir
 	}
-	o << "Nombre: " << obj->Nombre << "Apellido: " << obj->Apellido << endl;
-	return o;
+	return Total;
 }

@@ -120,6 +120,11 @@ cListaT<cPais>* cPais::GetListaLimitrofes()
 
 }
 
+string cPais::To_string() const
+{
+	return Nombre;
+}
+
 bool cPais::operator==(string Nombre)
 {
 	return (Nombre == this->Nombre);

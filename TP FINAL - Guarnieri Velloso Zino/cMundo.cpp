@@ -85,6 +85,11 @@ cListaT<cPais>* cMundo::GetLista()
 	return ListaPaises;
 }
 
+void cMundo::Imprimir() const
+{
+	cout << *ListaPaises;
+}
+
 void cMundo::SetUp(const char* Filename)
 {
 	try
@@ -93,6 +98,7 @@ void cMundo::SetUp(const char* Filename)
 	}
 	catch (exception* ex)
 	{
+		delete ex;
 		//TODO: hacer algo con la excepcion
 	}
 }

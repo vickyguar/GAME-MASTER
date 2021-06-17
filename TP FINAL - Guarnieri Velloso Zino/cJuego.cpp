@@ -192,6 +192,14 @@ void cJuego::FindeRondaEntera()
 	}
 }
 
+cJugador* cJuego::BuscarXEstado(eEstadoJugador estado) const
+{
+	for (unsigned int i = 0; i < Jugadores->getCA(); i++)
+		if ((*Jugadores)[i]->getEstado() == estado)
+			return (*Jugadores)[i];
+	throw new runtime_error("Error en BuscarXEstado");
+}
+
 void cJuego::AsignarPaisesRandom()
 {
 	//listem
@@ -214,15 +222,14 @@ void cJuego::AsignarPaisesRandom()
 
 }
 
-int cJuego::getRondas()
+int cJuego::getRondas() 
 {
 	return Rondas;
 }
 
-cJugador* cJuego::getJugadorAtacante()
+cMundo* cJuego::getMundo() const
 {
-	//return Jugadores->BuscarEstado(eEstadoJugador::ATACANDO);
-	return NULL;
+	return Mundo;
 }
 
 

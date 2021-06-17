@@ -26,10 +26,13 @@ int main()
 	if (ListoXaJugar)
 	{
 		unsigned int Mundo = ElegirMundo();
+	
 		
 		GAME_MASTER = new cJuego(CANT); 
 		//abro archivo y creo el mundo
 		GAME_MASTER->SetUpMundo(Mundo); //a esta altura ya tenemos la cantidad de paises
+		cout << "Usted esta en " << ConvertMundoString(Mundo) << endl;
+		GAME_MASTER->getMundo()->Imprimir();
 
 		//pregunto cantidad de jugadores -> por ahora es de a 2 :)
 
@@ -52,14 +55,14 @@ int main()
 	{
 		GAME_MASTER->AsignarTurno(); //Se asigna el turno, y se envía alusuario a jugar. 
 
-	} while (GAME_MASTER->getRondas() < 10 || GAME_MASTER->getJugadorAtacante()->getEstado() != eEstadoJugador::GANADOR); //TODO: las condiciones serían: que haya un ganador o supere un maximo de 10 turnos
+	} while (GAME_MASTER->getRondas() < 10 || GAME_MASTER->BuscarXEstado(eEstadoJugador::ATACANDO) != NULL); //las condiciones serían: que haya un ganador o supere un maximo de 10 turnos
 
 	//se juega mientras que el numero de ronda sea < a 10 o que haya un jugador que haya conquistado el MUNDOOOO!
 
-	if (GAME_MASTER->getJugadorAtacante()->getEstado() == eEstadoJugador::GANADOR)
+	if (GAME_MASTER->BuscarXEstado(eEstadoJugador::GANADOR) != NULL)
 	{
 		system("color E4");
-		cout << GAME_MASTER->getJugadorAtacante()->getClave() << " has logrado conquistar el MUNDO :)" << endl;
+		cout << GAME_MASTER->BuscarXEstado(eEstadoJugador::GANADOR)->getClave() << " has logrado conquistar el MUNDO :)" << endl;
 	}
 		
 

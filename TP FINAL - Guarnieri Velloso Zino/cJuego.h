@@ -49,6 +49,8 @@ public:
 	void Reagrupar(unsigned int pos, cPais* PaisAtacado, cPais* PaisAtacante);
 	void FindeRondaEntera();
 
+	cJugador* BuscarXEstado(eEstadoJugador estado)const;
+
 #pragma region SETUPS
 
 	void SetUpMundo(unsigned int mundo);
@@ -59,7 +61,7 @@ public:
 #pragma region GETTERS & SETTERS
 
 	static int getRondas();
-	cJugador* getJugadorAtacante();
+	cMundo* getMundo()const;
 
 #pragma endregion
 

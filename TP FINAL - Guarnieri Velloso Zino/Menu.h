@@ -93,6 +93,16 @@ unsigned int ElegirMundo()
 	return Mundo;
 }
 
+string ConvertMundoString(unsigned int mundo) {
+
+	mundo--;
+	switch ((eMundo)mundo)
+	{
+	case eMundo::AGENTINA: return "Argentina"; break;
+	case eMundo::AMERICA_LATINA: return "America Latina"; break;
+	}
+}
+
 void Instrucciones() { 
 	cout << "\t\n----- INSTRUCCIONES -----" << endl;
 	cout<< "El objetivo del juego es CONQUISTAR EL MUNDO ocupando con tus tropas todos los paises de los oponentes" << endl;

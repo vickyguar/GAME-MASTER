@@ -202,24 +202,31 @@ cJugador* cJuego::BuscarXEstado(eEstadoJugador estado) const
 
 void cJuego::AsignarPaisesRandom()
 {
-	//listem
+	unsigned int i;
 	float Division = (float)Mundo->GetLista()->getCA() / Jugadores->getCA();
-	cListaT<cPais>* Temporal = Mundo->GetLista(); //TODO: operador =
+	unsigned int PaisesSobrantes = CalcularResiduo(Mundo->GetLista()->getCA(), Jugadores->getCA()); //cantidad paises, cantidad jugadores
 
-	for (unsigned int i = 0; i < (unsigned int)Division; i++)
-	{
-		//TODO: random
-		//TODO: asignar tropas random pAIS[1]->AsignarTropa();
-		//TODO: la agrego al jugador el pais con sus tropas (por copia)
+	cListaT<unsigned int> Array(true, Mundo->GetLista()->getCA());
+	Array.AgregarXDefault();
+
+
+	for (unsigned int k = 0; k < Jugadores->getCA(); k++) {
+
+		for (unsigned int i = 0; i < (unsigned int)Division; i++) { //División es la cantidad de paises que le corresponden a cada uno si se hace una división equitativa
+			unsigned int random = rand() % Array.getCA();
+			(*Jugadores)[k]->GanarPais((*cPais::getListaPaises())[*Array[random]]); //Aca estamos asignando el pais al jugador
+			Array - random;
+		}
+
+		if (PaisesSobrantes>0) {
+			unsigned int random = rand() % Array.getCA();
+			(*Jugadores)[k]->GanarPais((*cPais::getListaPaises())[*Array[random]]); //Aca estamos asignando el pais al jugador
+			Array - random;
+
+			PaisesSobrantes--;
+		}
+
 	}
-
-	if (Division - (int)Division != 0) //se reparten la misma cantidad para todos los jugadores
-	{
-		unsigned int PaisesSobrantes = CalcularResiduo(Mundo->GetLista()->getCA(), Jugadores->getCA()); //cantidad paises, cantidad jugadores
-		//TODO: rando para ver quien se queda con paises
-		//TODO: asigno paises
-	}
-
 }
 
 int cJuego::getRondas() 

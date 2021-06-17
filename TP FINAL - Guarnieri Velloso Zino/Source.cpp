@@ -18,6 +18,8 @@
 
 int main()
 {
+	//TODO: AMPERSEN!!!!!!!!!!!! DEBUG ASSERTION FAILED
+
 	srand(time(NULL));
 	bool ListoXaJugar = Menu();
 	cJuego* GAME_MASTER;

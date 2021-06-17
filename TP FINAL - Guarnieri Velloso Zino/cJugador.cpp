@@ -120,7 +120,8 @@ void cJugador::AgregarTropas()
 
 void cJugador::GanarPais(cPais* Pais)
 {
-	Paises->Agregar(Pais);
+	try { Paises->Agregar(Pais); }
+	catch (exception* ex) { delete ex; }//TODO: ATENCION
 }
 
 void cJugador::PerderPais(cPais* Pais)

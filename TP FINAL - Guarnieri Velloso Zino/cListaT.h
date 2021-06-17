@@ -22,6 +22,7 @@ public:
 #pragma endregion
 #pragma region AGREGAR,QUITAR,ELIMINAR
 	void Agregar(T* newItem);
+	void AgregarXDefault();
 	T* Quitar(const string Key);
 	T* QuitarXPos(unsigned int pos);
 	void Eliminar(unsigned int pos);
@@ -43,6 +44,7 @@ public:
 #pragma region SOBRECARGA
 	T* operator[](unsigned int pos);
 	void operator+(T* newItem);
+	void operator-(unsigned int pos);
 	void operator=(cListaT<T>* Copia); //ESTO CREA POR COPIA
 #pragma endregion
 
@@ -116,6 +118,18 @@ void cListaT<T>::Agregar(T* newItem)
 	}
 	throw new exception("El nuevo item que se desea agregar a la lista es NULL");
 }
+
+template<class T>
+void cListaT<T>::AgregarXDefault()
+{
+	unsigned int i = 0;
+	if (CA == TAM) //si la cant actual es igual al tamanio max
+		Redimensionar(); //redimensiono la lista
+	for(i = 0; i< TAM; i++)
+		Lista[CA++] = &i; //lo agrego a la lista
+
+}
+	
 
 template<class T>
 T* cListaT<T>::Quitar(const string Key)
@@ -277,6 +291,12 @@ inline void cListaT<T>::operator+(T* newItem)
 		throw ex;
 	}
 	return;
+}
+
+template<class T>
+inline void cListaT<T>::operator-(unsigned int pos)
+{
+	Eliminar(pos);
 }
 
 template<class T>

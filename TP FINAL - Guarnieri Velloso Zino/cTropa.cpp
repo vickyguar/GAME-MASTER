@@ -74,11 +74,11 @@ bool cTropa::operator>(cTropa* otra)
 	//ARQUERO VS MAGO -> fuerte arquero
 	//CABALLERO VS ARQUERO -> fuerte caballero
 
-	if (AnalizarTipo<cMago>(this->Guerreros) && AnalizarTipo<cCaballero>(otra->Guerreros))
+	if (AnalizarTipoTropa<cMago>(this->Guerreros) && AnalizarTipoTropa<cCaballero>(otra->Guerreros))
 		return true;
-	if (AnalizarTipo<cArquero>(this->Guerreros) && AnalizarTipo<cMago>(otra->Guerreros))
+	if (AnalizarTipoTropa<cArquero>(this->Guerreros) && AnalizarTipoTropa<cMago>(otra->Guerreros))
 		return true;
-	if (AnalizarTipo<cCaballero>(this->Guerreros) && AnalizarTipo<cArquero>(otra->Guerreros))
+	if (AnalizarTipoTropa<cCaballero>(this->Guerreros) && AnalizarTipoTropa<cArquero>(otra->Guerreros))
 		return true;
 
 	return false;
@@ -105,16 +105,23 @@ void cTropa::OrdenarXHP()
 	}
 }
 
-string cTropa::To_string() 
+string cTropa::To_string()
 {
-	string output = "\t\t TROPA N "+ IDTropa + to_string(Guerreros->getCA());
+	string output = "\t\t TROPA N " + IDTropa + ": " + to_string(Guerreros->getCA());
 
-	if (AnalizarTipo<cCaballero>(Guerreros))
+	if (dynamic_cast<cCaballero*>(Guerreros) != NULL)
 		output += " Caballeros\n";
-	else if (AnalizarTipo<cMago>(Guerreros))
+	else if (dynamic_cast<cMago*>(Guerreros) != NULL)
 		output += " Magos\n";
-	else if (AnalizarTipo<cArquero>(Guerreros))
-		output += " Arqueros\n";
+	else if (dynamic_cast<cArquero*>(Guerreros) != NULL)
+		output += " Arqueros\n"; //TODO: NO IMPRIME
+
+	/*if (AnalizarTipoTropa<cCaballero>(Guerreros))
+		output += " Caballeros\n";
+	else if (AnalizarTipoTropa<cMago>(Guerreros))
+		output += " Magos\n";
+	else if (AnalizarTipoTropa<cArquero>(Guerreros))
+		output += " Arqueros\n";*/
 
 	return output;
 }
@@ -122,7 +129,7 @@ string cTropa::To_string()
 void cTropa::RecibirDanio(unsigned int AT_Ataque) {
 
 	OrdenarXHP(); //ordeno de más vida a menod vida
-	int i = 0;
+	unsigned int i = 0;
 	do
 	{
 		int aux = (*Guerreros)[i]->getHP(); //me fijo cuanta vida tengo

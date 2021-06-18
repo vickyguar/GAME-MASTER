@@ -171,7 +171,7 @@ inline T* cListaT<T>::QuitarXPos(unsigned int pos)
 		ex = new exception(("No se puede quitar el item: " + error).c_str());
 		throw ex;
 	}
-	for (int i = pos; i < CA - 1; i++)
+	for (unsigned int i = pos; i < CA - 1; i++)
 	{
 		Lista[i] = Lista[i + 1]; //corro todo una posicion para arriba 
 	}

@@ -141,7 +141,7 @@ string cJugador::To_string() const
 	output += "\t" + this->Username + "\n";
 	output += "\t\tPaises que posee: \n";
 	for (unsigned int i = 0; i < this->Paises->getCA(); i++) {
-		output += "\t\t Pais " + to_string(cPais::getListaPaises()->getIndex((*Paises)[i]->getClave())) + ':' + (*Paises)[i]->getClave();
+		output += "\t\t Pais " + to_string(cPais::getListaPaises()->getIndex((*Paises)[i]->getClave())) + ':' + (*Paises)[i]->getClave() + "\n";
 		output += (*Paises)[i]->getTropas()->To_String();
 	}
 

@@ -211,7 +211,7 @@ void cJuego::AsignarPaisesRandom()
 {
 	
 	float Division = (float)Mundo->GetLista()->getCA() / Jugadores->getCA();
-	unsigned int CANT_MAX = (int)(2 * Division);
+	unsigned int CANT_MAX = int(Division); //repartire 1 tropas por pais y me sobraran tantas tropas como paises haya en el mundo para cada jugador
 	cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(cPais::getListaPaises()));
 
 	unsigned int PaisesSobrantes = CalcularResiduo(Mundo->GetLista()->getCA(), Jugadores->getCA()); //cantidad paises, cantidad jugadores
@@ -221,9 +221,15 @@ void cJuego::AsignarPaisesRandom()
 
 		for (unsigned int i = 0; i < (unsigned int)Division; i++) { //División es la cantidad de paises que le corresponden a cada uno si se hace una división equitativa
 			unsigned int random = rand() % CopiaLista->getCA();
-			do {
-				(*CopiaLista)[random]->AsignarTropas();
-			}while()
+			unsigned int randomTropas = 1; //siempre uno
+			if (CANT_MAX > 0)
+			{
+				randomTropas += (rand() % 2)+1; //y agrego aleatoriamente una o dos
+				CANT_MAX -= randomTropas; //resto la cantidad de paises extra que agregue al pais
+			}
+			for(int n=0;n<randomTropas;n++)
+				(*CopiaLista)[random]->AsignarTropas();//1 vez seguro
+
 			(*Jugadores)[k]->GanarPais(CopiaLista->QuitarXPos(random)); //Aca estamos asignando el pais al jugador
 	
 		}

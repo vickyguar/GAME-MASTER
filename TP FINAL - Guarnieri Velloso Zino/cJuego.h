@@ -72,7 +72,7 @@ public:
 
 #pragma endregion
 
-	//int* ReparticionPaises();
+	
 	void AsignarPaisesRandom();
 
 };

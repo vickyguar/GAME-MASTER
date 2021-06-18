@@ -33,6 +33,7 @@ public:
 	* destructor de la clase cTropa
 	*/
 	~cTropa();
+	void AsignarGuerreros();
 
 #pragma endregion
 	/**

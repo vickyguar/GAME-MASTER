@@ -16,22 +16,35 @@ unsigned int cTropa::ContTropas = 0;
 cTropa::cTropa(){
 	ContTropas++;
 	IDTropa = to_string(ContTropas);
-	
-	eTipoGuerrero random = eTipoGuerrero(rand() % 3);
-	switch (random)
-	{
-	case eTipoGuerrero::CABALLERO:
-		*Guerreros = new cListaT<cCaballero>(); break;
-	case eTipoGuerrero::MAGO:
-		*Guerreros = new cListaT<cMago>(); break;
-	case eTipoGuerrero::ARQUERO:
-		*Guerreros = new cListaT<cArquero>(); break;
-	}
+	Guerreros = new cListaT<cGuerrero>();
+	AsignarGuerreros();
 }
 
 cTropa::~cTropa(){
 	if (Guerreros != NULL)
 		delete Guerreros;
+}
+
+void cTropa::AsignarGuerreros()
+{
+	int i = 0;
+	eTipoGuerrero random = eTipoGuerrero(rand() % 3);
+	switch (random)
+	{
+	case eTipoGuerrero::CABALLERO:
+		for(i=0;i<(rand()%11)+10;i++)
+			Guerreros->Agregar(new cCaballero());
+		break;
+	case eTipoGuerrero::MAGO:
+		for (i = 0; i < (rand() % 21) + 20; i++)
+			Guerreros->Agregar(new cMago());
+		break;
+	case eTipoGuerrero::ARQUERO:
+		for (i = 0; i < (rand() % 16) + 15; i++)
+			Guerreros->Agregar(new cArquero());
+		break;
+	}
+
 }
 
 unsigned int cTropa::CalcularAT_Total(cTropa* otra) {

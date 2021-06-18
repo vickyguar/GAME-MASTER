@@ -19,7 +19,8 @@ protected:
 	unsigned int AT;
 	unsigned int HP_Actual;
 	unsigned int HP_Inicial;
-
+	string ID;
+	static unsigned int cantGuerreros;
 public:
 #pragma region CONSTRUCTORES & DESTRUCTORES
 	/**
@@ -58,5 +59,6 @@ public:
 	inline void setHP(unsigned int Daño) { HP_Actual -= Daño; }
 	void operator-=(unsigned int daño) { setHP(daño); }
 	bool VerificarVida() { return (HP_Actual <= HP_Inicial * 0.1); }
+	string getClave() const { return ID; }
 };
 #endif // !defined(EA_86F03F75_F4B2_4011_AD66_663180BE8617__INCLUDED_)

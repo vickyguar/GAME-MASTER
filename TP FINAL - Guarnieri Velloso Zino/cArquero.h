@@ -33,7 +33,7 @@ public:
 	* @return bool
 	*/
 	bool AtaqueAleatorio();
-	
+	unsigned int AtaquePorSegunda(cGuerrero* Atacado);
 	unsigned int CondicionAtaque(cGuerrero* Atacado);
 
 };

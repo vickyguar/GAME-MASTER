@@ -6,6 +6,7 @@
 ///////////////////////////////////////////////////////////
 
 #include "cCaballero.h"
+#include "cArquero.h"
 
 cCaballero::cCaballero():cGuerrero((rand() % 11) + 30, (rand() % 21) + 80, (rand() % 21) + 80){
 	//Los caballeros tienen un ataque (AT) entre 30-40 y entre 80 y 100 de vida(HP).
@@ -17,10 +18,14 @@ cCaballero::~cCaballero(){
 
 unsigned int cCaballero::CondicionAtaque(cGuerrero* Atacado){
 
-	return 0;
+	if (dynamic_cast<cArquero*>(Atacado) != NULL)
+		return (AT * 1.25); //su ataque aumenta en 0,25
+	else
+		return AT;
 }
 
 unsigned int cCaballero::Contrataque(){
-	return 0;
+	
+	return (AT * 1.25);
 }
 

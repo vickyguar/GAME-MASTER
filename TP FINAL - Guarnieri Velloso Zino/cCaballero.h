@@ -30,7 +30,7 @@ public:
 
 #pragma endregion
 	
-	unsigned int CondicionAtaque(cGuerrero* Atacado);
+	unsigned int Ataque(cGuerrero* Atacado);
 	/**
 	* Contrataque //TODO: terminar comentario
 	*/

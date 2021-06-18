@@ -42,28 +42,6 @@ unsigned int cTropa::CalcularAT_Total() {
 	return AT_Total;
 }
 
-void cTropa::RecibirDanio(unsigned int AT_Ataque) {
-
-	//funcion de ordenar HP
-	
-	//verifica si estta -> sino esta vivo lo mato
-	//cambiao el at (at-lo que le saque)
-	int i = 0;
-	do
-	{
-		int aux = (*Guerreros)[i]->getHP();
-		(*(*Guerreros)[i]) -= AT_Ataque;
-		if ((*Guerreros)[i]->VerificarVida())
-		{
-			Guerreros->Eliminar(i);
-			--i;
-		}
-		AT_Ataque -= aux;
-		i++;
-
-	} while (AT_Ataque > 0 && i < Guerreros->getCA());
-}
-
 bool cTropa::operator>(cTropa* otra)
 {
 	//MAGO VS CABALLERO -> fuerte mago
@@ -78,4 +56,44 @@ bool cTropa::operator>(cTropa* otra)
 		return true;
 
 	return false;
+}
+
+cListaT<cGuerrero>* cTropa::OrdenarXHP()
+{
+	cGuerrero* aux = NULL;
+	int cont_cambios = 0;
+	for (unsigned int i = 0; i < Guerreros->getCA() - 1; i++)
+	{
+		for (unsigned int k = 0; k < Guerreros->getCA() - 1; k++)
+		{
+			if ((*Guerreros)[k]->getHP() < (*Guerreros)[k+1]->getHP())
+			{
+				aux = (*Guerreros)[k];
+				Guerreros[k] = Guerreros[k+1];
+				Guerreros[k + 1] = aux;
+				cont_cambios++;
+			}
+		}
+		if (cont_cambios == 0)
+			break;
+	}
+}
+
+void cTropa::RecibirDanio(unsigned int AT_Ataque) {
+
+	Guerreros = OrdenarXHP(); //ordeno de más vida a menod vida
+	int i = 0;
+	do
+	{
+		int aux = (*Guerreros)[i]->getHP();
+		(*(*Guerreros)[i]) -= AT_Ataque;
+		if ((*Guerreros)[i]->VerificarVida())
+		{
+			Guerreros->Eliminar(i);
+			--i;
+		}
+		AT_Ataque -= aux;
+		i++;
+
+	} while (AT_Ataque > 0 && i < Guerreros->getCA());
 }

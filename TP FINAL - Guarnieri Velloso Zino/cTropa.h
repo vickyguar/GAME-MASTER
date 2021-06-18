@@ -54,6 +54,7 @@ public:
 	string getClave() { return IDTropa; }
 	template<class TipoGuerrero>
 	bool AnalizarTipo(cTropa* Tropa);
+	cListaT<cGuerrero>* OrdenarXHP();
 };
 template<class TipoGuerrero>
 bool cTropa::AnalizarTipo(cTropa* Tropa)

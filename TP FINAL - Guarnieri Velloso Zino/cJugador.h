@@ -10,7 +10,7 @@
 
 
 #include "cPais.h"
-
+class cJuego;
 class cJugador
 {
 private:
@@ -50,7 +50,7 @@ public:
 	* reordena las tropas. Es decir que se pueden juntar, en el caso de que queden pocas unidades
 	* o se pueden separar (para tener más unidades)
 	*/
-	void Reagrupar(cPais* Pais);
+	void Reagrupar(cPais* PaisOrigen,cPais*Destino=NULL);
 	/**
 	* RenunciarTurno
 	* le pregunta al usuario si quiere seguir jugando o si termina su turno
@@ -77,7 +77,7 @@ public:
 	void setEstado(eEstadoJugador _Estado = eEstadoJugador::ATACANDO);
 	eEstadoJugador getEstado();
 	string getClave();
-
+	unsigned int getCantPaises() { return Paises->getCA(); }
 #pragma endregion
 	bool VerificarPais(int pospais); //verifica si el pais es mio
 
@@ -88,6 +88,7 @@ public:
 		return (this->Paises->BuscarItem(Pais->getClave()) != NULL) ? false : true;
 	}
 	//TODO: sobrecarga cout (IMPRIME EL NUMERO DEL PAIS CORRESPONDIENTE AL NUMERO DEL JUGADOR)
+
 };
 
 #endif // !defined(EA_B34E5789_D7AB_47b3_BFBB_ABFA2C7A92ED__INCLUDED_)

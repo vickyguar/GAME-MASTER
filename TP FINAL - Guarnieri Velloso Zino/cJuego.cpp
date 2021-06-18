@@ -99,32 +99,37 @@ void cJuego::JugadorAtacando(unsigned int pos)
 {
 	unsigned int cant = 0;
 	unsigned int pospais = 0;
+	(*Jugadores)[pos]->setEstado(eEstadoJugador::ATACANDO);
+	cPais* paisAtaque = NULL;
 	do {
-	
-		cPais* paisAtaque = PosPaisAtaque((*Jugadores)[pos]);
-		cPais* paisAtacado = PosPaisAtacado((*Jugadores)[pos],paisAtaque);
+
+		paisAtaque = PosPaisAtaque((*Jugadores)[pos]);
+		cPais* paisAtacado = PosPaisAtacado((*Jugadores)[pos], paisAtaque);
 		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false, 3); //le pusimos false :)
-		TropasdeBatalla(paisAtaque,MiniListaTropas);
+		TropasdeBatalla(paisAtaque, MiniListaTropas);
 
 		Batallar((*Jugadores)[pos], paisAtaque, paisAtacado, MiniListaTropas); //Todo lo que le pasamos a batallar está chequeado
 
-		Reagrupar(pos, paisAtaque, paisAtacado);
 		cant++;
 		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
 		delete MiniListaTropas;
 
 	} while (cant < 3 || !((*Jugadores)[pos]->RenunciarTurno()) || (*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR);
-
+	if ((*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR)
+	{
+		Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion)
+		(*Jugadores)[pos]->setEstado(eEstadoJugador::ESPERANDO);
+	}
 }
 
-//TODO: BATALLAR (bool)
+
 void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas) {
 	
 	cListaT<cTropa>* ListaTropaDef = PaisAtacado->CrearMiniListaRandom();
 
 	unsigned int AT_Efectivo_Base = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef); //calcula el daño base que se va a realizar
 	cJugador* JugadorAtacado = DuenioPais(PaisAtacado); //Buscamos el dueño del pais atacado
-
+	JugadorAtacado->setEstado(eEstadoJugador::DEFENDIENDO);
 	if (JugadorAtacado == NULL)
 		throw new exception("El pais no tiene duenio"); //si esto pasa es porque algo hicimos mal
 	
@@ -133,13 +138,18 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 	try
 	{
 		PaisAtacante->RecibirDanio(AT_Defensa_Base, Tropas);
-		PaisAtacado->RecibirDanio(AT_Efectivo_Base, ListaTropaDef); //RecibirDaño(daño base, mis tropas, el enemigo)
+		PaisAtacado->RecibirDanio(AT_Efectivo_Base, ListaTropaDef); 
 	}
 	catch (exception* ex)
 	{
-		cout << ex->what() << endl;
+		cout << ex->what() << endl; //SI ENTRA ES PORQUE PERDIO EL ATACADO DOMINIO DEL PAIS
 		JugadorAtacado->PerderPais(PaisAtacado);
 		JugadorAtacante->GanarPais(PaisAtacado);
+		JugadorAtacante->Reagrupar(PaisAtacante, PaisAtacado);
+		if (JugadorAtacado->getCantPaises() == 0)
+			(*Jugadores) - JugadorAtacado; //BORRAMOS AL JUGADOR SI NO TIENE PAISES
+		if (JugadorAtacante->getCantPaises() == cPais::getListaPaises()->getCA())
+			JugadorAtacante->setEstado(eEstadoJugador::GANADOR); //PARA VER SI GANO EL ATACANTE VER QUE TENGA TODOS LOS PAISES DEL MUNDO
 	}	
 }
 
@@ -178,7 +188,7 @@ void cJuego::SetUpJugadores(string nombre)
 	
 }
 
-void cJuego::Reagrupar(unsigned int pos, cPais* PaisAtacado, cPais* PaisAtacante)
+void cJuego::Reagrupar(unsigned int pos, cPais* PaisAtacante)
 {
 	(*Jugadores)[pos]->Reagrupar(PaisAtacante);
 }
@@ -206,8 +216,7 @@ void cJuego::AsignarPaisesRandom()
 	cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(cPais::getListaPaises()));
 
 	unsigned int PaisesSobrantes = CalcularResiduo(Mundo->GetLista()->getCA(), Jugadores->getCA()); //cantidad paises, cantidad jugadores
-	//cListaT<unsigned int> Array(true, Mundo->GetLista()->getCA());
-	//Array.AgregarXDefault();
+	
 
 	for (unsigned int k = 0; k < Jugadores->getCA(); k++) {
 

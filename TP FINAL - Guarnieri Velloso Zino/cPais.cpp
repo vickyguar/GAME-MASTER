@@ -61,14 +61,18 @@ void cPais::AsignarTropas(cTropa* Tropa)
 		Tropas->Agregar(new cTropa());
 
 	}
-	//TODO: falta hacer la parte random
 }
 
 cTropa* cPais::VerificarTropa(unsigned int NTropa)
 {
 	cTropa* aux = NULL;
-	try { aux=Tropas->BuscarXPos(NTropa); } //TODO: CHEQUEAR DE QUIEN ES ESE NUMERO :)
-	catch(exception*ex){delete ex; }
+
+	try { 
+		aux = Tropas->BuscarItem(to_string(NTropa)); //EL NUMERO ES EL ID DE LA TROPA
+	} 
+	catch(exception*ex){
+		delete ex;
+	}
 	return aux;
 }
 
@@ -133,3 +137,5 @@ bool cPais::operator==(string Nombre)
 {
 	return (Nombre == this->Nombre);
 }
+
+

@@ -47,15 +47,26 @@ void cTropa::AsignarGuerreros()
 
 }
 
-unsigned int cTropa::CalcularAT_Total(cTropa* otra) {
+unsigned int cTropa::CalcularAT()
+{
+	unsigned int AT = 0;
+	for (unsigned int i = 0; i < Guerreros->getCA(); i++)
+	{
+		AT += (*Guerreros)[i]->getAT();
+	}
+	return AT;
+}
 
-	unsigned int AT_Total = 0;
+unsigned int cTropa::AT_Extra(cTropa* otra) {
+
+	unsigned int ATExtra = 0;
 
 	for (unsigned int i = 0; i < Guerreros->getCA(); i++)
-		AT_Total += (*Guerreros)[i]->Ataque(otra->Guerreros->BuscarXPos(i));
+		ATExtra += (*Guerreros)[i]->Ataque(otra->Guerreros->BuscarXPos(i));
 	
-	return AT_Total;
+	return ATExtra;
 }
+
 
 bool cTropa::operator>(cTropa* otra)
 {
@@ -96,7 +107,7 @@ void cTropa::OrdenarXHP()
 
 string cTropa::To_string() 
 {
-	string output = "\t\t" + to_string(Guerreros->getCA());
+	string output = "\t\t TROPA N "+ IDTropa + to_string(Guerreros->getCA());
 
 	if (AnalizarTipo<cCaballero>(Guerreros))
 		output += " Caballeros\n";

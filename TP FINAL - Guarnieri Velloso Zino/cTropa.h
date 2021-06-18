@@ -35,13 +35,15 @@ public:
 	~cTropa();
 	void AsignarGuerreros();
 
+	unsigned int CalcularAT();
+
 #pragma endregion
 	/**
 	* CalcularAT_Total
 	* la recorre la lista de Guerreros y acumula los AT de cada unidad en particular. Retorna el acumulador
 	* @return int
 	*/
-	unsigned int CalcularAT_Total(cTropa* otra);
+	unsigned int AT_Extra(cTropa* otra);
 	/**
 	* RecibirDanio
 	* Le resta el AT que recibe la unidad como daño. Recorre la lista, y

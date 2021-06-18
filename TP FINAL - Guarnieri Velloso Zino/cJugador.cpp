@@ -23,22 +23,18 @@ cJugador::~cJugador(){
 unsigned int cJugador::AtaqueEfectivo(cListaT<cTropa>* miTropa, cListaT<cTropa>* TropaEnemiga){
 
 	unsigned int Fuerza = 0;
-	int modificador = 1;
+	unsigned int FuerzaExtra=0;
 	for (int i = 0; i < miTropa->getCA(); i++)
 	{
-		modificador = 1;
-
 		if (dynamic_cast<cCaballero*>((*miTropa)[i]->getGuerreros()) != NULL && Estado == eEstadoJugador::DEFENDIENDO) //si mi tropa son caballeros
-			modificador += 0.25;
+			dynamic_cast<cCaballero*>((*miTropa)[i]->getGuerreros())->Contrataque();
 
 		for (int k = 0; k < TropaEnemiga->getCA(); k++)
 		{
-			if ((*(*miTropa)[i]) > (*TropaEnemiga)[k]) //TODO: SOBRE CARGA > (si mi tropa es fuerte contra la otra)
-			{
-				modificador += 0.25; //ser fuerte significa que mi ataque aumenta un 25% (MODIFICADOR ESTA = 1)
-			}
+			FuerzaExtra += (*miTropa)[i]->AT_Extra((*TropaEnemiga)[k]);
+			
 		}
-		Fuerza += (*miTropa)[i]->CalcularAT_Total((*TropaEnemiga)[i]) * modificador; //voy acumulando los aumentos que tengo que realizar a la hora del ataque.
+		Fuerza += (*miTropa)[i]->CalcularAT() + FuerzaExtra; //voy acumulando los aumentos que tengo que realizar a la hora del ataque.
 	}
 	return Fuerza;
 }
@@ -145,8 +141,8 @@ string cJugador::To_string() const
 	output += "\t" + this->Username + "\n";
 	output += "\t\tPaises que posee: \n";
 	for (unsigned int i = 0; i < this->Paises->getCA(); i++) {
-		output += "\t\t Pais " + to_string(i + 1) + ':' + (*Paises)[i]->getClave();
-		output += "Tropa " + to_string(i + 1) + ':' + (*Paises)[i]->getTropas()->To_String();
+		output += "\t\t Pais " + to_string(cPais::getListaPaises()->getIndex((*Paises)[i]->getClave())) + ':' + (*Paises)[i]->getClave();
+		output += (*Paises)[i]->getTropas()->To_String();
 	}
 
 	return output;
@@ -162,9 +158,20 @@ string cJugador::getClave()
 	return Username;
 }
 
-bool cJugador::VerificarPais(int pospais)
+bool cJugador::VerificarPais(cPais*ptr)
 {
-	return ((*Paises)[pospais] == NULL)? false : true;
+	try
+	{
+		cPais*aux=Paises->BuscarItem(ptr->getClave());
+	}
+	catch (exception* ex)
+	{
+		delete ex;
+		return false;
+	}
+	
+	return true;
+
 }
 
 

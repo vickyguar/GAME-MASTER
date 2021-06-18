@@ -27,19 +27,19 @@ bool cArquero::AtaqueAleatorio(){
 
 unsigned int cArquero::AtaquePorSegunda(cGuerrero* Atacado)
 {
-	return (AT * 1.50);
+	return (AT * 0.50);
 }
 
 unsigned int cArquero::Ataque(cGuerrero* Atacado){
-	
+	unsigned int AT_aux=0;
 	bool condicion = AtaqueAleatorio();
 
 	if (dynamic_cast<cMago*>(Atacado) != NULL)
-		AT = AT * 1.25; //su ataque aumenta en 0,25
+		AT_aux = AT * 0.25; //su ataque aumenta en 0,25
 
 	if (condicion) //si ataco por segunda vez
-		AT += AtaquePorSegunda(Atacado); //volveré a atacar con AT + 50%
+		AT_aux += AtaquePorSegunda(Atacado); //volveré a atacar con AT + 50%
 
-	return AT;
+	return AT_aux;
 }
 

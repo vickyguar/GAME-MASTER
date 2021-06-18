@@ -80,7 +80,7 @@ public:
 	string getClave();
 	unsigned int getCantPaises() { return Paises->getCA(); }
 #pragma endregion
-	bool VerificarPais(int pospais); //verifica si el pais es mio
+	bool VerificarPais(cPais*ptr); //verifica si el pais es mio
 
 	bool operator==(cPais* Pais) { //Esto no es para comparar, es para ver si existe en la lista de paises del jugador
 		return (this->Paises->BuscarItem(Pais->getClave()) != NULL) ? true : false;

@@ -16,7 +16,7 @@ cPais* PosPaisAtaque(cJugador* Jugador) {
 		cout << "\n ---- JUGADOR " << Jugador->getClave() << " ---- " << endl;
 		cout << " Introduzca el numero pais desde el que quiere atacar: \n";
 		cin >> pospais;
-	} while (pospais <0 || pospais>cPais::getListaPaises()->getCA() || !Jugador->VerificarPais(pospais));
+	} while (pospais <0 || pospais>cPais::getListaPaises()->getCA() || !Jugador->VerificarPais((*cPais::getListaPaises())[pospais]));
 
 	return (*cPais::getListaPaises())[pospais];
 }
@@ -27,7 +27,7 @@ cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
 		cout << " Introduzca el numero pais al que quiere atacar: \n";
 		cin >> pospais;
 
-	} while (pospais <0 || pospais>cPais::getListaPaises()->getCA() || Jugador->VerificarPais(pospais) ||
+	} while ((pospais <0 || pospais>cPais::getListaPaises()->getCA()) || (Jugador->VerificarPais((*cPais::getListaPaises())[pospais]))||
 		!Pais->VerificarLimitrofes((*cPais::getListaPaises())[pospais]));
 
 	return (*cPais::getListaPaises())[pospais];
@@ -41,18 +41,25 @@ void TropasdeBatalla(cPais* PaisAtaque, cListaT<cTropa>* TropasBatalla)
 	do {
 		cout << " Introduzca la cantidad de tropas con las que quiere atacar. MAXIMO DE 3 : \n";
 		cin >> canttropas;
-	} while (canttropas > 3 || canttropas < 1);
+	} while (canttropas > 3 || canttropas <= 1||PaisAtaque->getTropas()->getCA()<canttropas);
 
 	for (unsigned int i = 0; i < canttropas; i++)
 	{
 		do
 		{
-			cout << " Introduzca el numero de tropa #" << i << " :";
+			cout << " Introduzca el numero de tropa #" << i+1 << " :";
 			cin >> nTropa;
 			aux = PaisAtaque->VerificarTropa(nTropa);
 		} while (aux == NULL);
-
-		(*TropasBatalla) + aux;
+		try { (*TropasBatalla) + aux; }
+		catch (exception* ex)
+		{
+			cout<<ex->what();
+			delete ex;
+			cout << "INGRESE LOS DATOS NUEVAMENTE"<< endl;
+			Sleep(1500); 
+			TropasdeBatalla(PaisAtaque, TropasBatalla);
+		}
 	}
 }
 
@@ -69,7 +76,7 @@ cJuego::~cJuego(){
 }
 
 void cJuego::AsignarTurno(){
-	if (Rondas % (Jugadores->getCA()) != 0)
+	if (Rondas % (Jugadores->getCA())== 0)
 	{
 		if (Rondas == 0)
 		{
@@ -108,7 +115,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false, 3); //le pusimos false :)
 		TropasdeBatalla(paisAtaque, MiniListaTropas);
 
-		Batallar((*Jugadores)[pos], paisAtaque, paisAtacado, MiniListaTropas); //Todo lo que le pasamos a batallar está chequeado
+		Batallar((*Jugadores)[pos], paisAtacado, paisAtaque, MiniListaTropas); //Todo lo que le pasamos a batallar está chequeado
 
 		cant++;
 		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
@@ -126,10 +133,10 @@ void cJuego::JugadorAtacando(unsigned int pos)
 void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas) {
 	
 	cListaT<cTropa>* ListaTropaDef = PaisAtacado->CrearMiniListaRandom();
-
-	unsigned int AT_Efectivo_Base = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef); //calcula el daño base que se va a realizar
 	cJugador* JugadorAtacado = DuenioPais(PaisAtacado); //Buscamos el dueño del pais atacado
 	JugadorAtacado->setEstado(eEstadoJugador::DEFENDIENDO);
+	unsigned int AT_Efectivo_Base = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef); //calcula el daño base que se va a realizar
+	
 	if (JugadorAtacado == NULL)
 		throw new exception("El pais no tiene duenio"); //si esto pasa es porque algo hicimos mal
 	

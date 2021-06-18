@@ -4,7 +4,7 @@
 #include "cJugador.h"
 #include "Menu.h"
 #include <random>
-#include<ctime>
+#include <ctime>
 
 #define CANT 2
 //TODO: COSASA A CAMBIAR EN EL UML
@@ -28,12 +28,13 @@ int main()
 	if (ListoXaJugar)
 	{
 		unsigned int Mundo = ElegirMundo();
-	
+		system("cls");
 		
 		GAME_MASTER = new cJuego(CANT); 
 		//abro archivo y creo el mundo
 		GAME_MASTER->SetUpMundo(Mundo); //a esta altura ya tenemos la cantidad de paises
-		cout << "Usted esta en " << ConvertMundoString(Mundo) << endl;
+		//cout << "Usted esta en " << ConvertMundoString(Mundo) << endl;
+
 		GAME_MASTER->getMundo()->Imprimir();
 
 		//pregunto cantidad de jugadores -> por ahora es de a 2 :)

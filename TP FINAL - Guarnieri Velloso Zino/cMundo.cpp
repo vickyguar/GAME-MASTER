@@ -44,8 +44,19 @@ void cMundo::LeerArchivo(const char* Filename)
 	Limitrofes += '\n'; //para que el ultimo tambien lo tenga
 
 	fclose(fp); //cierro el archivo
+	
+	SetNombreMundo(Filename);
+
 	return;
 }
+
+void cMundo::SetNombreMundo(string str) {
+	if (str == "MUNDO 1.txt")
+		this->setNombre("Argentina y sus limitrofes");
+	else if (str == "MUNDO 2.txt")
+		this->setNombre("America Latina");
+}
+
 
 void cMundo::PaisesLimitrofes(string& Limitrofes, string nombre) {
 
@@ -85,9 +96,20 @@ cListaT<cPais>* cMundo::GetLista()
 	return ListaPaises;
 }
 
+void cMundo::setNombre(string nombre)
+{
+	this->Nombre = nombre;
+}
+
 void cMundo::Imprimir() const
 {
-	cout << *ListaPaises;
+	cout << "\tEnhorabuena! Combatiran en " << Nombre << endl << endl;
+	cout << "\tLos paises disponibles en este mundo son: " << endl;
+	cout << *ListaPaises << endl; //imprimo la lista de paises
+
+	Sleep(5000);
+	system("cls");
+
 }
 
 void cMundo::SetUp(const char* Filename)

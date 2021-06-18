@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "cListaT.h"
 #include "cPais.h"
+#include "windows.h"
 
 class cMundo
 {
@@ -18,6 +19,8 @@ private:
 	* @param filename
 	*/
 	void LeerArchivo(const char* Filename);
+
+	void SetNombreMundo(string str);
 
 #pragma endregion
 	
@@ -60,6 +63,7 @@ public:
 #pragma region GETTERS & SETTERS
 
 	cListaT<cPais>* GetLista();
+	void setNombre(string nombre);
 
 #pragma region IMPRIMIR
 

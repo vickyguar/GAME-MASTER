@@ -328,10 +328,10 @@ ostream& operator<<(ostream& os, const cListaT<T>& Lista)
 template<class T>
 string cListaT<T>::To_String() const
 {
-	string Total;
+	string output;
 	for (unsigned int i = 0; i < CA; i++)
 	{
-		Total += Lista[i]->To_string();// imprimir
+		output += '\t' + Lista[i]->To_string() + '\n'; // imprimir
 	}
-	return Total;
+	return output;
 }

@@ -59,6 +59,7 @@ bool Menu() {
 	switch (opcion)
 	{
 	case eOpcion::JUGAR:
+		system("cls");
 		return true;
 
 	case eOpcion::IMPRIMIR_REGLAS:
@@ -69,27 +70,30 @@ bool Menu() {
 		Menu();
 		break;
 		
-	case eOpcion::IMPRIMIR_PERFILES: break;
+	//case eOpcion::IMPRIMIR_PERFILES: break;
 
 	case eOpcion::SALIR:
+		system("cls");
 		return false;
+
+	default: return false;
 	}
-	return false;
 }
 
 unsigned int ElegirMundo()
 {
 	unsigned int Mundo = (unsigned int)eMundo::AMERICA_LATINA;
-	cout << "\t\n---- MUNDOS -----" << endl;
-	cout << "1. ARGENTINA Y LIMITROFES" << endl;
-	cout << "2. AMERICA LATINA" << endl;
-	cout << "3. NARNIA" << endl;
-	cout << "Ingrese opcion: "; 
+	cout << "\n\t---- MUNDOS -----" << endl;
+	cout << "\t1. ARGENTINA Y LIMITROFES" << endl;
+	cout << "\t2. AMERICA LATINA" << endl;
+	cout << "\t3. NARNIA" << endl;
+	cout << "\tIngrese opcion: "; 
 	cin >> Mundo;
 
 	if (Mundo < (unsigned int)eMundo::AGENTINA || Mundo > (unsigned int)eMundo::AMERICA_LATINA)
 		Mundo = ElegirMundo();
 
+	system("cls");
 	return Mundo;
 }
 
@@ -103,13 +107,23 @@ string ConvertMundoString(unsigned int mundo) {
 	}
 }
 
-void Instrucciones() { 
-	cout << "\t\n----- INSTRUCCIONES -----" << endl;
-	cout<< "El objetivo del juego es CONQUISTAR EL MUNDO ocupando con tus tropas todos los paises de los oponentes" << endl;
-	cout<<"\n Cada jugador comenzara la partida con 5 paises y 10 tropas de algun tipo de guerreros"<<endl;
-	cout << "\n El maximo de tropas que pueden ser enviadas a batallar es de 3. SOLO se puede atacar a paises limitrofes" << endl;
-	cout << "\n CADA TIPO DE GUERRERO TIENE ATRIBUTOS ESPECIALES!" << endl;
+string To_StringInstrucciones() {
+	string output;
+	output += "\n\t----- INSTRUCCIONES GAME MASTER!! -----\n";
+	output += "\tEl objetivo del juego es APODERARSE DEL MUNDO, ocupando con tus tropas todos los paises de los oponentes.\n";
+	output += "\tEn este juego existen tres tipos de guerreros : CABALLEROS, MAGOS, ARQUEROS --> CADA TIPO DE GUERRERO TIENE ATRIBUTOS ESPECIALES!\n";
+	output += "\tCada jugador comenzara la partida con 5 paises y 10 tropas de algun tipo de guerrero. AL QUE LE TOCA, LE TOCA!LA SUERTE ES LOCA!  :P\n";
+	output += "\tEl maximo de tropas que pueden ser enviadas a batallar es de 3.\n";
+	output += "\tAl finalizar cada ronda, cada jugador recibe tropas para seguir combatiendo!pero ojo... no podran elegir el tipo de guerrero!\n";
+	output += "\tSOLO se puede atacar a paises limitrofes.\n";
+	output += "\tAl final de cada turno, se les ofrece la oportunidad de reagrupar las tropas desde el ultimo pais atacado a sus limitrofes.\n";
+	output += "\tTienen la oportunidad de renunciar a atacar en la batalla, pero no pueden renunciar a defenderse. A BANCARSELA!\n\n";
+	output += "\tYA ESTAN LISTOS PARA LA BATALLA!!\n";
 
-	cout <<"\n YA ESTAN LISTOS PARA JUGAR! El primer turno le sera asignado al jugador que responda bien un acetrijo" << endl;
+	return output;
+}
 
+void Instrucciones() {
+	cout << To_StringInstrucciones();
+	getchar();
 }

@@ -34,10 +34,12 @@ cTropa::~cTropa(){
 		delete Guerreros;
 }
 
-unsigned int cTropa::CalcularAT_Total() {
+unsigned int cTropa::CalcularAT_Total(cTropa* otra) {
+
 	unsigned int AT_Total = 0;
+
 	for (unsigned int i = 0; i < Guerreros->getCA(); i++) {
-		AT_Total += (*Guerreros)[i]->getAT();
+		AT_Total += (*Guerreros)[i]->Ataque(otra->(*Guerreros)[i]); //TODO: no entiendo porque no me deja hacer esto
 	}
 	return AT_Total;
 }
@@ -48,11 +50,11 @@ bool cTropa::operator>(cTropa* otra)
 	//ARQUERO VS MAGO -> fuerte arquero
 	//CABALLERO VS ARQUERO -> fuerte caballero
 
-	if (AnalizarTipo<cMago>(this) && AnalizarTipo<cCaballero>(otra))
+	if (AnalizarTipo<cMago>(this->Guerreros) && AnalizarTipo<cCaballero>(otra->Guerreros))
 		return true;
-	if (AnalizarTipo<cArquero>(this) && AnalizarTipo<cMago>(otra))
+	if (AnalizarTipo<cArquero>(this->Guerreros) && AnalizarTipo<cMago>(otra->Guerreros))
 		return true;
-	if (AnalizarTipo<cCaballero>(this) && AnalizarTipo<cArquero>(otra))
+	if (AnalizarTipo<cCaballero>(this->Guerreros) && AnalizarTipo<cArquero>(otra->Guerreros))
 		return true;
 
 	return false;
@@ -85,15 +87,17 @@ void cTropa::RecibirDanio(unsigned int AT_Ataque) {
 	int i = 0;
 	do
 	{
-		int aux = (*Guerreros)[i]->getHP();
-		(*(*Guerreros)[i]) -= AT_Ataque;
-		if ((*Guerreros)[i]->VerificarVida())
+		int aux = (*Guerreros)[i]->getHP(); //me fijo cuanta vida tengo
+		(*(*Guerreros)[i]) -= AT_Ataque; //le resto el AT con el que me atacaron
+		if ((*Guerreros)[i]->VerificarVida()) //me fijo si estoy vivo
 		{
-			Guerreros->Eliminar(i);
-			--i;
+			Guerreros->Eliminar(i); //si no lo estoy paso a mejor vida
+			--i; //menos guerreros 
 		}
-		AT_Ataque -= aux;
+		AT_Ataque -= aux; //el AT con el que me atacaron disminuye
 		i++;
 
-	} while (AT_Ataque > 0 && i < Guerreros->getCA());
+	} while (AT_Ataque > 0 && i < Guerreros->getCA()); //esto se repite hasta que el AT que me mandaron sea 0 o se elimine toda la tropa
+	if (Guerreros->getCA() == 0) //me quede sin guerreros en la tropa
+		delete Guerreros;
 }

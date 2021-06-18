@@ -40,7 +40,7 @@ public:
 	* la recorre la lista de Guerreros y acumula los AT de cada unidad en particular. Retorna el acumulador
 	* @return int
 	*/
-	unsigned int CalcularAT_Total();
+	unsigned int CalcularAT_Total(cTropa* otra);
 	/**
 	* RecibirDanio
 	* Le resta el AT que recibe la unidad como daño. Recorre la lista, y
@@ -53,12 +53,12 @@ public:
 	bool operator>(cTropa* otra);
 	string getClave() { return IDTropa; }
 	template<class TipoGuerrero>
-	bool AnalizarTipo(cTropa* Tropa);
-	void OrdenarXHP();
+	bool AnalizarTipo(cListaT<cGuerrero>* Lista);
+	cListaT<cGuerrero>* OrdenarXHP();
 };
 template<class TipoGuerrero>
-bool cTropa::AnalizarTipo(cTropa* Tropa)
+bool cTropa::AnalizarTipo(cListaT<cGuerrero>* Lista)
 {
-	return (dynamic_cast<TipoGuerrero*>((*Tropa->getGuerreros())[0]) != NULL); //TODO: OJO CON FOWARD DECLARATION Y LOS .H
+	return (dynamic_cast<TipoGuerrero*>(Lista != NULL); //TODO: OJO CON FOWARD DECLARATION Y LOS .H
 }
 #endif // !defined(EA_48AC6C59_7B06_45a6_B915_81B52F35D200__INCLUDED_)

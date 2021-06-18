@@ -46,7 +46,7 @@ public:
 
 	cJugador* DuenioPais(cPais *Pais);
 	
-	void Reagrupar(unsigned int pos, cPais* PaisAtacado, cPais* PaisAtacante);
+	void Reagrupar(unsigned int pos, cPais* PaisAtacante);
 	void FindeRondaEntera();
 
 	cJugador* BuscarXEstado(eEstadoJugador estado)const;
@@ -74,7 +74,6 @@ public:
 	//int* ReparticionPaises();
 	void AsignarPaisesRandom();
 
-	
 };
 //istream& operator>>(istream& in, cJugador* Jugador)
 //{

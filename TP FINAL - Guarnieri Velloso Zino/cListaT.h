@@ -22,7 +22,6 @@ public:
 #pragma endregion
 #pragma region AGREGAR,QUITAR,ELIMINAR
 	void Agregar(T* newItem);
-	void AgregarXDefault();
 	T* Quitar(const string Key);
 	T* QuitarXPos(unsigned int pos);
 	void Eliminar(unsigned int pos);
@@ -45,6 +44,7 @@ public:
 	T* operator[](unsigned int pos);
 	void operator+(T* newItem);
 	void operator-(unsigned int pos);
+	void operator-(T* obj);
 	void operator=(cListaT<T>* Copia); //ESTO CREA POR COPIA
 #pragma endregion
 
@@ -139,18 +139,6 @@ void cListaT<T>::Agregar(T* newItem)
 	}
 	throw new exception("El nuevo item que se desea agregar a la lista es NULL");
 }
-
-template<class T>
-void cListaT<T>::AgregarXDefault()
-{
-	unsigned int i = 0;
-	if (CA == TAM) //si la cant actual es igual al tamanio max
-		Redimensionar(); //redimensiono la lista
-	for(i = 0; i< TAM; i++)
-		Lista[CA++] = &i; //lo agrego a la lista
-
-}
-	
 
 template<class T>
 T* cListaT<T>::Quitar(const string Key)
@@ -308,6 +296,19 @@ inline void cListaT<T>::operator-(unsigned int pos)
 		delete ex; //TODO: EXCEPCION 
 	}
 }
+template<class T>
+inline void cListaT<T>::operator-(T*obj)
+{
+	try
+	{
+		unsigned int pos=getIndex(obj->getClave());
+		Eliminar(pos);
+	}
+	catch (exception* ex)
+	{
+		delete ex; //TODO: EXCEPCION 
+	}
+}
 
 template<class T>
 inline void cListaT<T>::operator=(cListaT<T>* ListaB)
@@ -328,10 +329,10 @@ ostream& operator<<(ostream& os, const cListaT<T>& Lista)
 template<class T>
 string cListaT<T>::To_String() const
 {
-	string Total;
+	string output;
 	for (unsigned int i = 0; i < CA; i++)
 	{
-		Total += Lista[i]->To_string();// imprimir
+		output += '\t' + Lista[i]->To_string() + '\n'; // imprimir
 	}
-	return Total;
+	return output;
 }

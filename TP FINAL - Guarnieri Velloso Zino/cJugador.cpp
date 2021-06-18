@@ -47,22 +47,35 @@ unsigned int cJugador::AtaqueEfectivo(cListaT<cTropa>* miTropa, cListaT<cTropa>*
 //
 //}
 
-void cJugador::Reagrupar(cPais* PaisOrigen) //este pais es desde el ultio que ataque
+void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde el ultio que ataque
 {
 	int opcion = 0;
 	unsigned int pos = 0;
-	cout << "Queres pasar topas desde " << PaisOrigen->getClave() << " a algun pais limitrofe?" << endl;
+	//si me pasan un pais busco su posicion en la lista global para poder usar el mismo algoritmo
+	if (Destino != NULL) 
+		pos = cPais::getListaPaises()->getIndex(Destino->getClave());
+
+	cout << "Queres pasar topas desde " << PaisOrigen->getClave();
+	if(Destino==NULL)
+		cout<< " a algun pais limitrofe?" << endl;
+	else
+		cout << " a " << Destino->getClave()<<endl;
+
 	cout << "1: SI" << endl << "0: NO" << endl;
 	cin >> opcion;
+
 	if (opcion)
 	{
-		do
+		if (Destino == NULL)
 		{
-			system("cls");
-			//cout << *this << endl;
-			cout << "Ingrese el numero de un pais limitrofe de " << PaisOrigen->getClave() << ":";
-			cin >> pos; //es la posicion de la lista del jugador
-		} while (!(PaisOrigen->VerificarLimitrofes((*Paises)[pos])));
+			do
+			{
+				system("cls");
+				//cout << *this << endl;
+				cout << "Ingrese el numero de un pais limitrofe de " << PaisOrigen->getClave() << ":";
+				cin >> pos; //es la posicion de la lista del jugador
+			} while (Paises->BuscarXPos(pos) != NULL && !(PaisOrigen->VerificarLimitrofes((*Paises)[pos])));
+		}
 
 		do
 		{
@@ -111,7 +124,7 @@ void cJugador::AgregarTropas()
 			cout << "Ingrese el numero del pais en donde quiere agregar la tropa #" << i + 1 << ":";
 			cin >> pos;
 
-			if (*this == Paises->BuscarXPos(pos)) //si es true es porque es un pais mio y agrego las tropas 
+			if (*this == Paises->BuscarXPos(pos)) //si es true es porque es un pais mio y agrego las tropas (SOBRECARGA DEL == porque nunca ibamos a igualar 2 jugadores)
 				Paises->BuscarXPos(pos)->AsignarTropas(new cTropa()); //le agrego una nueva tropa al pais elegido
 
 		} while ((pos < 0 || pos >cPais::getListaPaises()->getCA()) && !(*this == Paises->BuscarXPos(pos)));
@@ -120,7 +133,7 @@ void cJugador::AgregarTropas()
 
 void cJugador::GanarPais(cPais* Pais)
 {
-	try { Paises->Agregar(Pais); }
+	try { Paises->Agregar(Pais); } //AGREGO EL PAIS A LA LISTA DE JUGADOR
 	catch (exception* ex) { delete ex; }//TODO: ATENCION
 }
 

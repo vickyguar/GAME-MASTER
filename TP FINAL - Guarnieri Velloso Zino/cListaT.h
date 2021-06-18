@@ -65,10 +65,30 @@ cListaT<T>::cListaT(bool _Delete, unsigned int _TAM)
 	}
 }
 template<class T>
+T* cListaT<T>::operator[](unsigned int pos)
+{
+	if (pos >= 0 && pos < CA)
+		return Lista[pos];
+	return NULL;
+}
+
+template<class T>
+inline void cListaT<T>::operator+(T* newItem)
+{
+	try { Agregar(newItem); }
+	catch (exception* ex) {
+		string error = ex->what();
+		delete ex;
+		ex = new exception(("Error al usar operator+: " + error).c_str());
+		throw ex;
+	}
+	return;
+}
+template<class T>
 inline cListaT<T>::cListaT(cListaT<T>& ListaCopia)
 {
 	TAM = ListaCopia.TAM;
-	Delete = ListaCopia.Delete;
+	Delete = false;
 	CA = 0;
 
 	Lista = new T * [ListaCopia.TAM];
@@ -79,7 +99,8 @@ inline cListaT<T>::cListaT(cListaT<T>& ListaCopia)
 	}
 	for (unsigned int i = 0; i < ListaCopia.CA; i++)
 	{
-		(*Lista)+(*ListaCopia)[i];
+		Agregar(ListaCopia[i]);
+		//(*Lista)+*(ListaCopia[i]);
 	}
 }
 template <class T>
@@ -184,6 +205,7 @@ void cListaT<T>::Eliminar(unsigned int pos)
 			throw ex;
 		}
 		delete aux;
+		return;
 	}
 	throw new exception("Error al eliminar: la lista es NULL");
 }
@@ -272,31 +294,19 @@ void cListaT<T>::Listar() const
 	}
 }
 
-template<class T>
-T* cListaT<T>::operator[](unsigned int pos)
-{
-	if (pos >= 0 && pos < CA)
-		return Lista[pos];
-	return NULL;
-}
 
-template<class T>
-inline void cListaT<T>::operator+(T* newItem)
-{
-	try { Agregar(newItem); }
-	catch (exception* ex) {
-		string error = ex->what();
-		delete ex;
-		ex = new exception(("Error al usar operator+: " + error).c_str());
-		throw ex;
-	}
-	return;
-}
 
 template<class T>
 inline void cListaT<T>::operator-(unsigned int pos)
 {
-	Eliminar(pos);
+	try
+	{
+		Eliminar(pos);
+	}
+	catch (exception* ex)
+	{
+		delete ex; //TODO: EXCEPCION 
+	}
 }
 
 template<class T>

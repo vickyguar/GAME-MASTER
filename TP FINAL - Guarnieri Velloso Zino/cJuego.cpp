@@ -203,7 +203,7 @@ void cJuego::AsignarPaisesRandom()
 {
 	unsigned int i;
 	float Division = (float)Mundo->GetLista()->getCA() / Jugadores->getCA();
-	cListaT<cPais>* CopiaLista = new cListaT<cPais>(cPais::getListaPaises());
+	cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(cPais::getListaPaises()));
 
 	unsigned int PaisesSobrantes = CalcularResiduo(Mundo->GetLista()->getCA(), Jugadores->getCA()); //cantidad paises, cantidad jugadores
 	//cListaT<unsigned int> Array(true, Mundo->GetLista()->getCA());
@@ -213,17 +213,17 @@ void cJuego::AsignarPaisesRandom()
 
 		for (unsigned int i = 0; i < (unsigned int)Division; i++) { //División es la cantidad de paises que le corresponden a cada uno si se hace una división equitativa
 			unsigned int random = rand() % CopiaLista->getCA();
-			(*Jugadores)[k]->GanarPais((*CopiaLista)[random]); //Aca estamos asignando el pais al jugador
-			CopiaLista - random;
+			(*Jugadores)[k]->GanarPais(CopiaLista->QuitarXPos(random)); //Aca estamos asignando el pais al jugador
+			
 		}
 
 		if (PaisesSobrantes > 0) {
 			unsigned int random = rand() % CopiaLista->getCA();
-			(*Jugadores)[k]->GanarPais((*CopiaLista)[random]); //Aca estamos asignando el pais al jugador
-			CopiaLista - random;
+			(*Jugadores)[k]->GanarPais(CopiaLista->QuitarXPos(random)); //Aca estamos asignando el pais al jugador
 			PaisesSobrantes--;
 		}
 	}
+	delete CopiaLista;
 }
 
 int cJuego::getRondas() 

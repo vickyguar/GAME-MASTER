@@ -151,7 +151,7 @@ cJugador* cJuego::DuenioPais(cPais *Pais) {
 	return NULL;
 }
 
-//TODO: IMPRIMIRESTADOS
+
 void cJuego::ImprimirEstados() const {
 
 }

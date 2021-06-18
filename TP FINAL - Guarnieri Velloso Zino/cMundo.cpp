@@ -45,7 +45,7 @@ void cMundo::LeerArchivo(const char* Filename)
 
 	fclose(fp); //cierro el archivo
 	
-	SetNombreMundo(Filename);
+	SetNombreMundo(Filename); 
 
 	return;
 }

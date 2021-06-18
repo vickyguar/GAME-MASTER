@@ -16,7 +16,7 @@ cCaballero::~cCaballero(){
 
 }
 
-unsigned int cCaballero::CondicionAtaque(cGuerrero* Atacado){
+unsigned int cCaballero::Ataque(cGuerrero* Atacado){
 
 	if (dynamic_cast<cArquero*>(Atacado) != NULL)
 		return (AT * 1.25); //su ataque aumenta en 0,25

@@ -34,7 +34,7 @@ public:
 	*/
 	bool AtaqueAleatorio();
 	unsigned int AtaquePorSegunda(cGuerrero* Atacado);
-	unsigned int CondicionAtaque(cGuerrero* Atacado);
+	unsigned int Ataque(cGuerrero* Atacado);
 
 };
 #endif // !defined(EA_1D30E1A9_0ECE_4a1f_8499_7609DA9E69C2__INCLUDED_)

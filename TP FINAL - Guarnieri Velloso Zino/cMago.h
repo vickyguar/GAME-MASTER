@@ -28,6 +28,6 @@ public:
 
 #pragma endregion
 
-	unsigned int CondicionAtaque(cGuerrero* Atacado);
+	unsigned int Ataque(cGuerrero* Atacado);
 };
 #endif // !defined(EA_DDB78A6D_FFB6_43b8_9A90_EB602687C8BF__INCLUDED_)

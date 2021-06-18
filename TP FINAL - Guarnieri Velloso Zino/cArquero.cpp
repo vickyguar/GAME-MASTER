@@ -30,7 +30,7 @@ unsigned int cArquero::AtaquePorSegunda(cGuerrero* Atacado)
 	return (AT * 1.50);
 }
 
-unsigned int cArquero::CondicionAtaque(cGuerrero* Atacado){
+unsigned int cArquero::Ataque(cGuerrero* Atacado){
 	
 	bool condicion = AtaqueAleatorio();
 

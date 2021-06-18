@@ -19,7 +19,7 @@ cMago::~cMago(){
 /**
  * Lo que dijo el Pampa: reparte su ataque en toda la tropa
  */
-unsigned int cMago::CondicionAtaque(cGuerrero* Atacado){
+unsigned int cMago::Ataque(cGuerrero* Atacado){
 
 	if (dynamic_cast<cCaballero*>(Atacado) != NULL)
 		return (AT * 1.25); //su ataque aumenta en 0,25

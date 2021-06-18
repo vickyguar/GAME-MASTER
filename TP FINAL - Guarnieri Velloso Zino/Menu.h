@@ -87,7 +87,7 @@ unsigned int ElegirMundo()
 	cout << "Ingrese opcion: "; 
 	cin >> Mundo;
 
-	if (Mundo < (unsigned int)eMundo::AGENTINA || Mundo > (unsigned int)eMundo::AMERICA_LATINA)
+	if (Mundo < (unsigned int)eMundo::AGENTINA || Mundo > ((unsigned int)eMundo::AMERICA_LATINA)+1)
 		Mundo = ElegirMundo();
 
 	return Mundo;

@@ -54,11 +54,13 @@ public:
 	string getClave() { return IDTropa; }
 	template<class TipoGuerrero>
 	bool AnalizarTipo(cListaT<cGuerrero>* Lista);
-	cListaT<cGuerrero>* OrdenarXHP();
+	void OrdenarXHP();
+
+	string To_string();
 };
 template<class TipoGuerrero>
 bool cTropa::AnalizarTipo(cListaT<cGuerrero>* Lista)
 {
-	return (dynamic_cast<TipoGuerrero*>(Lista != NULL); //TODO: OJO CON FOWARD DECLARATION Y LOS .H
+	return (dynamic_cast<TipoGuerrero*>(Lista) != NULL); //TODO: OJO CON FOWARD DECLARATION Y LOS .H
 }
 #endif // !defined(EA_48AC6C59_7B06_45a6_B915_81B52F35D200__INCLUDED_)

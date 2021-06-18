@@ -71,6 +71,7 @@ public:
 
 	void PerderPais(cPais* Pais);
 
+	string To_string()const;
 
 #pragma region SETTES & GETTERS
 

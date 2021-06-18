@@ -69,6 +69,7 @@ public:
 
 	void ImprimirEstados() const;
 
+
 #pragma endregion
 
 	//int* ReparticionPaises();

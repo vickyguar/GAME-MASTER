@@ -57,6 +57,10 @@ void cPais::AsignarTropas(cTropa* Tropa)
 {
 	if(Tropa != NULL)
 		*Tropas + Tropa;
+	else {
+		Tropas->Agregar(new cTropa());
+
+	}
 	//TODO: falta hacer la parte random
 }
 

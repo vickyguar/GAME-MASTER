@@ -38,14 +38,11 @@ unsigned int cJugador::AtaqueEfectivo(cListaT<cTropa>* miTropa, cListaT<cTropa>*
 				modificador += 0.25; //ser fuerte significa que mi ataque aumenta un 25% (MODIFICADOR ESTA = 1)
 			}
 		}
-		Fuerza += (*miTropa)[i]->CalcularAT_Total() * modificador; //voy acumulando los aumentos que tengo que realizar a la hora del ataque.
+		Fuerza += (*miTropa)[i]->CalcularAT_Total((*TropaEnemiga)[i]) * modificador; //voy acumulando los aumentos que tengo que realizar a la hora del ataque.
 	}
 	return Fuerza;
 }
 
-//void cJugador::Defender(cPais* PaisAtacado, unsigned int AT_Contrincante){
-//
-//}
 
 void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde el ultio que ataque
 {
@@ -140,6 +137,19 @@ void cJugador::GanarPais(cPais* Pais)
 void cJugador::PerderPais(cPais* Pais)
 {
 	Paises->Quitar(Pais->getClave());
+}
+
+string cJugador::To_string() const
+{
+	string output;
+	output += "\t" + this->Username + "\n";
+	output += "\t\tPaises que posee: \n";
+	for (unsigned int i = 0; i < this->Paises->getCA(); i++) {
+		output += "\t\t Pais " + to_string(i + 1) + ':' + (*Paises)[i]->getClave();
+		output += "Tropa " + to_string(i + 1) + ':' + (*Paises)[i]->getTropas()->To_String();
+	}
+
+	return output;
 }
 
 eEstadoJugador cJugador::getEstado()

@@ -33,7 +33,6 @@ int main()
 		GAME_MASTER = new cJuego(CANT); 
 		//abro archivo y creo el mundo
 		GAME_MASTER->SetUpMundo(Mundo); //a esta altura ya tenemos la cantidad de paises
-		//cout << "Usted esta en " << ConvertMundoString(Mundo) << endl;
 
 		GAME_MASTER->getMundo()->Imprimir();
 

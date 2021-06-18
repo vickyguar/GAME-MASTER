@@ -38,9 +38,9 @@ unsigned int cTropa::CalcularAT_Total(cTropa* otra) {
 
 	unsigned int AT_Total = 0;
 
-	for (unsigned int i = 0; i < Guerreros->getCA(); i++) {
-		AT_Total += (*Guerreros)[i]->Ataque(otra->(*Guerreros)[i]); //TODO: no entiendo porque no me deja hacer esto
-	}
+	for (unsigned int i = 0; i < Guerreros->getCA(); i++)
+		AT_Total += (*Guerreros)[i]->Ataque(otra->Guerreros->BuscarXPos(i));
+	
 	return AT_Total;
 }
 
@@ -79,6 +79,20 @@ void cTropa::OrdenarXHP()
 		if (cont_cambios == 0)
 			break;
 	}
+}
+
+string cTropa::To_string() 
+{
+	string output = "\t\t" + to_string(Guerreros->getCA());
+
+	if (AnalizarTipo<cCaballero>(Guerreros))
+		output += " Caballeros\n";
+	else if (AnalizarTipo<cMago>(Guerreros))
+		output += " Magos\n";
+	else if (AnalizarTipo<cArquero>(Guerreros))
+		output += " Arqueros\n";
+
+	return output;
 }
 
 void cTropa::RecibirDanio(unsigned int AT_Ataque) {

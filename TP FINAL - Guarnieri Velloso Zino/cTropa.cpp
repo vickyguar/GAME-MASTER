@@ -58,7 +58,7 @@ bool cTropa::operator>(cTropa* otra)
 	return false;
 }
 
-cListaT<cGuerrero>* cTropa::OrdenarXHP()
+void cTropa::OrdenarXHP()
 {
 	cGuerrero* aux = NULL;
 	int cont_cambios = 0;
@@ -81,7 +81,7 @@ cListaT<cGuerrero>* cTropa::OrdenarXHP()
 
 void cTropa::RecibirDanio(unsigned int AT_Ataque) {
 
-	Guerreros = OrdenarXHP(); //ordeno de más vida a menod vida
+	OrdenarXHP(); //ordeno de más vida a menod vida
 	int i = 0;
 	do
 	{

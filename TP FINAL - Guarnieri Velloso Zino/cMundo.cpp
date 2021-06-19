@@ -41,7 +41,7 @@ void cMundo::LeerArchivo(const char* Filename)
 
 	} while (pos != Cadena.npos);
 
-	Limitrofes += '\n'; //para que el ultimo tambien lo tenga
+	//Limitrofes += '\n'; //para que el ultimo tambien lo tenga
 
 	fclose(fp); //cierro el archivo
 	
@@ -65,7 +65,7 @@ void cMundo::PaisesLimitrofes(string& Limitrofes, string nombre) {
 	//primero divido por linea
 	vector<string> ListaLimitrofes; //lista con size 0
 	pos = Limitrofes.find('\n'); //busco los separadores
-	string subCadena = Limitrofes.substr(0, pos); //me copio el elemento 
+	string subCadena = Limitrofes.substr(0, pos-2); //me copio el elemento 
 	Limitrofes = Limitrofes.erase(0, pos + 1); //borro el elemento
 
 	pos = 0;
@@ -107,7 +107,7 @@ void cMundo::Imprimir() const
 	cout << "\tLos paises disponibles en este mundo son: " << endl;
 	cout << *ListaPaises << endl; //imprimo la lista de paises
 
-	Sleep(5000);
+	Sleep(1000); //TODO: aca quiero el mapaa :)
 	system("cls");
 
 }

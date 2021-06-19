@@ -17,7 +17,10 @@ cJugador::cJugador(string _Username, eEstadoJugador _Estado):Username(_Username)
 }
 
 cJugador::~cJugador(){
+	if (Paises!= NULL)
+	{
 
+	}
 }
 
 unsigned int cJugador::AtaqueEfectivo(cListaT<cTropa>* miTropa, cListaT<cTropa>* TropaEnemiga){

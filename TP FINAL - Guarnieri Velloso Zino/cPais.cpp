@@ -41,16 +41,12 @@ unsigned int cPais::CalcularAT_Tropas(cListaT<cTropa>* Tropas)
 }
 
 bool cPais::VerificarLimitrofes(cPais* PaisLimitrofe) {
-	try
-	{
-		cPais*aux=GetListaLimitrofes()->BuscarItem(PaisLimitrofe->Nombre);
-	}
-	catch (exception* ex)
-	{
-		delete ex;
-		return false;
-	}
-	return true;
+
+	for (unsigned int i = 0; i < ListaLimitrofes.size(); i++)
+		if (PaisLimitrofe->Nombre == ListaLimitrofes[i])
+			return true;
+
+	return false;
 }
 
 void cPais::AsignarTropas(cTropa* Tropa)
@@ -115,12 +111,12 @@ void cPais::RecibirDanio(unsigned int Daño, cListaT<cTropa>* miTropa)
 
 cListaT<cPais>* cPais::GetListaLimitrofes()
 {
-	cListaT<cPais>* ListaLimitrofesAux = new cListaT<cPais>();
+	cListaT<cPais>* ListaLimitrofesAux = new cListaT<cPais>(false);
 	for (int i = 0; i < ListaLimitrofes.size(); i++)
 	{
 		for (int j = 0; j < ListaPaises->getCA(); j++)
 		{
-			if ((*(*ListaPaises)[j])==ListaLimitrofes[i])
+			if ((*ListaPaises)[j]->getClave()==ListaLimitrofes[i])
 				(*ListaLimitrofesAux) + (*ListaPaises)[j];
 		}
 	}

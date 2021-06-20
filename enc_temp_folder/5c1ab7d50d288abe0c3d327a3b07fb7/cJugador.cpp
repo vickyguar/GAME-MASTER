@@ -175,22 +175,4 @@ bool cJugador::VerificarPais(cPais*ptr)
 
 }
 
-bool cJugador::VerficarAtaque(cPais* Pais)
-{
-	cListaT<cPais>* CopiaLista = new cListaT<cPais>(Pais->GetListaLimitrofes()); //me copio los paises limitrofes a una lista para no perderlos
-
-	for (unsigned int i = 0; i < Paises->getCA(); i++) //recorro mi lista de paises
-	{
-		for (unsigned int k = 0; k < CopiaLista->getCA(); k++) //recorro los limitrofes
-		{
-			if ((*CopiaLista)[k]->getClave() == (*Paises)[i]->getClave()) //si tengo un limitrofe
-				*CopiaLista - (*CopiaLista)[k]; //lo saco de la lista
-		}
-	}
-	if (CopiaLista->getCA() == 0) //si la lista de limitrofes esta vacia (o sea que tengo todos los limitrofes de ese pais)
-		return false; //no puedo atacar desde el pais que me llego por parametro
-	else
-		return true; //puedo atacar yey :)
-}
-
 

@@ -52,10 +52,9 @@ bool cPais::VerificarLimitrofes(cPais* PaisLimitrofe) {
 void cPais::AsignarTropas(cTropa* Tropa)
 {
 	if(Tropa != NULL)
-		*Tropas + Tropa;
+		*Tropas + Tropa; //esto es para cuando muevo tropas de un pais al otro
 	else {
-		Tropas->Agregar(new cTropa());
-
+		Tropas->Agregar(new cTropa());//agrego una tropa random nueva
 	}
 }
 

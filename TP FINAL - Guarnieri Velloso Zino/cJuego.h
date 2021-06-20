@@ -69,12 +69,10 @@ public:
 
 	void ImprimirEstados() const;
 
-
 #pragma endregion
 
 	
-	void AsignarPaisesRandom();
-	bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais);
+	void AsignarPaisesRandom(); //FUNCIONA
 
 };
 //istream& operator>>(istream& in, cJugador* Jugador)
@@ -95,6 +93,7 @@ public:
 //	return in;
 //}
 
+bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais);
 static unsigned int CalcularResiduo(int Num1, int Num2)
 {
 	if (Num2 != 0)

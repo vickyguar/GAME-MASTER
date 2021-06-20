@@ -267,9 +267,13 @@ void cJuego::AsignarPaisesRandom()
 		}
 	}
 
-	ImprimirEstados();
-	for(int k=0;k<Jugadores->getCA();k++) //recorro lista de jugadores
+	for (int k = 0; k < Jugadores->getCA(); k++) //recorro lista de jugadores
+	{
+		system("cls");
+		ImprimirEstados();
 		(*Jugadores)[k]->AgregarTropas(); //asigno las tropas extras para dsp poder empezar el juego
+	}
+		
 	
 	delete CopiaLista;
 }

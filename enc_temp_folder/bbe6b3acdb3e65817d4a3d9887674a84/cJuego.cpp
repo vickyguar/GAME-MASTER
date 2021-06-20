@@ -14,21 +14,19 @@ cPais* PosPaisAtaque(cJugador* Jugador) {
 	unsigned int pospais = -1;
 	do {
 		cout << "\n ---- JUGADOR " << Jugador->getClave() << " ---- " << endl;
-		cout << " Introduzca el numero pais desde el que quiere atacar: ";
+		cout << " Introduzca el numero pais desde el que quiere atacar: \n";
 		cin >> pospais;
 	} while (pospais <0 || pospais>cPais::getListaPaises()->getCA() 
 		|| !Jugador->VerificarPais((*cPais::getListaPaises())[pospais])
 		|| (*cPais::getListaPaises())[pospais]->getTropas()->getCA() <= 1);
 	//TODO: las condiciones en una funcion para imprimir porque no me dejo seleccionar ese pais
-	
 	return (*cPais::getListaPaises())[pospais];
 }
 
 cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
 	unsigned int pospais = -1;
-
 	do {
-		cout << " Introduzca el numero pais al que quiere atacar: ";
+		cout << " Introduzca el numero pais al que quiere atacar: \n";
 		cin >> pospais;
 
 	} while ((pospais>cPais::getListaPaises()->getCA()) || (Jugador->VerificarPais((*cPais::getListaPaises())[pospais]))||

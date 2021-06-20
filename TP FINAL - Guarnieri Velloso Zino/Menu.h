@@ -45,7 +45,7 @@ eOpcion ElegirOpcion() {
 	if(opcion < eOpcion::SALIR || opcion > eOpcion::IMPRIMIR_PERFILES)
 	{
 		cout << "Opcion invalida\n";
-		Sleep(2000); //TODO: es esta la función?
+		Sleep(2000); 
 		system("cls");
 		opcion = ElegirOpcion();
 	}

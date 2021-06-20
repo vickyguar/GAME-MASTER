@@ -1,4 +1,4 @@
-///////////////////////////////////////////////////////////
+ï»¿///////////////////////////////////////////////////////////
 //  cJuego.cpp
 //  Implementation of the Class cJuego
 //  Created on:      01-jun.-2021 20:42:39
@@ -10,19 +10,31 @@
 
 unsigned int cJuego::Rondas = 0;
 
+
+bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais) {
+
+	if (pospais <0
+		|| pospais>cPais::getListaPaises()->getCA()
+		|| !Jugador->VerificarPais((*cPais::getListaPaises())[pospais])
+		|| (*cPais::getListaPaises())[pospais]->getTropas()->getCA() <= 1) {
+		cout << "\n\tEl pais de donde quiere atacar es invalido: No le pertenece o no es limitrofe :(\n\t...Debera ingresar otro pais" << endl;
+		return true;
+	}
+	return false;
+}
+
 cPais* PosPaisAtaque(cJugador* Jugador) {
 	unsigned int pospais = -1;
 	do {
 		cout << "\n ---- JUGADOR " << Jugador->getClave() << " ---- " << endl;
 		cout << " Introduzca el numero pais desde el que quiere atacar: ";
 		cin >> pospais;
-	} while (pospais <0 || pospais>cPais::getListaPaises()->getCA() 
-		|| !Jugador->VerificarPais((*cPais::getListaPaises())[pospais])
-		|| (*cPais::getListaPaises())[pospais]->getTropas()->getCA() <= 1);
-	//TODO: las condiciones en una funcion para imprimir porque no me dejo seleccionar ese pais
-	
+	} while (VerificarPaisOrigen(Jugador, pospais));
+
 	return (*cPais::getListaPaises())[pospais];
 }
+
+
 
 cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
 	unsigned int pospais = -1;
@@ -119,7 +131,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false, 3); //le pusimos false :)
 		TropasdeBatalla(paisAtaque, MiniListaTropas);
 
-		Batallar((*Jugadores)[pos], paisAtacado, paisAtaque, MiniListaTropas); //Todo lo que le pasamos a batallar está chequeado
+		Batallar((*Jugadores)[pos], paisAtacado, paisAtaque, MiniListaTropas); //Todo lo que le pasamos a batallar estï¿½ chequeado
 
 		cant++;
 		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
@@ -137,9 +149,9 @@ void cJuego::JugadorAtacando(unsigned int pos)
 void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas) {
 	
 	cListaT<cTropa>* ListaTropaDef = PaisAtacado->CrearMiniListaRandom();
-	cJugador* JugadorAtacado = DuenioPais(PaisAtacado); //Buscamos el dueño del pais atacado
+	cJugador* JugadorAtacado = DuenioPais(PaisAtacado); //Buscamos el dueï¿½o del pais atacado
 	JugadorAtacado->setEstado(eEstadoJugador::DEFENDIENDO);
-	unsigned int AT_Efectivo_Base = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef); //calcula el daño base que se va a realizar
+	unsigned int AT_Efectivo_Base = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef); //calcula el daï¿½o base que se va a realizar
 	
 	if (JugadorAtacado == NULL)
 		throw new exception("El pais no tiene duenio"); //si esto pasa es porque algo hicimos mal
@@ -188,7 +200,10 @@ void cJuego::SetUpMundo(unsigned int mundo){
 	}
 	catch (exception* ex)
 	{
-		throw ex; //TODO: cambiar ex
+		string error = ex->what();
+		delete ex;
+		ex = new exception(("Error en SetUpMundo: " + error).c_str());
+		throw ex;
 	}
 }
 

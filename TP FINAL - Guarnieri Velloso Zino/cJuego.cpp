@@ -283,5 +283,3 @@ cMundo* cJuego::getMundo() const
 {
 	return Mundo;
 }
-
-

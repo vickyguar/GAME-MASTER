@@ -32,8 +32,10 @@ public:
 	~cJugador();
 
 #pragma endregion
+
+#pragma region METODOS
 	/**
-	* AtaqueEfectivo 
+	* AtaqueEfectivo
 	* calcula la fuerza total con la que va a tacar las tropas que se mandan a batallar
 	* @param pais que ataca, unidad de ataque
 	* @return int
@@ -50,7 +52,7 @@ public:
 	* reordena las tropas. Es decir que se pueden juntar, en el caso de que queden pocas unidades
 	* o se pueden separar (para tener más unidades)
 	*/
-	void Reagrupar(cPais* PaisOrigen,cPais*Destino=NULL);
+	void Reagrupar(cPais* PaisOrigen, cPais* Destino = NULL);
 	/**
 	* RenunciarTurno
 	* le pregunta al usuario si quiere seguir jugando o si termina su turno
@@ -61,8 +63,8 @@ public:
 	/**
 	* AgregarTropas
 	* recibe la cantidad de tropas que le corresponde poner al jugador, dependiendo de la cantidad de paises que tenga
-	* se agregan esas tropas a un pais aleatorio (este pais debe pertenecer a la lista que tiene el jugador de paiese 
-	* en su dominio). 
+	* se agregan esas tropas a un pais aleatorio (este pais debe pertenecer a la lista que tiene el jugador de paiese
+	* en su dominio).
 	* @param int num
 	*/
 	void AgregarTropas();
@@ -73,6 +75,8 @@ public:
 
 	string To_string()const;
 
+#pragma endregion
+
 #pragma region SETTES & GETTERS
 
 	void setEstado(eEstadoJugador _Estado = eEstadoJugador::ATACANDO);
@@ -80,17 +84,12 @@ public:
 	string getClave();
 	unsigned int getCantPaises() { return Paises->getCA(); }
 #pragma endregion
-	bool VerificarMiPais(cPais*ptr); //verifica si el pais es mio
 
-	bool operator==(cPais* Pais) { //Esto no es para comparar, es para ver si existe en la lista de paises del jugador
-		return VerificarMiPais(Pais);
-	}
-	bool operator!=(cPais* Pais) {
-		return !(*this == Pais);
-	}
-	//TODO: sobrecarga cout (IMPRIME EL NUMERO DEL PAIS CORRESPONDIENTE AL NUMERO DEL JUGADOR)
+#pragma region VERIFICACIONES
+
+	bool VerificarMiPais(cPais* ptr); //verifica si el pais es mio
 	/*
-	* VerificarAtaque 
+	* VerificarAtaque
 	* me fijo si hay limitrofes a los cuales atacar (recordar lo que paso con Chile)
 	* @param: Pais
 	* @return bool (true si hay limitrofes)
@@ -102,7 +101,20 @@ public:
 	* @param: Pais
 	* @return bool
 	*/
-	bool VerifcarPaisDispo(cPais* Pais); //
+	bool VerifcarPaisDispo(cPais* Pais);
+
+#pragma endregion
+
+#pragma region OPERATORS
+	//Esto no es para comparar, es para ver si existe en la lista de paises del jugador
+	bool operator==(cPais* Pais) { 
+		return VerificarMiPais(Pais);
+	}
+	bool operator!=(cPais* Pais) {
+		return !(*this == Pais);
+	}
+#pragma endregion
+
 };
 
 #endif // !defined(EA_B34E5789_D7AB_47b3_BFBB_ABFA2C7A92ED__INCLUDED_)

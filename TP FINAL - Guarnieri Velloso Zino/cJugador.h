@@ -80,17 +80,29 @@ public:
 	string getClave();
 	unsigned int getCantPaises() { return Paises->getCA(); }
 #pragma endregion
-	bool VerificarPais(cPais*ptr); //verifica si el pais es mio
+	bool VerificarMiPais(cPais*ptr); //verifica si el pais es mio
 
 	bool operator==(cPais* Pais) { //Esto no es para comparar, es para ver si existe en la lista de paises del jugador
-		return (this->Paises->BuscarItem(Pais->getClave()) != NULL);
+		return VerificarMiPais(Pais);
 	}
 	bool operator!=(cPais* Pais) {
 		return !(*this == Pais);
 	}
 	//TODO: sobrecarga cout (IMPRIME EL NUMERO DEL PAIS CORRESPONDIENTE AL NUMERO DEL JUGADOR)
-
+	/*
+	* VerificarAtaque 
+	* me fijo si hay limitrofes a los cuales atacar (recordar lo que paso con Chile)
+	* @param: Pais
+	* @return bool (true si hay limitrofes)
+	*/
 	bool VerficarAtaque(cPais* Pais);
+	/*
+	* VerificarAtaque
+	* verifico que tengo otro pais para atacar (debe cumplir con condiciones)
+	* @param: Pais
+	* @return bool
+	*/
+	bool VerifcarPaisDispo(cPais* Pais); //
 };
 
 #endif // !defined(EA_B34E5789_D7AB_47b3_BFBB_ABFA2C7A92ED__INCLUDED_)

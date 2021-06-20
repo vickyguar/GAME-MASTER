@@ -159,20 +159,19 @@ string cJugador::getClave()
 	return Username;
 }
 
-bool cJugador::VerificarPais(cPais*ptr)
+bool cJugador::VerificarMiPais(cPais*ptr)
 {
 	try
 	{
-		cPais*aux=Paises->BuscarItem(ptr->getClave());
+		cPais* aux = Paises->BuscarItem(ptr->getClave()); //busco el item en mi lista de paises
 	}
 	catch (exception* ex)
 	{
-		delete ex;
+		delete ex; //no lo encontré
 		return false;
 	}
 	
-	return true;
-
+	return true; //lo encontré :)
 }
 
 bool cJugador::VerficarAtaque(cPais* Pais)
@@ -191,6 +190,18 @@ bool cJugador::VerficarAtaque(cPais* Pais)
 		return false; //no puedo atacar desde el pais que me llego por parametro
 	else
 		return true; //puedo atacar yey :)
+}
+
+bool cJugador::VerifcarPaisDispo(cPais* Pais)
+{
+	{
+		for (unsigned int i = 0; i < Paises->getCA(); i++) //recorro la lista de mis paises
+		{
+			if (((*Paises)[i]->getTropas()->getCA() > 1) && Pais->getClave() != (*Paises)[i]->getClave()) //tengo otro pais que tiene más de una tropa (puede atacar)
+				return true;
+		}
+		return false; //no tengo otro pais para atacar (F) :(
+	}
 }
 
 

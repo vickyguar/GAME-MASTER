@@ -32,7 +32,7 @@ void cTropa::AsignarGuerreros()
 	switch (random)
 	{
 	case eTipoGuerrero::CABALLERO:
-		for(i=0;i<(rand()%11)+10;i++)
+		for (i = 0; i < (rand() % 11) + 10; i++)
 			Guerreros->Agregar(new cCaballero());
 		break;
 	case eTipoGuerrero::MAGO:
@@ -74,12 +74,29 @@ bool cTropa::operator>(cTropa* otra)
 	//ARQUERO VS MAGO -> fuerte arquero
 	//CABALLERO VS ARQUERO -> fuerte caballero
 
-	if (AnalizarTipoTropa<cMago>(this->Guerreros) && AnalizarTipoTropa<cCaballero>(otra->Guerreros))
+	//TODO: PARA MI ACA ES COMPARAR CON LAS LISTAS
+
+	if(AnalizarTipoGuerrero<cMago>((*Guerreros)[0]) && AnalizarTipoGuerrero<cCaballero>(otra->Guerreros->BuscarXPos(0)))
+		return true;
+	if (AnalizarTipoGuerrero<cArquero>((*Guerreros)[0]) && AnalizarTipoGuerrero<cMago>(otra->Guerreros->BuscarXPos(0)))
+		return true;
+	if (AnalizarTipoGuerrero<cCaballero>((*Guerreros)[0]) && AnalizarTipoGuerrero<cArquero>(otra->Guerreros->BuscarXPos(0)))
+		return true;
+
+	/*if (AnalizarTipoTropa<cListaT<cMago>>(this->Guerreros) && AnalizarTipoTropa<cListaT<cCaballero>>(otra->Guerreros))
+		return true;
+	if (AnalizarTipoTropa<cListaT<cArquero>>(this->Guerreros) && AnalizarTipoTropa<cListaT<cMago>>(otra->Guerreros))
+		return true;
+	if (AnalizarTipoTropa<cListaT<cCaballero>>(this->Guerreros) && AnalizarTipoTropa<cListaT<cArquero>>(otra->Guerreros))
+		return true;*/
+
+
+	/*if (AnalizarTipoTropa<cMago>(this->Guerreros) && AnalizarTipoTropa<cCaballero>(otra->Guerreros))
 		return true;
 	if (AnalizarTipoTropa<cArquero>(this->Guerreros) && AnalizarTipoTropa<cMago>(otra->Guerreros))
 		return true;
 	if (AnalizarTipoTropa<cCaballero>(this->Guerreros) && AnalizarTipoTropa<cArquero>(otra->Guerreros))
-		return true;
+		return true;*/
 
 	return false;
 }
@@ -109,11 +126,11 @@ string cTropa::To_string()
 {
 	string output = "\t\t TROPA N " + IDTropa + ": " + to_string(Guerreros->getCA());
 
-	if (dynamic_cast<cCaballero*>(Guerreros) != NULL)
+	if (dynamic_cast<cCaballero*>((*Guerreros)[0]) != NULL)
 		output += " Caballeros\n";
-	else if (dynamic_cast<cMago*>(Guerreros) != NULL)
+	else if (dynamic_cast<cMago*>((*Guerreros)[0]) != NULL)
 		output += " Magos\n";
-	else if (dynamic_cast<cArquero*>(Guerreros) != NULL)
+	else if (dynamic_cast<cArquero*>((*Guerreros)[0]) != NULL)
 		output += " Arqueros\n"; //TODO: NO IMPRIME
 
 	/*if (AnalizarTipoTropa<cCaballero>(Guerreros))

@@ -55,13 +55,24 @@ public:
 	cListaT<cGuerrero>* getGuerreros() { return Guerreros; }
 	bool operator>(cTropa* otra);
 	string getClave() { return IDTropa; }
+
+	template<class TipoGuerrero>
+	bool AnalizarTipoGuerrero(cGuerrero* Guerrero1);
+
 	template<class TipoGuerrero>
 	bool AnalizarTipoTropa(cListaT<cGuerrero>* Lista);
-	//bool AnalizarTipoGuerrero();
+
 	void OrdenarXHP();
 
 	string To_string();
 };
+
+template<class TipoGuerrero>
+bool cTropa::AnalizarTipoGuerrero(cGuerrero* Guerrero1) //Segun nuestra implementacion, las tropas se crean todas con el mimso tipo del guerrero ==> si yo analizo el primero, entonces estoy analizando todas.
+{
+	return (dynamic_cast<TipoGuerrero*>(Guerrero1) != NULL); 
+}
+
 
 template<class TipoGuerrero>
 bool cTropa::AnalizarTipoTropa(cListaT<cGuerrero>* Lista)

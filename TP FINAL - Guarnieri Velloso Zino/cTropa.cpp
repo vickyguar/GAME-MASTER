@@ -131,7 +131,7 @@ string cTropa::To_string()
 	else if (dynamic_cast<cMago*>((*Guerreros)[0]) != NULL)
 		output += " Magos\n";
 	else if (dynamic_cast<cArquero*>((*Guerreros)[0]) != NULL)
-		output += " Arqueros\n"; //TODO: NO IMPRIME
+		output += " Arqueros\n"; 
 
 	/*if (AnalizarTipoTropa<cCaballero>(Guerreros))
 		output += " Caballeros\n";

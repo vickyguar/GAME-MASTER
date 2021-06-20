@@ -10,18 +10,31 @@
 
 unsigned int cJuego::Rondas = 0;
 
+
+bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais) {
+
+	if (pospais <0
+		|| pospais>cPais::getListaPaises()->getCA()
+		|| !Jugador->VerificarPais((*cPais::getListaPaises())[pospais])
+		|| (*cPais::getListaPaises())[pospais]->getTropas()->getCA() <= 1) {
+		cout << "\n\tEl pais de donde quiere atacar es invalido: No le pertenece o no es limitrofe :(\n\t...Debera ingresar otro pais" << endl;
+		return true;
+	}
+	return false;
+}
+
 cPais* PosPaisAtaque(cJugador* Jugador) {
 	unsigned int pospais = -1;
 	do {
 		cout << "\n ---- JUGADOR " << Jugador->getClave() << " ---- " << endl;
 		cout << " Introduzca el numero pais desde el que quiere atacar: \n";
 		cin >> pospais;
-	} while (pospais <0 || pospais>cPais::getListaPaises()->getCA() 
-		|| !Jugador->VerificarPais((*cPais::getListaPaises())[pospais])
-		|| (*cPais::getListaPaises())[pospais]->getTropas()->getCA() <= 1);
-	//TODO: las condiciones en una funcion para imprimir porque no me dejo seleccionar ese pais
+	} while (VerificarPaisOrigen(Jugador, pospais));
+
 	return (*cPais::getListaPaises())[pospais];
 }
+
+
 
 cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
 	unsigned int pospais = -1;
@@ -186,7 +199,10 @@ void cJuego::SetUpMundo(unsigned int mundo){
 	}
 	catch (exception* ex)
 	{
-		throw ex; //TODO: cambiar ex
+		string error = ex->what();
+		delete ex;
+		ex = new exception(("Error en SetUpMundo: " + error).c_str());
+		throw ex;
 	}
 }
 

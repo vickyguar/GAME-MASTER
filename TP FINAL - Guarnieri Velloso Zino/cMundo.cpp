@@ -100,16 +100,43 @@ void cMundo::setNombre(string nombre)
 	this->Nombre = nombre;
 }
 
+
+string MAPA(const char* filename) {
+
+	FILE* fp = fopen(filename, "r");
+	string cadena;
+	char buffer[200] = "";
+
+	if (fp != NULL) {
+		while (!feof(fp))
+		{
+			fgets(buffer, 199, fp); //leo por linea
+			cadena += buffer;
+		}
+		return cadena;
+	}
+	else
+		throw new exception(" --- Error al abrir el archivo ---");
+}
+
+
 void cMundo::Imprimir() const
 {
-	cout << "\tEnhorabuena! Combatiran en " << Nombre << endl << endl;
-	cout << "\tLos paises disponibles en este mundo son: " << endl;
-	cout << *ListaPaises << endl; //imprimo la lista de paises
+	if (Nombre == "America Latina")
+		cout << MAPA("ARCHIVO1.txt");
 
-	Sleep(1000); //TODO: aca quiero el mapaa :)
+	if (Nombre == "Argentina y sus limitrofes")
+		cout << MAPA("ARCHIVO2.txt");
+
+	Sleep(5000); 
 	system("cls");
 
 }
+
+
+
+
+
 
 void cMundo::SetUp(const char* Filename)
 {

@@ -23,6 +23,8 @@ private:
 public:
 #pragma region CONSTRUCTORES & DESTRUCTORES
 
+	
+
 	/**
 	* cJuego
 	* constructor de la clase cJuego
@@ -74,6 +76,7 @@ public:
 
 	
 	void AsignarPaisesRandom();
+	bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais);
 
 };
 //istream& operator>>(istream& in, cJugador* Jugador)

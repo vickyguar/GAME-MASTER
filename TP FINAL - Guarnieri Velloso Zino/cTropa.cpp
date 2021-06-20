@@ -62,7 +62,11 @@ unsigned int cTropa::AT_Extra(cTropa* otra) {
 	unsigned int ATExtra = 0;
 
 	for (unsigned int i = 0; i < Guerreros->getCA(); i++)
-		ATExtra += (*Guerreros)[i]->Ataque(otra->Guerreros->BuscarXPos(i));
+	{
+		if(i <otra->Guerreros->getCA())
+			ATExtra += (*Guerreros)[i]->Ataque(otra->Guerreros->BuscarXPos(i));
+	}
+		
 	
 	return ATExtra;
 }
@@ -105,9 +109,9 @@ void cTropa::OrdenarXHP()
 {
 	cGuerrero* aux = NULL;
 	int cont_cambios = 0;
-	for (unsigned int i = 0; i < Guerreros->getCA() - 1; i++)
+	for (unsigned int i = 0; i < (Guerreros->getCA()) - 1; i++)
 	{
-		for (unsigned int k = 0; k < Guerreros->getCA() - 1; k++)
+		for (unsigned int k = 0; k < (Guerreros->getCA()) - 1; k++)
 		{
 			if ((*Guerreros)[k]->getHP() < (*Guerreros)[k+1]->getHP())
 			{

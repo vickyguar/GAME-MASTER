@@ -23,8 +23,6 @@ private:
 public:
 #pragma region CONSTRUCTORES & DESTRUCTORES
 
-	
-
 	/**
 	* cJuego
 	* constructor de la clase cJuego
@@ -55,8 +53,8 @@ public:
 
 #pragma region SETUPS
 
-	void SetUpMundo(unsigned int mundo);
-	void SetUpJugadores(string username);
+	void SetUpMundo(unsigned int mundo); //FUNCIONA
+	void SetUpJugadores(string username); //FUNCIONA
 
 #pragma endregion
 
@@ -71,12 +69,10 @@ public:
 
 	void ImprimirEstados() const;
 
-
 #pragma endregion
 
 	
-	void AsignarPaisesRandom();
-	bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais);
+	void AsignarPaisesRandom(); //FUNCIONA
 
 };
 //istream& operator>>(istream& in, cJugador* Jugador)
@@ -97,6 +93,7 @@ public:
 //	return in;
 //}
 
+bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais);
 static unsigned int CalcularResiduo(int Num1, int Num2)
 {
 	if (Num2 != 0)
@@ -109,14 +106,6 @@ static unsigned int CalcularResiduo(int Num1, int Num2)
 	else
 		throw new exception(" --- Division por cero --- ");
 }
-
-//Funciones
-
-//Ingreso de datos
-
-
-//Verificación de datos ingresados
-
 
 
 		/*cout << "\n ---- JUGADOR " << (*Jugadores)[pos]->getUsername() <<" ---- "<< endl;

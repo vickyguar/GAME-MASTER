@@ -10,12 +10,11 @@
 
 unsigned int cJuego::Rondas = 0;
 
-
 bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais) {
 
 	if (pospais <0
 		|| pospais>cPais::getListaPaises()->getCA()
-		|| !Jugador->VerificarPais((*cPais::getListaPaises())[pospais])
+		|| !Jugador->VerificarMiPais((*cPais::getListaPaises())[pospais])
 		|| (*cPais::getListaPaises())[pospais]->getTropas()->getCA() <= 1) {
 		cout << "\n\tEl pais de donde quiere atacar es invalido: No le pertenece o no es limitrofe :(\n\t...Debera ingresar otro pais" << endl;
 		return true;
@@ -30,11 +29,14 @@ cPais* PosPaisAtaque(cJugador* Jugador) {
 		cout << " Introduzca el numero pais desde el que quiere atacar: ";
 		cin >> pospais;
 	} while (VerificarPaisOrigen(Jugador, pospais));
-
+	
+	if (!(Jugador->VerficarAtaque((*cPais::getListaPaises())[pospais])) && Jugador->VerifcarPaisDispo((*cPais::getListaPaises())[pospais]))
+	{
+		throw new exception("PERDES EL TURNO POR NO SABER JUGAR, MALISIMA TU ESTRATEGIA");
+		return NULL;
+	}
 	return (*cPais::getListaPaises())[pospais];
 }
-
-
 
 cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
 	unsigned int pospais = -1;
@@ -43,7 +45,7 @@ cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
 		cout << " Introduzca el numero pais al que quiere atacar: ";
 		cin >> pospais;
 
-	} while ((pospais>cPais::getListaPaises()->getCA()) || (Jugador->VerificarPais((*cPais::getListaPaises())[pospais]))||
+	} while ((pospais>cPais::getListaPaises()->getCA()) || (Jugador->VerificarMiPais((*cPais::getListaPaises())[pospais]))||
 		!Pais->VerificarLimitrofes((*cPais::getListaPaises())[pospais]) || pospais < 0);
 
 	return (*cPais::getListaPaises())[pospais];
@@ -55,9 +57,9 @@ void TropasdeBatalla(cPais* PaisAtaque, cListaT<cTropa>* TropasBatalla)
 	unsigned int nTropa = 0;
 	cTropa* aux = NULL;
 	do {
-		cout << " Introduzca la cantidad de tropas con las que quiere atacar. MAXIMO DE 3 : \n";
+		cout << " Introduzca la cantidad de tropas con las que quiere atacar. (MAXIMO DE 3): ";
 		cin >> canttropas;
-	} while (canttropas > 3 || canttropas <= 1||PaisAtaque->getTropas()->getCA()<canttropas);
+	} while (canttropas > 3 || canttropas < 1 || PaisAtaque->getTropas()->getCA() - 1 < canttropas);
 
 	for (unsigned int i = 0; i < canttropas; i++)
 	{
@@ -78,7 +80,6 @@ void TropasdeBatalla(cPais* PaisAtaque, cListaT<cTropa>* TropasBatalla)
 		}
 	}
 }
-
 
 cJuego::cJuego(unsigned int cantjugadores)
 {
@@ -125,8 +126,17 @@ void cJuego::JugadorAtacando(unsigned int pos)
 	(*Jugadores)[pos]->setEstado(eEstadoJugador::ATACANDO);
 	cPais* paisAtaque = NULL;
 	do {
+		try
+		{
+			paisAtaque = PosPaisAtaque((*Jugadores)[pos]);
+		}
+		catch (exception* ex)
+		{
+			cout << ex->what() << endl;
+			delete ex;
+			break; //para que rompa el do-while ya que el jugador no puede atacar con nada
+		}
 
-		paisAtaque = PosPaisAtaque((*Jugadores)[pos]);
 		cPais* paisAtacado = PosPaisAtacado((*Jugadores)[pos], paisAtaque);
 		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false, 3); //le pusimos false :)
 		TropasdeBatalla(paisAtaque, MiniListaTropas);
@@ -138,13 +148,13 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		delete MiniListaTropas;
 
 	} while (cant < 3 || !((*Jugadores)[pos]->RenunciarTurno()) || (*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR);
-	if ((*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR)
+	
+	if ((*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR && paisAtaque != NULL)
 	{
 		Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion)
 		(*Jugadores)[pos]->setEstado(eEstadoJugador::ESPERANDO);
 	}
 }
-
 
 void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* PaisAtacante, cListaT<cTropa>* Tropas) {
 	
@@ -183,7 +193,6 @@ cJugador* cJuego::DuenioPais(cPais *Pais) {
 	
 	return NULL;
 }
-
 
 void cJuego::ImprimirEstados() const {
 	
@@ -258,9 +267,13 @@ void cJuego::AsignarPaisesRandom()
 		}
 	}
 
-	ImprimirEstados();
-	for(int k=0;k<Jugadores->getCA();k++) //recorro lista de jugadores
+	for (int k = 0; k < Jugadores->getCA(); k++) //recorro lista de jugadores
+	{
+		system("cls");
+		ImprimirEstados();
 		(*Jugadores)[k]->AgregarTropas(); //asigno las tropas extras para dsp poder empezar el juego
+	}
+		
 	
 	delete CopiaLista;
 }
@@ -274,5 +287,3 @@ cMundo* cJuego::getMundo() const
 {
 	return Mundo;
 }
-
-

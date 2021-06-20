@@ -45,6 +45,7 @@ public:
 	~cPais();
 
 #pragma endregion
+
 	/**
 	* CalcularAT_Tropas
 	* recibe una lista de tropas (lista pequeña de unidad de ataque), 
@@ -73,8 +74,6 @@ public:
 	void AsignarTropas(cTropa* Tropa = NULL); //si no le paso nada es porque lo estoy llamando para comenzar el juego
 	cTropa* VerificarTropa(unsigned int NTropa);
 
-	static cListaT<cPais>* getListaPaises();
-
 	cListaT<cTropa>* CrearMiniListaRandom();
 	void RecibirDanio(unsigned int Daño, cListaT<cTropa>* miTropa);
 
@@ -84,6 +83,7 @@ public:
 	cListaT<cPais>* GetListaLimitrofes();
 	string getClave() { return Nombre; }
 	cListaT<cTropa>* getTropas() { return Tropas; }
+	static cListaT<cPais>* getListaPaises();
 
 #pragma endregion
 

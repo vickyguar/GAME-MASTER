@@ -18,12 +18,18 @@
 
 int main()
 {
-
-
 	srand(time(NULL));
+
+	system("color 0C");
+	cout << Caratula("CARATULA.txt") << endl << endl;
+	cout << "PRESS A KEY TO START " << endl;
+	getchar();
+	
+	system("cls");
+	system("color 07");
+
 	bool ListoXaJugar = Menu();
 	cJuego* GAME_MASTER;
-	//int CantidadJugadores = 0;
 
 	if (ListoXaJugar)
 	{

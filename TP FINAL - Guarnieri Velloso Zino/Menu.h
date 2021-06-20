@@ -1,5 +1,5 @@
 #pragma once
-
+#pragma warning(disable : 4996)
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -21,9 +21,31 @@ enum class eMundo {
 	//NARNIA,
 };
 
+string Caratula(const char* Filename);
 string To_StringMenu();
 eOpcion ElegirOpcion();
 void Instrucciones();
+
+string Caratula(const char* Filename)
+{
+	FILE* fp = NULL; //file pointer
+	fp = fopen(Filename, "r"); //Abrir archivo
+	char buffer[200] = "";
+	int pos = 0;
+	string Cadena = "";
+
+	if (fp == NULL)
+		throw new exception(" --- Error al abrir el archivo ---");
+
+	while (!feof(fp))
+	{
+		fgets(buffer, 199, fp); //leo por linea
+		Cadena += buffer; //me guardo la linea
+	}
+
+	fclose(fp); //cierro el archivo
+	return Cadena;
+}
 
 string To_StringMenu() {
 	string output = "\t----- MENU -----\n";

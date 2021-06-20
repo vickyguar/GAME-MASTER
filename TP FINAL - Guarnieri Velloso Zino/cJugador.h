@@ -62,10 +62,10 @@ public:
 	* AgregarTropas
 	* recibe la cantidad de tropas que le corresponde poner al jugador, dependiendo de la cantidad de paises que tenga
 	* se agregan esas tropas a un pais aleatorio (este pais debe pertenecer a la lista que tiene el jugador de paiese 
-	* en su dominio). TODO: terminar de decidir si es ramdom o no
+	* en su dominio). 
 	* @param int num
 	*/
-	void AgregarTropas();
+	void AgregarTropas(unsigned int cant=0);
 
 	void GanarPais(cPais* Pais);
 

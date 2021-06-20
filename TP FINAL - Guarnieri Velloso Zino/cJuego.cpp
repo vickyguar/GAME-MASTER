@@ -30,7 +30,7 @@ cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
 		cin >> pospais;
 
 	} while ((pospais>cPais::getListaPaises()->getCA()) || (Jugador->VerificarPais((*cPais::getListaPaises())[pospais]))||
-		!Pais->VerificarLimitrofes((*cPais::getListaPaises())[pospais]) || pospais > 0);
+		!Pais->VerificarLimitrofes((*cPais::getListaPaises())[pospais]) || pospais < 0);
 
 	return (*cPais::getListaPaises())[pospais];
 }
@@ -218,34 +218,38 @@ cJugador* cJuego::BuscarXEstado(eEstadoJugador estado) const
 
 void cJuego::AsignarPaisesRandom()
 {
+	float Division = (float)Mundo->GetLista()->getCA() / Jugadores->getCA(); //divido paises por cant jugadores
 
-	float Division = (float)Mundo->GetLista()->getCA() / Jugadores->getCA();
-	unsigned int CANT_MAX = unsigned int(Division) - 2; //repartire 1 tropas por pais y me sobraran tantas tropas como paises haya en el mundo para cada jugador
-	cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(cPais::getListaPaises()));
+	cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(cPais::getListaPaises())); //me copio a los paises
 
-	unsigned int PaisesSobrantes = CalcularResiduo(Mundo->GetLista()->getCA(), Jugadores->getCA()); //cantidad paises, cantidad jugadores
+	unsigned int PaisesSobrantes = CalcularResiduo(Mundo->GetLista()->getCA(), Jugadores->getCA()); //calculo los que sobran con cantidad paises, cantidad jugadores
 
 
 	for (unsigned int k = 0; k < Jugadores->getCA(); k++) {
 
-		for (unsigned int i = 0; i < (unsigned int)Division; i++) { //División es la cantidad de paises que le corresponden a cada uno si se hace una división equitativa
-			unsigned int random = rand() % CopiaLista->getCA();
-			unsigned int randomTropas = 1; //siempre uno
-			
-			if (CANT_MAX > 0)
-			{
-				randomTropas += (rand() % 2) + 1; //y agrego aleatoriamente una o dos
-				CANT_MAX -= randomTropas; //resto la cantidad de paises extra que agregue al pais
-			}
+		// Como se entregara una cantidad de tropas iniciales = 2 veces la cantidad de paises del mundo
+		// y se reparten 2 tropas al primer pais de cada jugador y 1 al resto
+		// Me sobraran tantas tropas como paises haya en el mundo para cada jugador (menos las extras que son entregadas al primer pais)
 
+		unsigned int CANT_MAX = unsigned int(Division) - 2; 
+
+		for (unsigned int i = 0; i < (unsigned int)Division; i++) 
+		{ 
+			unsigned int random = rand() % CopiaLista->getCA();
+			unsigned int randomTropas = 1; 
+			
 			if (i == 0)
 				randomTropas = 2;
 			for (int n = 0; n < randomTropas; n++)
-				(*CopiaLista)[random]->AsignarTropas();//1 vez seguro
+				(*CopiaLista)[random]->AsignarTropas(); //1 vez seguro
 
 			(*Jugadores)[k]->GanarPais(CopiaLista->QuitarXPos(random)); //Aca estamos asignando el pais al jugador
 
 		}
+
+		for (int n = 0; n < CANT_MAX; n++)
+			(*Jugadores)[k]->AgregarTropas(CANT_MAX); 
+		
 
 		if (PaisesSobrantes > 0) {
 			unsigned int random = rand() % CopiaLista->getCA();

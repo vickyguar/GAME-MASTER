@@ -105,10 +105,13 @@ void cJugador::setEstado(eEstadoJugador _Estado)
 	Estado = _Estado;
 }
 
-void cJugador::AgregarTropas()
+void cJugador::AgregarTropas(unsigned int cant)
 {
+
 	unsigned int pos = 0;
 	unsigned int aux = Paises->getCA() / 2; // la cantidad de tropas que voy a agregar
+	if (cant != 0) //es distinto de cero al principio, para agregar tropas extra
+		aux = cant;
 
 	cout << Username << " tenes " << aux << "TROPAS NUEVAS PARA AGREGAR yey!";
 

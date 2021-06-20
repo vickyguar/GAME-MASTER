@@ -110,23 +110,23 @@ void cJugador::AgregarTropas(unsigned int cant)
 
 	unsigned int pos = 0;
 	unsigned int aux = Paises->getCA() / 2; // la cantidad de tropas que voy a agregar
+
 	if (cant != 0) //es distinto de cero al principio, para agregar tropas extra
 		aux = cant;
 
-	cout << Username << " tenes " << aux << "TROPAS NUEVAS PARA AGREGAR yey!";
+	cout << Username << " tenes " << aux << " TROPAS NUEVAS PARA AGREGAR yey!"<<endl;
 
 	for (unsigned int i = 0; i < aux; i++)
 	{
-		//cout << *this << endl; //sobrecarga cout
 		do
 		{
-			cout << "Ingrese el numero del pais en donde quiere agregar la tropa #" << i + 1 << ":";
+			cout << "Ingrese el numero del pais en donde quiere agregar la tropa #" << i + 1 << ": ";
 			cin >> pos;
 
-			if (*this == Paises->BuscarXPos(pos)) //si es true es porque es un pais mio y agrego las tropas (SOBRECARGA DEL == porque nunca ibamos a igualar 2 jugadores)
+			if ((*this)== cPais::getListaPaises()->BuscarXPos(pos)) //si es true es porque es un pais mio y agrego las tropas (SOBRECARGA DEL == porque nunca ibamos a igualar 2 jugadores)
 				Paises->BuscarXPos(pos)->AsignarTropas(new cTropa()); //le agrego una nueva tropa al pais elegido
 
-		} while ((pos < 0 || pos >cPais::getListaPaises()->getCA()) && !(*this == Paises->BuscarXPos(pos)));
+		} while ((pos < 0 || pos >cPais::getListaPaises()->getCA()) && !((*this) == cPais::getListaPaises()->BuscarXPos(pos)));
 	}
 }
 

@@ -224,14 +224,13 @@ void cJuego::AsignarPaisesRandom()
 
 	unsigned int PaisesSobrantes = CalcularResiduo(Mundo->GetLista()->getCA(), Jugadores->getCA()); //calculo los que sobran con cantidad paises, cantidad jugadores
 
+	// Como se entregara una cantidad de tropas iniciales = 2 veces la cantidad de paises del mundo
+	// y se reparten 2 tropas al primer pais de cada jugador y 1 al resto
+	// Me sobraran tantas tropas como paises haya en el mundo para cada jugador (menos las extras que son entregadas al primer pais)
+
+	unsigned int CANT_MAX = unsigned int(Division) - 2;
 
 	for (unsigned int k = 0; k < Jugadores->getCA(); k++) {
-
-		// Como se entregara una cantidad de tropas iniciales = 2 veces la cantidad de paises del mundo
-		// y se reparten 2 tropas al primer pais de cada jugador y 1 al resto
-		// Me sobraran tantas tropas como paises haya en el mundo para cada jugador (menos las extras que son entregadas al primer pais)
-
-		unsigned int CANT_MAX = unsigned int(Division) - 2; 
 
 		for (unsigned int i = 0; i < (unsigned int)Division; i++) 
 		{ 
@@ -247,10 +246,6 @@ void cJuego::AsignarPaisesRandom()
 
 		}
 
-		for (int n = 0; n < CANT_MAX; n++)
-			(*Jugadores)[k]->AgregarTropas(CANT_MAX); 
-		
-
 		if (PaisesSobrantes > 0) {
 			unsigned int random = rand() % CopiaLista->getCA();
 			(*CopiaLista)[random]->AsignarTropas();
@@ -258,6 +253,10 @@ void cJuego::AsignarPaisesRandom()
 			PaisesSobrantes--;
 		}
 	}
+	ImprimirEstados();
+	for(int k=0;k<Jugadores->getCA();k++)
+		(*Jugadores)[k]->AgregarTropas(CANT_MAX);
+	
 	delete CopiaLista;
 }
 

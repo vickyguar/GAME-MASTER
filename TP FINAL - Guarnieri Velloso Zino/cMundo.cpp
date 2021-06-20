@@ -23,7 +23,8 @@ void cMundo::LeerArchivo(const char* Filename)
 
 	//leo primera linea (son los paises que tiene el mapa)
 	fgets(buffer, 199, fp);
-	string Cadena = buffer; //me guardo lo que lei
+	string Cadena = buffer; //me guardo lo que lei y le saco el \n
+	Cadena.resize(Cadena.size()-1, '\n'); //le saco el \n molesto
 
 	string Limitrofes;
 	//sigo recorriendo el archivo de texto para los paises limitrofes
@@ -40,8 +41,6 @@ void cMundo::LeerArchivo(const char* Filename)
 		Cadena.erase(0, (pos + 1)); //borro el nombre que había encontrado
 
 	} while (pos != Cadena.npos);
-
-	//Limitrofes += '\n'; //para que el ultimo tambien lo tenga
 
 	fclose(fp); //cierro el archivo
 	
@@ -65,7 +64,7 @@ void cMundo::PaisesLimitrofes(string& Limitrofes, string nombre) {
 	//primero divido por linea
 	vector<string> ListaLimitrofes; //lista con size 0
 	pos = Limitrofes.find('\n'); //busco los separadores
-	string subCadena = Limitrofes.substr(0, pos-2); //me copio el elemento 
+	string subCadena = Limitrofes.substr(0, pos); //me copio el elemento 
 	Limitrofes = Limitrofes.erase(0, pos + 1); //borro el elemento
 
 	pos = 0;

@@ -123,6 +123,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 {
 	unsigned int cant = 0;
 	unsigned int pospais = 0;
+	bool renunciar = false;
 	(*Jugadores)[pos]->setEstado(eEstadoJugador::ATACANDO);
 	cPais* paisAtaque = NULL;
 	do {
@@ -146,8 +147,9 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		cant++;
 		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
 		delete MiniListaTropas;
+		renunciar=(*Jugadores)[pos]->RenunciarTurno();
 
-	} while (cant < 3 || !((*Jugadores)[pos]->RenunciarTurno()) || (*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR);
+	} while (cant < 3 || !renunciar || (*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR);
 	
 	if ((*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR && paisAtaque != NULL)
 	{
@@ -161,7 +163,7 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 	cListaT<cTropa>* ListaTropaDef = PaisAtacado->CrearMiniListaRandom();
 	cJugador* JugadorAtacado = DuenioPais(PaisAtacado); //Buscamos el due�o del pais atacado
 	JugadorAtacado->setEstado(eEstadoJugador::DEFENDIENDO);
-	unsigned int AT_Efectivo_Base = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef); //calcula el da�o base que se va a realizar
+	unsigned int AT_Efectivo = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef); //calcula el da�o base que se va a realizar
 	
 	if (JugadorAtacado == NULL)
 		throw new exception("El pais no tiene duenio"); //si esto pasa es porque algo hicimos mal
@@ -171,7 +173,8 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 	try
 	{
 		PaisAtacante->RecibirDanio(AT_Defensa_Base, Tropas);
-		PaisAtacado->RecibirDanio(AT_Efectivo_Base, ListaTropaDef); 
+		PaisAtacado->RecibirDanio(AT_Efectivo, ListaTropaDef); 
+		//TODO: NO ESTA ENTRANDO AL CATCH
 	}
 	catch (exception* ex)
 	{

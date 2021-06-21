@@ -7,12 +7,12 @@
 
 #include "cGuerrero.h"
 unsigned int cGuerrero::cantGuerreros = 0;
-cGuerrero::cGuerrero(unsigned int _AT, unsigned int _HP_Actual, unsigned int _HP_Inicial)
+cGuerrero::cGuerrero(unsigned int _AT, unsigned int _HP_Inicial)
 {
 	cantGuerreros++;
 	AT = _AT;
-	HP_Actual = _HP_Actual;
 	HP_Inicial = _HP_Inicial;
+	HP_Actual = HP_Inicial;
 	ID = to_string(cantGuerreros);
 }
 

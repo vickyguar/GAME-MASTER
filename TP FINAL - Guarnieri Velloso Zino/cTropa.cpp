@@ -63,8 +63,7 @@ unsigned int cTropa::AT_Extra(cTropa* otra) {
 
 	for (unsigned int i = 0; i < Guerreros->getCA(); i++)
 	{
-		if(i <otra->Guerreros->getCA())
-			ATExtra += (*Guerreros)[i]->Ataque(otra->Guerreros->BuscarXPos(i));
+		ATExtra += (*Guerreros)[i]->Ataque((*otra->Guerreros)[0]);
 	}
 		
 	
@@ -108,16 +107,16 @@ bool cTropa::operator>(cTropa* otra)
 void cTropa::OrdenarXHP()
 {
 	cGuerrero* aux = NULL;
-	int cont_cambios = 0;
 	for (unsigned int i = 0; i < (Guerreros->getCA()) - 1; i++)
 	{
+		int cont_cambios = 0;
 		for (unsigned int k = 0; k < (Guerreros->getCA()) - 1; k++)
 		{
-			if ((*Guerreros)[k]->getHP() < (*Guerreros)[k+1]->getHP())
+			if ((*Guerreros)[k]->getHP() > (*Guerreros)[k+1]->getHP())
 			{
 				aux = (*Guerreros)[k];
-				Guerreros[k] = Guerreros[k+1];
-				Guerreros[k + 1] = aux;
+				*(*Guerreros)[k] = *(*Guerreros)[k+1]; //quiero que el puntero me apunte al guerrero de menor hp
+				*(*Guerreros)[k + 1] = *(aux);
 				cont_cambios++;
 			}
 		}
@@ -128,33 +127,35 @@ void cTropa::OrdenarXHP()
 
 string cTropa::To_string()
 {
-	string output = "\t\t TROPA N " + IDTropa + ": " + to_string(Guerreros->getCA());
+	if(Guerreros!=NULL)
+	{
+		if (Guerreros->getCA() > 0)
+		{
+			string output = "\t\t TROPA N " + IDTropa + ": " + to_string(Guerreros->getCA());
 
-	if (dynamic_cast<cCaballero*>((*Guerreros)[0]) != NULL)
-		output += " Caballeros\n";
-	else if (dynamic_cast<cMago*>((*Guerreros)[0]) != NULL)
-		output += " Magos\n";
-	else if (dynamic_cast<cArquero*>((*Guerreros)[0]) != NULL)
-		output += " Arqueros\n"; //TODO: NO IMPRIME
+			if (dynamic_cast<cCaballero*>((*Guerreros)[0]) != NULL)
+				output += " Caballeros\n";
+			else if (dynamic_cast<cMago*>((*Guerreros)[0]) != NULL)
+				output += " Magos\n";
+			else if (dynamic_cast<cArquero*>((*Guerreros)[0]) != NULL)
+				output += " Arqueros\n";
+			return output;
+		}
+	}
 
-	/*if (AnalizarTipoTropa<cCaballero>(Guerreros))
-		output += " Caballeros\n";
-	else if (AnalizarTipoTropa<cMago>(Guerreros))
-		output += " Magos\n";
-	else if (AnalizarTipoTropa<cArquero>(Guerreros))
-		output += " Arqueros\n";*/
-
-	return output;
+	
 }
 
-void cTropa::RecibirDanio(unsigned int AT_Ataque) {
+void cTropa::RecibirDanio(int AT_Ataque) {
 
 	OrdenarXHP(); //ordeno de más vida a menod vida
 	unsigned int i = 0;
 	do
 	{
 		int aux = (*Guerreros)[i]->getHP(); //me fijo cuanta vida tengo
+		
 		(*(*Guerreros)[i]) -= AT_Ataque; //le resto el AT con el que me atacaron
+
 		if ((*Guerreros)[i]->VerificarVida()) //me fijo si estoy vivo
 		{
 			Guerreros->Eliminar(i); //si no lo estoy paso a mejor vida

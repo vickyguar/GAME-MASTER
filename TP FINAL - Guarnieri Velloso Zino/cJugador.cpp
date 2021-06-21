@@ -96,8 +96,10 @@ void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde e
 }
 
 bool cJugador::RenunciarTurno(){
-
-	return false;
+	int aux;
+	cout << "Ingrese 0 para seguir atacando, 1 para terminar el turno: ";
+	cin >> aux;
+	return (aux==0)? false:true;
 }
 
 void cJugador::setEstado(eEstadoJugador _Estado)
@@ -143,7 +145,10 @@ string cJugador::To_string() const
 	output += "\t\tPaises que posee: \n";
 	for (unsigned int i = 0; i < this->Paises->getCA(); i++) {
 		output += "\t\t Pais " + to_string(cPais::getListaPaises()->getIndex((*Paises)[i]->getClave())) + ':' + (*Paises)[i]->getClave() + "\n";
-		output += (*Paises)[i]->getTropas()->To_String();
+		if ((*Paises)[i]->getTropas() != NULL)
+		{
+			output += (*Paises)[i]->getTropas()->To_String();
+		}
 	}
 
 	return output;

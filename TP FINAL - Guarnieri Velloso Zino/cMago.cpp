@@ -8,7 +8,7 @@
 #include "cMago.h"
 #include "cCaballero.h"
 
-cMago::cMago():cGuerrero((rand() % 11) + 10, (rand() % 21) + 40, (rand() % 21) + 40){
+cMago::cMago():cGuerrero((rand() % 11) + 10, (rand() % 21) + 40){
 	//10 - 20 y entre 40 y 60 de vida
 }
 
@@ -24,6 +24,6 @@ unsigned int cMago::Ataque(cGuerrero* Atacado){
 	if (dynamic_cast<cCaballero*>(Atacado) != NULL)
 		return (AT * 0.25); //su ataque aumenta en 0,25
 	else
-		return AT;
+		return 0;
 }
 

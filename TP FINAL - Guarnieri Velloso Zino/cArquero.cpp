@@ -8,7 +8,7 @@
 #include "cArquero.h"
 #include "cMago.h"
 
-cArquero::cArquero():cGuerrero((rand() % 11) + 20,(rand() % 21) + 60L, (rand() % 21) + 60){
+cArquero::cArquero():cGuerrero((rand() % 11) + 20, (rand() % 21) + 60){
 
 }
 

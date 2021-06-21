@@ -17,7 +17,7 @@ class cGuerrero
 {
 protected:
 	unsigned int AT;
-	unsigned int HP_Actual;
+	int HP_Actual;
 	unsigned int HP_Inicial;
 	string ID;
 	static unsigned int cantGuerreros;
@@ -27,7 +27,7 @@ public:
 	* cGuerrero
 	* constructor de la clase cGuerrero
 	*/
-	cGuerrero(unsigned int _AT, unsigned int _HP_Actual, unsigned int _HP_Inicial);
+	cGuerrero(unsigned int _AT, unsigned int _HP_Inicial);
 	/**
 	* ~cGuerrero
 	* destructor de la clase cGuerrero
@@ -56,7 +56,7 @@ public:
 	*/
 	/*virtual unsigned int CalcularDanio() const = 0;*/
 	unsigned int getHP() { return HP_Actual; }
-	inline void setHP(unsigned int Daño) { HP_Actual -= Daño; }
+	inline void setHP(unsigned int Daño) { HP_Actual= HP_Actual-Daño; }
 	void operator-=(unsigned int daño) { setHP(daño); }
 	bool VerificarVida() { return (HP_Actual <= HP_Inicial * 0.1); }
 	string getClave() const { return ID; }

@@ -51,7 +51,7 @@ public:
 	* el segundo recibe 1000-100, etc...
 	* @param int AT_ataque
 	*/
-	void RecibirDanio(unsigned int AT_Ataque);
+	void RecibirDanio(int AT_Ataque);
 	cListaT<cGuerrero>* getGuerreros() { return Guerreros; }
 	bool operator>(cTropa* otra);
 	string getClave() { return IDTropa; }

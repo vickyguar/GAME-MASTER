@@ -332,7 +332,10 @@ string cListaT<T>::To_String() const
 	string output;
 	for (unsigned int i = 0; i < CA; i++)
 	{
-		output += '\t' + Lista[i]->To_string() + '\n'; // imprimir
+		if(Lista[i]!=NULL)
+		{
+			output += '\t' + Lista[i]->To_string() + '\n'; // imprimir
+		}
 	}
 	return output;
 }

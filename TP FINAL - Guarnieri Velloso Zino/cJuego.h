@@ -54,7 +54,8 @@ public:
 #pragma region SETUPS
 
 	void SetUpMundo(unsigned int mundo); //FUNCIONA
-	void SetUpJugadores(string username); //FUNCIONA
+	//void SetUpJugadores(string username); //FUNCIONA
+	void SetUpJugadores();
 
 #pragma endregion
 

@@ -219,10 +219,18 @@ void cJuego::SetUpMundo(unsigned int mundo){
 	}
 }
 
-void cJuego::SetUpJugadores(string nombre)
+//void cJuego::SetUpJugadores(string nombre)
+//{
+//
+//	Jugadores->Agregar(new cJugador(nombre));
+//}
+
+void cJuego::SetUpJugadores()
 {
-	Jugadores->Agregar(new cJugador(nombre));
+
+	Jugadores->Agregar(new cJugador());
 }
+
 
 void cJuego::Reagrupar(unsigned int pos, cPais* PaisAtacante)
 {

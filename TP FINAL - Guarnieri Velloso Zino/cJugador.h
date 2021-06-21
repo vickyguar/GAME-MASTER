@@ -15,7 +15,7 @@ class cJugador
 {
 private:
 	eEstadoJugador Estado; //si esta atacando, defendiendo, esperando, etc...
-	const string Username; //nombre de usuario
+	string Username; //nombre de usuario
 	cListaT<cPais>* Paises; //lista de paises en su dominio
 
 public:
@@ -24,7 +24,8 @@ public:
 	* cJugador
 	* constructor de la clase cJugador
 	*/
-	cJugador(string _Username, eEstadoJugador _Estado = eEstadoJugador::ESPERANDO);
+	//cJugador(string _Username, eEstadoJugador _Estado = eEstadoJugador::ESPERANDO);
+	cJugador(eEstadoJugador _Estado = eEstadoJugador::ESPERANDO);
 	/**
 	* cJugador
 	* constructor de la clase cJugador
@@ -113,8 +114,16 @@ public:
 	bool operator!=(cPais* Pais) {
 		return !(*this == Pais);
 	}
+
+	friend istream& operator>>(istream& in, cJugador &Jugador) {
+		cout << "\tIngrese su nombre de usuario: ";
+		in >> Jugador.Username;
+		return in;
+	}
+
 #pragma endregion
 
 };
+
 
 #endif // !defined(EA_B34E5789_D7AB_47b3_BFBB_ABFA2C7A92ED__INCLUDED_)

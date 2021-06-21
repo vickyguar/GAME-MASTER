@@ -12,11 +12,19 @@ unsigned int cJuego::Rondas = 0;
 
 bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais) {
 
-	if (pospais <0
-		|| pospais>cPais::getListaPaises()->getCA()
-		|| !Jugador->VerificarMiPais((*cPais::getListaPaises())[pospais])
-		|| (*cPais::getListaPaises())[pospais]->getTropas()->getCA() <= 1) {
-		cout << "\n\tEl pais de donde quiere atacar es invalido: No le pertenece o no es limitrofe :(\n\t...Debera ingresar otro pais" << endl;
+	if (pospais < 0 || pospais > cPais::getListaPaises()->getCA())
+	{
+		cout << "El pais de donde quiere atacar es invalido." << endl;
+		return true;
+	}
+	else if (!Jugador->VerificarMiPais((*cPais::getListaPaises())[pospais]))
+	{
+		cout << "El pais seleccionado no te pertenece." << endl;
+		return true;
+	}
+	else if ((*cPais::getListaPaises())[pospais]->getTropas()->getCA() <= 1) 
+	{
+		cout << "El pais no tiene limitrofes a los cuales puedas atacar." << endl;
 		return true;
 	}
 	return false;
@@ -104,7 +112,7 @@ void cJuego::AsignarTurno(){
 		}
 		if (TurnoPrevio < Jugadores->getCA())
 		{
-			TurnoPrevio++;
+			TurnoPrevio++; //TODO: aca no imprime y debe imprimir
 			(*Jugadores)[TurnoPrevio]->setEstado();
 			JugadorAtacando(TurnoPrevio);
 		}
@@ -148,8 +156,9 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
 		delete MiniListaTropas;
 		renunciar=(*Jugadores)[pos]->RenunciarTurno();
-
-	} while (cant < 3 || !renunciar || (*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR);
+		if ((*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR)
+			cant = 4;
+	} while (cant < 3 || !renunciar);
 	
 	if ((*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR && paisAtaque != NULL)
 	{
@@ -219,18 +228,10 @@ void cJuego::SetUpMundo(unsigned int mundo){
 	}
 }
 
-//void cJuego::SetUpJugadores(string nombre)
-//{
-//
-//	Jugadores->Agregar(new cJugador(nombre));
-//}
-
 void cJuego::SetUpJugadores()
 {
-
 	Jugadores->Agregar(new cJugador());
 }
-
 
 void cJuego::Reagrupar(unsigned int pos, cPais* PaisAtacante)
 {
@@ -284,8 +285,7 @@ void cJuego::AsignarPaisesRandom()
 		ImprimirEstados();
 		(*Jugadores)[k]->AgregarTropas(); //asigno las tropas extras para dsp poder empezar el juego
 	}
-		
-	
+
 	delete CopiaLista;
 }
 

@@ -10,13 +10,6 @@
 #include "cCaballero.h"
 #include "cArquero.h"
 
-//cJugador::cJugador(string _Username, eEstadoJugador _Estado)
-//{
-//	Username = _Username;
-//	Estado = _Estado;
-//	Paises = new cListaT<cPais>(); 
-//}
-
 cJugador::cJugador(eEstadoJugador _Estado)
 {
 	cin >> *this; //Uso sobrecarga del cin
@@ -60,13 +53,13 @@ void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde e
 	if (Destino != NULL) 
 		pos = cPais::getListaPaises()->getIndex(Destino->getClave());
 
-	cout << "Queres pasar topas desde " << PaisOrigen->getClave();
+	cout << "Queres pasar tropas desde " << PaisOrigen->getClave();
 	if(Destino==NULL)
 		cout<< " a algun pais limitrofe?" << endl;
 	else
 		cout << " a " << Destino->getClave()<<endl;
 
-	cout << "1: SI" << endl << "0: NO" << endl;
+	cout << "1: SI" << endl << "0: NO" << endl; //TODO: la opcion de no se la tiramos no cuando gana un pais sino cuando termina su turno
 	cin >> opcion;
 
 	if (opcion)
@@ -120,7 +113,7 @@ void cJugador::AgregarTropas()
 {
 	unsigned int pos = 0;
 	unsigned int aux = Paises->getCA() / 2; // la cantidad de tropas que voy a agregar (las extras)
-
+	bool Dominio = true;
 	cout << Username << " tenes " << aux << " TROPA/S NUEVAS PARA AGREGAR yey!" << endl;
 
 	for (unsigned int i = 0; i < aux; i++)
@@ -129,7 +122,9 @@ void cJugador::AgregarTropas()
 		{
 			cout << "Ingrese el numero del pais en donde quiere agregar la tropa #" << i + 1 << ": ";
 			cin >> pos;
-		} while ((pos < 0 || pos >cPais::getListaPaises()->getCA()) || !((*this) == (*cPais::getListaPaises())[pos])); //TODO: funcion verificar
+			if (pos < cPais::getListaPaises()->getCA())
+				Dominio = VerificarMiPais((*cPais::getListaPaises())[pos]);
+		} while ((pos < 0 || pos >cPais::getListaPaises()->getCA()) || !Dominio); //TODO: funcion verificar
 		
 	 //si es true es porque es un pais mio y agrego las tropas (SOBRECARGA DEL == porque nunca ibamos a igualar 2 jugadores)
 		(*cPais::getListaPaises())[pos]->AsignarTropas(); //le agrego una nueva tropa al pais elegido

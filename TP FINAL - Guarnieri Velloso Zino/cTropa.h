@@ -50,8 +50,9 @@ public:
 	* por ejemplo, si el AT de ataque es 1000, el primero recibe 100 (muere), 
 	* el segundo recibe 1000-100, etc...
 	* @param int AT_ataque
+	* @return bool (si se muere toda la tropa es true)
 	*/
-	void RecibirDanio(int AT_Ataque);
+	bool RecibirDanio(int AT_Ataque);
 	cListaT<cGuerrero>* getGuerreros() { return Guerreros; }
 	bool operator>(cTropa* otra);
 	string getClave() { return IDTropa; }

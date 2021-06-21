@@ -146,7 +146,7 @@ string cTropa::To_string()
 	
 }
 
-void cTropa::RecibirDanio(int AT_Ataque) {
+bool cTropa::RecibirDanio(int AT_Ataque) {
 
 	OrdenarXHP(); //ordeno de más vida a menod vida
 	unsigned int i = 0;
@@ -166,5 +166,9 @@ void cTropa::RecibirDanio(int AT_Ataque) {
 
 	} while (AT_Ataque > 0 && i < Guerreros->getCA()); //esto se repite hasta que el AT que me mandaron sea 0 o se elimine toda la tropa
 	if (Guerreros->getCA() == 0) //me quede sin guerreros en la tropa
-		delete Guerreros;
+	{
+		delete Guerreros; //bai bai
+		return true; //no tengo tropa
+	}
+	return false; //todavía tendo tropa ;)
 }

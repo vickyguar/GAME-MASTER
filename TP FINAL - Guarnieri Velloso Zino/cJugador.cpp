@@ -10,11 +10,20 @@
 #include "cCaballero.h"
 #include "cArquero.h"
 
-cJugador::cJugador(string _Username, eEstadoJugador _Estado):Username(_Username)
+//cJugador::cJugador(string _Username, eEstadoJugador _Estado)
+//{
+//	Username = _Username;
+//	Estado = _Estado;
+//	Paises = new cListaT<cPais>(); 
+//}
+
+cJugador::cJugador(eEstadoJugador _Estado)
 {
+	cin >> *this; //Uso sobrecarga del cin
 	Estado = _Estado;
-	Paises = new cListaT<cPais>(); 
+	Paises = new cListaT<cPais>();
 }
+
 
 cJugador::~cJugador(){
 	if (Paises!= NULL)

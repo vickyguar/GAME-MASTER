@@ -122,6 +122,7 @@ string MAPA(const char* filename) {
 
 void cMundo::Imprimir() const
 {
+	system("color 0C");
 	if (Nombre == "America Latina")
 		cout << MAPA("ARCHIVO1.txt");
 
@@ -130,6 +131,7 @@ void cMundo::Imprimir() const
 
 	Sleep(5000); 
 	system("cls");
+	system("color 07");
 
 }
 

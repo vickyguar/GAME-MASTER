@@ -52,7 +52,8 @@ int main()
 			string username;
 			cout << "Jugador " << (i + 1) << " ingrese su nombre de usuario: "; //pregunto nombre de usuario
 			cin >> username;
-			GAME_MASTER->SetUpJugadores(username); //construyo el jugador
+			//GAME_MASTER->SetUpJugadores(username); //construyo el jugador
+			GAME_MASTER->SetUpJugadores();
 		}
 		GAME_MASTER->AsignarPaisesRandom(); //asigno paises para cada jugador con sus respectivas tropas random
 	}

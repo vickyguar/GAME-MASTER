@@ -50,8 +50,9 @@ int main()
 		for (int i = 0; i < CANT; i++)
 		{
 			string username;
-			cout << "Jugador " << (i + 1) << " ingrese su nombre de usuario: "; //pregunto nombre de usuario
-			cin >> username;
+			cout << "Jugador " << (i + 1);
+			//<< " ingrese su nombre de usuario: "; //pregunto nombre de usuario
+			//cin >> username;
 			//GAME_MASTER->SetUpJugadores(username); //construyo el jugador
 			GAME_MASTER->SetUpJugadores();
 		}

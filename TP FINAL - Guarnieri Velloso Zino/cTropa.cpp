@@ -74,8 +74,6 @@ bool cTropa::operator>(cTropa* otra)
 	//ARQUERO VS MAGO -> fuerte arquero
 	//CABALLERO VS ARQUERO -> fuerte caballero
 
-	//TODO: PARA MI ACA ES COMPARAR CON LAS LISTAS
-
 	if(AnalizarTipoGuerrero<cMago>((*Guerreros)[0]) && AnalizarTipoGuerrero<cCaballero>(otra->Guerreros->BuscarXPos(0)))
 		return true;
 	if (AnalizarTipoGuerrero<cArquero>((*Guerreros)[0]) && AnalizarTipoGuerrero<cMago>(otra->Guerreros->BuscarXPos(0)))

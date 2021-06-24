@@ -87,7 +87,7 @@ bool Menu() {
 	case eOpcion::IMPRIMIR_REGLAS:
 		Instrucciones();
 		cout << " Presione cualquier tecla para volver al menu\n";
-		getchar();//TODO: jaja no me gusta el getchar
+		getchar();
 		system("cls");
 		Menu();
 		break;

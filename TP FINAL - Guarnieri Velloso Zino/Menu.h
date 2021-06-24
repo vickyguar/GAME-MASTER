@@ -21,12 +21,12 @@ enum class eMundo {
 	//NARNIA,
 };
 
-void Caratula(const char* Filename);
+string Caratula(const char* Filename);
 string To_StringMenu();
 eOpcion ElegirOpcion();
 void Instrucciones();
 
-void Caratula(const char* Filename)
+string Caratula(const char* Filename)
 {
 	FILE* fp = NULL; //file pointer
 	fp = fopen(Filename, "r"); //Abrir archivo
@@ -39,11 +39,12 @@ void Caratula(const char* Filename)
 
 	while (!feof(fp))
 	{
-		fputs(buffer, fp); //leo por linea
+		fgets(buffer,199, fp); //leo por linea
+		Cadena += buffer;
 	}
 
 	fclose(fp); //cierro el archivo
-	return;
+	return Cadena;
 }
 
 string To_StringMenu() {

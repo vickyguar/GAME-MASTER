@@ -23,7 +23,7 @@ int main()
 	srand(time(NULL));
 
 	system("color 0C");
-	Caratula("CARATULA.txt");
+	cout << Caratula("CARATULA.txt");
 	cout << endl << endl;
 	cout << "\t\t\tPRESS A KEY TO START " << endl;
 	getchar();

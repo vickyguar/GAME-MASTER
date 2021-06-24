@@ -161,7 +161,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 
 		if (cant < TURNOSMAX) 
 		{
-			if((*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR|| (*Jugadores)[pos]->VerifcarPaisDispo(paisAtaque)||(*Jugadores)[pos]->RenunciarTurno())
+			if((*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR|| !(*Jugadores)[pos]->VerifcarPaisDispo(paisAtaque)||(*Jugadores)[pos]->RenunciarTurno())
 			{
 				cant = TURNOSMAX + 1;
 			}
@@ -273,8 +273,8 @@ void cJuego::AsignarPaisesRandom()
 {
 	float Division = (float)Mundo->GetLista()->getCA() / Jugadores->getCA(); //divido paises por cant jugadores
 
-	cListaT<cPais>* CopiaLista = cPais::getListaPaises(); //SOBRECARGA =
-	//cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(cPais::getListaPaises())); //me copio a los paises para dsp repartirlos
+	//cListaT<cPais>* CopiaLista = cPais::getListaPaises(); //SOBRECARGA =
+	cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(cPais::getListaPaises())); //me copio a los paises para dsp repartirlos
 
 	unsigned int PaisesSobrantes = CalcularResiduo(Mundo->GetLista()->getCA(), Jugadores->getCA()); //calculo los que sobran con cantidad paises, cantidad jugadores
 

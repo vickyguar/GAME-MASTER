@@ -175,18 +175,22 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 	
 	cListaT<cTropa>* ListaTropaDef = PaisAtacado->CrearMiniListaRandom();
 	cJugador* JugadorAtacado = DuenioPais(PaisAtacado); //Buscamos el due�o del pais atacado
+	unsigned int AT_ZONA_ATACANTE = 0;
+	unsigned int AT_ZONA_DEFENSOR = 0;
+
 	JugadorAtacado->setEstado(eEstadoJugador::DEFENDIENDO);
-	unsigned int AT_Efectivo = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef); //calcula el da�o base que se va a realizar
+
+	unsigned int AT_Efectivo = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef, AT_ZONA_ATACANTE); //calcula el danio base que se va a realizar
 	
 	if (JugadorAtacado == NULL)
 		throw new exception("El pais no tiene duenio"); //si esto pasa es porque algo hicimos mal
 	
-	unsigned int AT_Defensa_Base = JugadorAtacado->AtaqueEfectivo(ListaTropaDef, Tropas);
+	unsigned int AT_Defensa_Base = JugadorAtacado->AtaqueEfectivo(ListaTropaDef, Tropas, AT_ZONA_DEFENSOR);
 
 	try
 	{
-		PaisAtacante->RecibirDanio(AT_Defensa_Base, Tropas);
-		PaisAtacado->RecibirDanio(AT_Efectivo, ListaTropaDef); 
+		PaisAtacante->RecibirDanio(AT_Defensa_Base, AT_ZONA_DEFENSOR, Tropas);
+		PaisAtacado->RecibirDanio(AT_Efectivo, AT_ZONA_ATACANTE, ListaTropaDef);
 	}
 	catch (exception* ex)
 	{

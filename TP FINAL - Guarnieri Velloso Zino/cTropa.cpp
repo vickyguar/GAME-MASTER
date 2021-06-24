@@ -62,10 +62,7 @@ unsigned int cTropa::AT_Extra(cTropa* otra) {
 	unsigned int ATExtra = 0;
 
 	for (unsigned int i = 0; i < Guerreros->getCA(); i++)
-	{
-		ATExtra += (*Guerreros)[i]->Ataque((*otra->Guerreros)[0]);
-	}
-		
+		ATExtra += (*Guerreros)[i]->Ataque((*otra->Guerreros)[0]); //uso la otra tropa para saber contra quien estoy combatiendo
 	
 	return ATExtra;
 }

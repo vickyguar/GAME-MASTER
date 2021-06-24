@@ -95,15 +95,23 @@ cListaT<cTropa>* cPais::CrearMiniListaRandom()
 	return aux;
 }
 
-void cPais::RecibirDanio(unsigned int Daño, cListaT<cTropa>* miTropa)
+void cPais::RecibirDanio(unsigned int DañoTotal, unsigned int DañoZona, cListaT<cTropa>* miTropa)
 {
 	for (int i = 0; i < miTropa->getCA(); i++) //recorro las tropas que mandan a combatir
 	{
-		if ((*miTropa)[i]->RecibirDanio(Daño)) //recibo el daño y si se muere toda la tropa
+		if (DañoZona > 0)
+		{
+			if ((*miTropa)[i]->RecibirDanioXZona(DañoZona)) //recibo el daño por zona que genera el mago
+			{
+				cTropa* aux = miTropa->QuitarXPos(i); //saco la tropa que murio de la minilista (la que llega por param)
+				Tropas->Quitar(aux->getClave()); //saco la tropa del pais porque murió en el campo
+			}
+		}
+
+		if ((*miTropa)[i]->RecibirDanio(DañoTotal)) //recibo el daño y si se muere toda la tropa
 		{
 			cTropa* aux = miTropa->QuitarXPos(i); //saco la tropa que murio de la minilista (la que llega por param)
 			Tropas->Quitar(aux->getClave()); //saco la tropa del pais porque murió en el campo
-			//delete aux;
 		}
 	}
 	if (miTropa->getCA() == 0 && Tropas->getCA() == 0) //si ya no tengo tropas (las que defendieron se murieron y en el pais no quedan mas)

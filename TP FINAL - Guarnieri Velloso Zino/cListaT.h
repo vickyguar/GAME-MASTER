@@ -293,7 +293,10 @@ inline void cListaT<T>::operator-(unsigned int pos)
 	}
 	catch (exception* ex)
 	{
-		delete ex; //TODO: EXCEPCION 
+		string error = ex->what();
+		delete ex;
+		ex = new exception((error + " :: No se pudo eliminar con el operator al recibir una pos").c_str());
+		throw ex;
 	}
 }
 template<class T>
@@ -306,7 +309,10 @@ inline void cListaT<T>::operator-(T*obj)
 	}
 	catch (exception* ex)
 	{
-		delete ex; //TODO: EXCEPCION 
+		string error = ex->what();
+		delete ex;
+		ex = new exception((error + " :: No se pudo eliminar con el operator al recibir un obj").c_str());
+		throw ex;
 	}
 }
 

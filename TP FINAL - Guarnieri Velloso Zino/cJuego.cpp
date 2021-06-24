@@ -106,7 +106,7 @@ void cJuego::AsignarTurno(){
 		if (Rondas == 0)
 		{
 			unsigned int pos = rand() % Jugadores->getCA();
-			(*Jugadores)[pos]->setEstado();//TODO: try catch para operator
+			(*Jugadores)[pos]->setEstado();
 			TurnoPrevio = pos;
 			JugadorAtacando(pos);
 		}
@@ -153,13 +153,13 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false, 3); //le pusimos false :)
 		TropasdeBatalla(paisAtaque, MiniListaTropas);
 
-		Batallar((*Jugadores)[pos], paisAtacado, paisAtaque, MiniListaTropas); //Todo lo que le pasamos a batallar est� chequeado
+		Batallar((*Jugadores)[pos], paisAtacado, paisAtaque, MiniListaTropas); //Todo lo que le pasamos a batallar esta chequeado
 		
 		system("cls");
 		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
 		delete MiniListaTropas;
 
-		if(cant<TURNOSMAX&&((*Jugadores)[pos]->RenunciarTurno()||(*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR)) //TODO: FUNCIONA?
+		if (cant < TURNOSMAX && ((*Jugadores)[pos]->RenunciarTurno() || (*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR)) //TODO: FUNCIONA?
 			cant = TURNOSMAX+1;
 
 	} while (cant < TURNOSMAX);

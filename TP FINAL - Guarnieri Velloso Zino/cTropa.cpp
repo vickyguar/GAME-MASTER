@@ -86,21 +86,6 @@ bool cTropa::operator>(cTropa* otra)
 	if (AnalizarTipoGuerrero<cCaballero>((*Guerreros)[0]) && AnalizarTipoGuerrero<cArquero>(otra->Guerreros->BuscarXPos(0)))
 		return true;
 
-	/*if (AnalizarTipoTropa<cListaT<cMago>>(this->Guerreros) && AnalizarTipoTropa<cListaT<cCaballero>>(otra->Guerreros))
-		return true;
-	if (AnalizarTipoTropa<cListaT<cArquero>>(this->Guerreros) && AnalizarTipoTropa<cListaT<cMago>>(otra->Guerreros))
-		return true;
-	if (AnalizarTipoTropa<cListaT<cCaballero>>(this->Guerreros) && AnalizarTipoTropa<cListaT<cArquero>>(otra->Guerreros))
-		return true;*/
-
-
-	/*if (AnalizarTipoTropa<cMago>(this->Guerreros) && AnalizarTipoTropa<cCaballero>(otra->Guerreros))
-		return true;
-	if (AnalizarTipoTropa<cArquero>(this->Guerreros) && AnalizarTipoTropa<cMago>(otra->Guerreros))
-		return true;
-	if (AnalizarTipoTropa<cCaballero>(this->Guerreros) && AnalizarTipoTropa<cArquero>(otra->Guerreros))
-		return true;*/
-
 	return false;
 }
 

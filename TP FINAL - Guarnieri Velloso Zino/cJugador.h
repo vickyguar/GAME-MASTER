@@ -115,11 +115,14 @@ public:
 		return !(*this == Pais);
 	}
 
+
 	friend istream& operator>>(istream& in, cJugador &Jugador) {
 		cout << "\tIngrese su nombre de usuario: ";
 		in >> Jugador.Username;
 		return in;
 	}
+
+
 
 #pragma endregion
 

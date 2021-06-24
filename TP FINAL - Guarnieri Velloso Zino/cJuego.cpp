@@ -159,15 +159,22 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
 		delete MiniListaTropas;
 
-		if(cant<TURNOSMAX&&((*Jugadores)[pos]->RenunciarTurno()||(*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR)) //TODO: FUNCIONA?
-			cant = TURNOSMAX+1;
+		if (cant < TURNOSMAX) //TODO:FUNCIONA?
+		{
+			if((*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR|| paisAtaque->getTropas()->getCA() == 1||(*Jugadores)[pos]->RenunciarTurno())
+			{
+				cant = TURNOSMAX + 1;
+			}
+		}
 
 	} while (cant < TURNOSMAX);
 	
 	if ((*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR && paisAtaque != NULL)
 	{
-		Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion)
-		(*Jugadores)[pos]->setEstado(eEstadoJugador::ESPERANDO);
+		if(paisAtaque->getTropas()->getCA() != 1)
+			Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion)
+		eEstadoJugador aux = eEstadoJugador::ESPERANDO;
+		(*Jugadores)[pos]->setEstado(aux);
 	}
 }
 

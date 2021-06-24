@@ -92,7 +92,7 @@ string cMundo::BuscarNombrePais(string str, char separator, int* pos)
 
 cListaT<cPais>* cMundo::GetLista()
 {
-	return ListaPaises;
+	return ListaPaises; //TIRO EXCEPCION
 }
 
 void cMundo::setNombre(string nombre)

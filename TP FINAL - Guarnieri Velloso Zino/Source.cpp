@@ -54,7 +54,7 @@ int main()
 		{
 			string username;
 			cout << "Jugador " << (i + 1);
-			GAME_MASTER++; //SOBRECARGA DEL ++ 
+			++(*GAME_MASTER); //SOBRECARGA DEL ++: estamos agregando un jugador
 			//GAME_MASTER->SetUpJugadores();
 		}
 		GAME_MASTER->AsignarPaisesRandom(); //asigno paises para cada jugador con sus respectivas tropas random

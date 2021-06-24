@@ -48,7 +48,7 @@ string Caratula(const char* Filename)
 }
 
 string To_StringMenu() {
-	string output = "\t----- MENU -----\n";
+	string output = "\n\t----- MENU -----\n";
 	output += "\t1. JUGAR\n";
 	output += "\t2. IMPRIMIR REGLAS\n";
 	output += "\t3. IMPRIMIR PERFILES\n";

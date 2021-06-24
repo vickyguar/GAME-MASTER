@@ -64,6 +64,7 @@ cListaT<T>::cListaT(bool _Delete, unsigned int _TAM)
 		Lista[i] = NULL;
 	}
 }
+
 template<class T>
 T* cListaT<T>::operator[](unsigned int pos)
 {
@@ -73,7 +74,7 @@ T* cListaT<T>::operator[](unsigned int pos)
 }
 
 template<class T>
-inline void cListaT<T>::operator+(T* newItem)
+void cListaT<T>::operator+(T* newItem)
 {
 	try { Agregar(newItem); }
 	catch (exception* ex) {
@@ -84,14 +85,16 @@ inline void cListaT<T>::operator+(T* newItem)
 	}
 	return;
 }
+
 template<class T>
-inline cListaT<T>::cListaT(cListaT<T>& ListaCopia)
+cListaT<T>::cListaT(cListaT<T>& ListaCopia)
 {
 	TAM = ListaCopia.TAM;
 	Delete = false;
 	CA = 0;
 
 	Lista = new T * [ListaCopia.TAM];
+
 	//Creo la lista dinamica
 	for (unsigned int i = 0; i < TAM; i++)
 	{
@@ -100,9 +103,9 @@ inline cListaT<T>::cListaT(cListaT<T>& ListaCopia)
 	for (unsigned int i = 0; i < ListaCopia.CA; i++)
 	{
 		Agregar(ListaCopia[i]);
-		//(*Lista)+*(ListaCopia[i]);
 	}
 }
+
 template <class T>
 cListaT<T>::~cListaT()
 {
@@ -161,7 +164,7 @@ T* cListaT<T>::Quitar(const string Key)
 }
 
 template<class T>
-inline T* cListaT<T>::QuitarXPos(unsigned int pos)
+T* cListaT<T>::QuitarXPos(unsigned int pos)
 {
 	T* aux = NULL;
 	try { aux = BuscarXPos(pos); } //busco el elemento
@@ -263,7 +266,7 @@ unsigned int cListaT<T>::getIndex(const string Key) const
 template<class T>
 unsigned int cListaT<T>::getCA() const
 {
-	return CA;
+	return CA; //EXCEPCION
 }
 
 template<class T>
@@ -282,10 +285,8 @@ void cListaT<T>::Listar() const
 	}
 }
 
-
-
 template<class T>
-inline void cListaT<T>::operator-(unsigned int pos)
+void cListaT<T>::operator-(unsigned int pos)
 {
 	try
 	{
@@ -296,8 +297,9 @@ inline void cListaT<T>::operator-(unsigned int pos)
 		delete ex; //TODO: EXCEPCION 
 	}
 }
+
 template<class T>
-inline void cListaT<T>::operator-(T*obj)
+void cListaT<T>::operator-(T*obj)
 {
 	try
 	{
@@ -311,12 +313,12 @@ inline void cListaT<T>::operator-(T*obj)
 }
 
 template<class T>
-inline void cListaT<T>::operator=(cListaT<T>* ListaB)
+void cListaT<T>::operator=(cListaT<T>* ListaB)
 {
-	for (int i = 0; i < ListaB->CA; i++)
-	{
-		Lista[i] = ListaB[i]; //SUPONEMOS QUE EL COMPILADOR CREA POR DEFECTO EL DE CLASE T
+	if (this != &ListaB) {
+		this->cListaT(&ListaB);
 	}
+	return this;
 }
 
 template <class T>

@@ -1,4 +1,5 @@
 //Source
+#pragma comment(lib, "winmm.lib")
 #include <iostream>
 #include "cJuego.h"
 #include "cJugador.h"
@@ -18,6 +19,7 @@
 
 int main()
 {
+	PlaySound(TEXT("Cancion.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	srand(time(NULL));
 
 	system("color 0C");

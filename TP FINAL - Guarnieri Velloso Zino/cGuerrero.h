@@ -56,11 +56,11 @@ public:
 	bool VerificarVida() { return (HP_Actual <= HP_Inicial * 0.1); }
 	string getClave() const { return ID; }
 };
-
-ostream& operator<<(ostream& out, cGuerrero* obj)
-{
-	out << "HP: " << obj->getHP() << endl << "AT: " << obj->getAT();
-	return out;
-}
+//
+//ostream& operator<<(ostream& out, cGuerrero* obj)
+//{
+//	out << "HP: " << obj->getHP() << endl << "AT: " << obj->getAT();
+//	return out;
+//}
 
 #endif // !defined(EA_86F03F75_F4B2_4011_AD66_663180BE8617__INCLUDED_)

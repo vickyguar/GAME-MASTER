@@ -37,9 +37,9 @@ public:
 	unsigned int Ataque(cGuerrero* Atacado);
 
 };
-ostream& operator<<(ostream& out, cArquero* obj)
-{
-	out << "ARQUERO ";
-	return out;
-}
+//ostream& operator<<(ostream& out, cArquero* obj)
+//{
+//	out << "ARQUERO ";
+//	return out;
+//}
 #endif // !defined(EA_1D30E1A9_0ECE_4a1f_8499_7609DA9E69C2__INCLUDED_)

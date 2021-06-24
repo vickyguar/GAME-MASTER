@@ -206,6 +206,8 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 	catch (exception* ex)
 	{
 		cout << ex->what() << endl; //SI ENTRA ES PORQUE PERDIO EL ATACADO DOMINIO DEL PAIS
+		delete ex;
+
 		JugadorAtacado->PerderPais(PaisAtacado);
 		JugadorAtacante->GanarPais(PaisAtacado);
 		JugadorAtacante->Reagrupar(PaisAtacante, PaisAtacado);
@@ -274,8 +276,10 @@ void cJuego::AsignarPaisesRandom()
 {
 	float Division = (float)Mundo->GetLista()->getCA() / Jugadores->getCA(); //divido paises por cant jugadores
 
-	//cListaT<cPais>* CopiaLista = cPais::getListaPaises(); //SOBRECARGA =
-	cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(cPais::getListaPaises())); //me copio a los paises para dsp repartirlos
+	cListaT<cPais>* CopiaLista = NULL;
+	*CopiaLista = *cPais::getListaPaises(); //SOBRECARGA =
+
+	//cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(cPais::getListaPaises())); //me copio a los paises para dsp repartirlos
 
 	unsigned int PaisesSobrantes = CalcularResiduo(Mundo->GetLista()->getCA(), Jugadores->getCA()); //calculo los que sobran con cantidad paises, cantidad jugadores
 

@@ -28,4 +28,3 @@ unsigned int cCaballero::Contrataque(){
 	
 	return (AT * 1.25);
 }
-

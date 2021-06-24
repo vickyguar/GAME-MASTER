@@ -70,7 +70,10 @@ public:
 
 #pragma endregion
 
-	
+	void operator++() {
+		this->SetUpJugadores();
+	}
+
 	void AsignarPaisesRandom(); //FUNCIONA
 
 };

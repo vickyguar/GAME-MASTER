@@ -105,7 +105,7 @@ bool cJugador::RenunciarTurno(){
 	int aux;
 	cout << "Ingrese 0 para seguir atacando, 1 para terminar el turno: ";
 	cin >> aux;
-	return (aux==0)? false:true;
+	return (aux == 0) ? false : true;
 }
 
 void cJugador::setEstado(eEstadoJugador _Estado)

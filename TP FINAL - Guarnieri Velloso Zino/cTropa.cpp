@@ -172,3 +172,23 @@ bool cTropa::RecibirDanio(int AT_Ataque) {
 	}
 	return false; //todavía tendo tropa ;)
 }
+
+bool cTropa::RecibirDanioXZona(int AT_Ataque)
+{
+	OrdenarXHP(); //ordeno de más vida a menod vida
+
+	for (unsigned int i = 0; i < Guerreros->getCA(); i++) //recorro la lista de guerreros
+	{
+		(*(*Guerreros)[i]) -= AT_Ataque; //le resto el AT con el que me atacaron (este AT es el del mago que ataca por zona)
+		if ((*Guerreros)[i]->VerificarVida()) //me fijo si estoy vivo
+			Guerreros->Eliminar(i); //si no lo estoy paso a mejor vida
+	}
+	
+	if (Guerreros->getCA() == 0) //me quede sin guerreros en la tropa
+	{
+		delete Guerreros; //bai bai
+		return true; //no tengo tropa
+	}
+
+	return false; //todavía tendo tropa ;)
+}

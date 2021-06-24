@@ -53,6 +53,7 @@ public:
 	* @return bool (si se muere toda la tropa es true)
 	*/
 	bool RecibirDanio(int AT_Ataque);
+	bool RecibirDanioXZona(int AT_Ataque);
 	cListaT<cGuerrero>* getGuerreros() { return Guerreros; }
 	bool operator>(cTropa* otra);
 	string getClave() { return IDTropa; }

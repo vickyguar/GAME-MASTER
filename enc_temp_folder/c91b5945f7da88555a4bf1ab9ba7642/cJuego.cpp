@@ -159,7 +159,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
 		delete MiniListaTropas;
 
-		if(cant<TURNOSMAX&&((*Jugadores)[pos]->RenunciarTurno()||(*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR)) //TODO: FUNCIONA?
+		if((*Jugadores)[pos]->RenunciarTurno()||(*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR)
 			cant = TURNOSMAX+1;
 
 	} while (cant < TURNOSMAX);

@@ -9,7 +9,7 @@
 #include "cMago.h"
 #include "cCaballero.h"
 #include "cArquero.h"
-
+#include "cJuego.h"
 cJugador::cJugador(eEstadoJugador _Estado)
 {
 	cin >> *this; //Uso sobrecarga del cin
@@ -21,7 +21,7 @@ cJugador::cJugador(eEstadoJugador _Estado)
 cJugador::~cJugador(){
 	if (Paises!= NULL)
 	{
-
+		delete Paises;
 	}
 }
 
@@ -50,17 +50,21 @@ void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde e
 	int opcion = 0;
 	unsigned int pos = 0;
 	//si me pasan un pais busco su posicion en la lista global para poder usar el mismo algoritmo
-	if (Destino != NULL) 
+	if (Destino != NULL)
+	{
 		pos = cPais::getListaPaises()->getIndex(Destino->getClave());
+		opcion = 1;
+	}
 
-	cout << "Queres pasar tropas desde " << PaisOrigen->getClave();
-	if(Destino==NULL)
-		cout<< " a algun pais limitrofe?" << endl;
-	else
-		cout << " a " << Destino->getClave()<<endl;
+	
+	if (Destino == NULL)
+	{
+		cout << "Queres pasar tropas desde " << PaisOrigen->getClave();
+		cout << " a algun pais limitrofe?" << endl;
+		cout << "1: SI" << endl << "0: NO" << endl; //TODO: la opcion de no se la tiramos no cuando gana un pais sino cuando termina su turno
+		cin >> opcion;
+	}
 
-	cout << "1: SI" << endl << "0: NO" << endl; //TODO: la opcion de no se la tiramos no cuando gana un pais sino cuando termina su turno
-	cin >> opcion;
 
 	if (opcion)
 	{
@@ -69,7 +73,7 @@ void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde e
 			do
 			{
 				system("cls");
-				//cout << *this << endl;
+				cout << this->To_string() << endl;
 				cout << "Ingrese el numero de un pais limitrofe de " << PaisOrigen->getClave() << ":";
 				cin >> pos; //es la posicion de la lista del jugador
 			} while (Paises->BuscarXPos(pos) != NULL && !(PaisOrigen->VerificarLimitrofes((*Paises)[pos])));
@@ -86,8 +90,8 @@ void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde e
 		for (unsigned int i = 0; i < opcion; i++)
 		{
 			cTropa* aux = PaisOrigen->getTropas()->QuitarXPos(rand1 + i); //lo quito del pais de origen
-			(*(*Paises)[pos]->getTropas()) + aux; //TODO: fijarse de que siga existiendo el obj (lo estoy agregando a la lista del pais limitrofe)
-			if (rand1 >= PaisOrigen->getTropas()->getCA())
+			(*((*PaisOrigen->getListaPaises())[pos]->getTropas())) + aux; 
+			if (rand1 >= PaisOrigen->getTropas()->getCA()) // Si llegamos al final de la lista de tropas y aun tenemos que quitar, agarramos desde el principio
 				rand1 = 0;
 		}
 	}

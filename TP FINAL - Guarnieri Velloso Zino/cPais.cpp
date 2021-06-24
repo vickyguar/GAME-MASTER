@@ -106,8 +106,8 @@ void cPais::RecibirDanio(unsigned int Daño, cListaT<cTropa>* miTropa)
 			//delete aux;
 		}
 	}
-	if (miTropa->getCA() == 0 && Tropas->getCA() == 0) //si ya no tengo tropas (las que mande se murieron y en el pais tapoco tengo)
-		throw new exception(("Perdiste el dominio del pais: " + Nombre).c_str());
+	if (miTropa->getCA() == 0 && Tropas->getCA() == 0) //si ya no tengo tropas (las que defendieron se murieron y en el pais no quedan mas)
+		throw new exception(("Ganaste el dominio del pais: " + Nombre).c_str()); //Aca nunca entra con el jugador que ataca por las reglas del juego (siempre 1 queda en el pais atacante)
 	return;
 }
 

@@ -9,9 +9,7 @@
 #define EA_D34FED27_7152_41ec_81AD_94CE58A64212__INCLUDED_
 
 #include "cMundo.h"
-
-class cJugador;
-
+#include "cJugador.h"
 class cJuego
 {
 private:

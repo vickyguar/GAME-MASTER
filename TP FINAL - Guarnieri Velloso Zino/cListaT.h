@@ -109,7 +109,7 @@ cListaT<T>::cListaT(cListaT<T>& ListaCopia)
 
 	for (unsigned int i = 0; i < ListaCopia.CA; i++)
 	{
-		Agregar(ListaCopia[i]);
+		Agregar(ListaCopia[i]); //agrego por copia
 	}
 }
 
@@ -328,10 +328,10 @@ void cListaT<T>::operator-(T*obj)
 template<class T>
 inline void cListaT<T>::operator=(cListaT<T>* Copia)
 {
-	for (unsigned int i = 0; i < Copia->CA; i++)
-	{
-		this->Agregar(Copia[i]);
-	}
+
+	*this = new cListaT<T>(*Copia); //me creo la lista (toda en null)
+
+	return;
 }
 
 template <class T>

@@ -53,7 +53,7 @@ cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
 		cout << " Introduzca el numero pais al que quiere atacar: ";
 		cin >> pospais;
 
-	} while ((pospais>cPais::getListaPaises()->getCA()) || (Jugador->VerificarMiPais((*cPais::getListaPaises())[pospais]))||
+	} while ((pospais>cPais::getListaPaises()->getCA()) || ((*Jugador) == (*cPais::getListaPaises())[pospais])||
 		!Pais->VerificarLimitrofes((*cPais::getListaPaises())[pospais]) || pospais < 0);
 
 	return (*cPais::getListaPaises())[pospais];
@@ -276,10 +276,10 @@ void cJuego::AsignarPaisesRandom()
 {
 	float Division = (float)Mundo->GetLista()->getCA() / Jugadores->getCA(); //divido paises por cant jugadores
 
-	cListaT<cPais>* CopiaLista = NULL;
-	*CopiaLista = *cPais::getListaPaises(); //SOBRECARGA =
+	//cListaT<cPais>* CopiaLista = NULL;
+	//(*CopiaLista) = cPais::getListaPaises(); //SOBRECARGA =
 
-	//cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(cPais::getListaPaises())); //me copio a los paises para dsp repartirlos
+	cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(cPais::getListaPaises())); //me copio a los paises para dsp repartirlos
 
 	unsigned int PaisesSobrantes = CalcularResiduo(Mundo->GetLista()->getCA(), Jugadores->getCA()); //calculo los que sobran con cantidad paises, cantidad jugadores
 

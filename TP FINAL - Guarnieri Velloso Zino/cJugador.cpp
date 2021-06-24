@@ -179,7 +179,7 @@ string cJugador::getClave()
 	return Username;
 }
 
-bool cJugador::VerificarMiPais(cPais*ptr)
+bool cJugador::VerificarMiPais(cPais* ptr)
 {
 	try
 	{
@@ -196,8 +196,8 @@ bool cJugador::VerificarMiPais(cPais*ptr)
 
 bool cJugador::VerficarAtaque(cPais* Pais)
 {
-	cListaT<cPais>* CopiaLista = new cListaT<cPais>(Pais->GetListaLimitrofes()); //me copio los paises limitrofes a una lista para no perderlos
-
+	//cListaT<cPais>* CopiaLista = new cListaT<cPais>(); //me copio los paises limitrofes a una lista para no perderlos
+	cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(Pais->GetListaLimitrofes()));
 	for (unsigned int i = 0; i < Paises->getCA(); i++) //recorro mi lista de paises
 	{
 		for (unsigned int k = 0; k < CopiaLista->getCA(); k++) //recorro los limitrofes

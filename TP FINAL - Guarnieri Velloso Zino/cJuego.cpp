@@ -156,15 +156,18 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		Batallar((*Jugadores)[pos], paisAtacado, paisAtaque, MiniListaTropas); //Todo lo que le pasamos a batallar est� chequeado
 		
 		system("cls");
-		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
+		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda, como viene el mundo
 		delete MiniListaTropas;
 
-		if (cant < TURNOSMAX) //TODO:FUNCIONA?
+		if (cant < TURNOSMAX) 
 		{
-			if((*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR|| paisAtaque->getTropas()->getCA() == 1||(*Jugadores)[pos]->RenunciarTurno())
+			if((*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR|| (*Jugadores)[pos]->VerifcarPaisDispo(paisAtaque)||(*Jugadores)[pos]->RenunciarTurno())
 			{
 				cant = TURNOSMAX + 1;
 			}
+			//PARA QUE TERMINE EL BUCLE SI YA GANE
+			//SI NO PUEDO ATACAR DESDE NINGUN PAIS
+			//SI RENUNCIO AL TURNO
 		}
 
 	} while (cant < TURNOSMAX);

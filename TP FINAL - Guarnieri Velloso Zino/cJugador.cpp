@@ -217,8 +217,13 @@ bool cJugador::VerifcarPaisDispo(cPais* Pais)
 	{
 		for (unsigned int i = 0; i < Paises->getCA(); i++) //recorro la lista de mis paises
 		{
-			if (((*Paises)[i]->getTropas()->getCA() > 1) && Pais->getClave() != (*Paises)[i]->getClave()) //tengo otro pais que tiene más de una tropa (puede atacar)
-				return true;
+			if (Pais != NULL)
+			{
+				if (((*Paises)[i]->getTropas()->getCA() > 1) && Pais->getClave() != (*Paises)[i]->getClave()) //SI tengo al menos un pais que tiene más de una tropa (puede atacar)   
+					return true;
+				else if ((*Paises)[i]->getTropas()->getCA() > 1)
+					return true;
+			}
 		}
 		return false; //no tengo otro pais para atacar (F) :(
 	}

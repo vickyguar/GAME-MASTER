@@ -24,7 +24,7 @@ bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais) {
 	}
 	else if ((*cPais::getListaPaises())[pospais]->getTropas()->getCA() <= 1) 
 	{
-		cout << "El pais no tiene limitrofes a los cuales puedas atacar." << endl;
+		cout << "El pais no tiene tropas suficientes para que puedas atacar (+1)." << endl;
 		return true;
 	}
 	return false;
@@ -38,7 +38,7 @@ cPais* PosPaisAtaque(cJugador* Jugador) {
 		cin >> pospais;
 	} while (VerificarPaisOrigen(Jugador, pospais));
 	
-	if (!(Jugador->VerficarAtaque((*cPais::getListaPaises())[pospais])) && Jugador->VerifcarPaisDispo((*cPais::getListaPaises())[pospais]))
+	if (!(Jugador->VerficarAtaque((*cPais::getListaPaises())[pospais])))
 	{
 		throw new exception("PERDES EL TURNO POR NO SABER JUGAR, MALISIMA TU ESTRATEGIA");
 		return NULL;
@@ -134,7 +134,8 @@ void cJuego::JugadorAtacando(unsigned int pos)
 {
 	unsigned int cant = 0;
 	unsigned int pospais = 0;
-	(*Jugadores)[pos]->setEstado(eEstadoJugador::ATACANDO);
+	eEstadoJugador aux = eEstadoJugador::ATACANDO;
+	(*Jugadores)[pos]->setEstado(aux);
 	cPais* paisAtaque = NULL;
 	do
 	{
@@ -161,7 +162,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 
 		if (cant < TURNOSMAX) 
 		{
-			if((*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR|| !(*Jugadores)[pos]->VerifcarPaisDispo(paisAtaque)||(*Jugadores)[pos]->RenunciarTurno())
+			if((*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR|| !(*Jugadores)[pos]->VerifcarPaisDispo()||(*Jugadores)[pos]->RenunciarTurno())
 			{
 				cant = TURNOSMAX + 1;
 			}
@@ -176,7 +177,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 	{
 		if(paisAtaque->getTropas()->getCA() != 1)
 			Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion)
-		eEstadoJugador aux = eEstadoJugador::ESPERANDO;
+		aux = eEstadoJugador::ESPERANDO;
 		(*Jugadores)[pos]->setEstado(aux);
 	}
 }

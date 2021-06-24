@@ -106,7 +106,7 @@ void cJuego::AsignarTurno(){
 		if (Rondas == 0)
 		{
 			unsigned int pos = rand() % Jugadores->getCA();
-			(*Jugadores)[pos]->setEstado();//TODO: try catch para operator
+			(*Jugadores)[pos]->setEstado();
 			TurnoPrevio = pos;
 			JugadorAtacando(pos);
 		}
@@ -153,21 +153,31 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false, 3); //le pusimos false :)
 		TropasdeBatalla(paisAtaque, MiniListaTropas);
 
-		Batallar((*Jugadores)[pos], paisAtacado, paisAtaque, MiniListaTropas); //Todo lo que le pasamos a batallar est� chequeado
+		Batallar((*Jugadores)[pos], paisAtacado, paisAtaque, MiniListaTropas); //Todo lo que le pasamos a batallar esta chequeado
 		
 		system("cls");
-		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
+		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda, como viene el mundo
 		delete MiniListaTropas;
 
-		if(cant<TURNOSMAX&&((*Jugadores)[pos]->RenunciarTurno()||(*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR)) //TODO: FUNCIONA?
-			cant = TURNOSMAX+1;
+		if (cant < TURNOSMAX) 
+		{
+			if((*Jugadores)[pos]->getEstado() == eEstadoJugador::GANADOR|| (*Jugadores)[pos]->VerifcarPaisDispo(paisAtaque)||(*Jugadores)[pos]->RenunciarTurno())
+			{
+				cant = TURNOSMAX + 1;
+			}
+			//PARA QUE TERMINE EL BUCLE SI YA GANE
+			//SI NO PUEDO ATACAR DESDE NINGUN PAIS
+			//SI RENUNCIO AL TURNO
+		}
 
 	} while (cant < TURNOSMAX);
 	
 	if ((*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR && paisAtaque != NULL)
 	{
-		Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion)
-		(*Jugadores)[pos]->setEstado(eEstadoJugador::ESPERANDO);
+		if(paisAtaque->getTropas()->getCA() != 1)
+			Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion)
+		eEstadoJugador aux = eEstadoJugador::ESPERANDO;
+		(*Jugadores)[pos]->setEstado(aux);
 	}
 }
 
@@ -175,18 +185,22 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 	
 	cListaT<cTropa>* ListaTropaDef = PaisAtacado->CrearMiniListaRandom();
 	cJugador* JugadorAtacado = DuenioPais(PaisAtacado); //Buscamos el due�o del pais atacado
+	unsigned int AT_ZONA_ATACANTE = 0;
+	unsigned int AT_ZONA_DEFENSOR = 0;
+
 	JugadorAtacado->setEstado(eEstadoJugador::DEFENDIENDO);
-	unsigned int AT_Efectivo = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef); //calcula el da�o base que se va a realizar
+
+	unsigned int AT_Efectivo = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef, AT_ZONA_ATACANTE); //calcula el danio base que se va a realizar
 	
 	if (JugadorAtacado == NULL)
 		throw new exception("El pais no tiene duenio"); //si esto pasa es porque algo hicimos mal
 	
-	unsigned int AT_Defensa_Base = JugadorAtacado->AtaqueEfectivo(ListaTropaDef, Tropas);
+	unsigned int AT_Defensa_Base = JugadorAtacado->AtaqueEfectivo(ListaTropaDef, Tropas, AT_ZONA_DEFENSOR);
 
 	try
 	{
-		PaisAtacante->RecibirDanio(AT_Defensa_Base, Tropas);
-		PaisAtacado->RecibirDanio(AT_Efectivo, ListaTropaDef); 
+		PaisAtacante->RecibirDanio(AT_Defensa_Base, AT_ZONA_DEFENSOR, Tropas);
+		PaisAtacado->RecibirDanio(AT_Efectivo, AT_ZONA_ATACANTE, ListaTropaDef);
 	}
 	catch (exception* ex)
 	{

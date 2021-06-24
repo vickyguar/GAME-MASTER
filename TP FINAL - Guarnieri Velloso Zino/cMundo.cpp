@@ -135,11 +135,6 @@ void cMundo::Imprimir() const
 
 }
 
-
-
-
-
-
 void cMundo::SetUp(const char* Filename)
 {
 	try
@@ -148,7 +143,9 @@ void cMundo::SetUp(const char* Filename)
 	}
 	catch (exception* ex)
 	{
+		string error = ex->what();
 		delete ex;
-		//TODO: hacer algo con la excepcion
+		ex = new exception((error + " :: No hay mundo para setear").c_str());
+		throw ex;
 	}
 }

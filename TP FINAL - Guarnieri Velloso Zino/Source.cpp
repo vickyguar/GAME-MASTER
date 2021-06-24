@@ -9,12 +9,8 @@
 
 #define CANT 2
 //TODO: COSASA A CAMBIAR EN EL UML
-// - agregar clase Mundo
 // - agregar metodos nuevos <3
 
-//TODO: sobre carga del ++
-//TODO: >= -> para tropa
-//TODO: == -> para las claves
 //TODO: constructores y destructores
 
 int main()

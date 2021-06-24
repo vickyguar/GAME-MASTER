@@ -39,6 +39,8 @@ public:
 #pragma region GETTERS & SETTERS
 
 	unsigned int getAT() const;
+	unsigned int getHP() { return HP_Actual; }
+	inline void setHP(unsigned int Daño) { HP_Actual = HP_Actual - Daño; }
 
 #pragma endregion
 
@@ -49,16 +51,16 @@ public:
 	* @return int
 	*/
 	virtual unsigned int Ataque(cGuerrero* Atacado) = 0; //Podemos hacerlo como los chicos con un template
-	/**
-	* CalcularDanio
-	* calcula el numero de daño que genera la unidad
-	* @return int
-	*/
-	/*virtual unsigned int CalcularDanio() const = 0;*/
-	unsigned int getHP() { return HP_Actual; }
-	inline void setHP(unsigned int Daño) { HP_Actual= HP_Actual-Daño; }
+	
 	void operator-=(unsigned int daño) { setHP(daño); }
 	bool VerificarVida() { return (HP_Actual <= HP_Inicial * 0.1); }
 	string getClave() const { return ID; }
 };
+
+ostream& operator<<(ostream& out, cGuerrero* obj)
+{
+	out << "HP: " << obj->getHP() << endl << "AT: " << obj->getAT();
+	return out;
+}
+
 #endif // !defined(EA_86F03F75_F4B2_4011_AD66_663180BE8617__INCLUDED_)

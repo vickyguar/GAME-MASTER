@@ -25,7 +25,7 @@ cJugador::~cJugador(){
 	}
 }
 
-unsigned int cJugador::AtaqueEfectivo(cListaT<cTropa>* miTropa, cListaT<cTropa>* TropaEnemiga){
+unsigned int cJugador::AtaqueEfectivo(cListaT<cTropa>* miTropa, cListaT<cTropa>* TropaEnemiga, unsigned int& AT_ZONA){
 
 	unsigned int Fuerza = 0;
 	unsigned int FuerzaExtra=0;
@@ -35,11 +35,12 @@ unsigned int cJugador::AtaqueEfectivo(cListaT<cTropa>* miTropa, cListaT<cTropa>*
 			dynamic_cast<cCaballero*>((*miTropa)[i]->getGuerreros())->Contrataque();
 
 		for (int k = 0; k < TropaEnemiga->getCA(); k++)
-		{
 			FuerzaExtra += (*miTropa)[i]->AT_Extra((*TropaEnemiga)[k]);
-			
-		}
-		Fuerza += (*miTropa)[i]->CalcularAT() + FuerzaExtra; //voy acumulando los aumentos que tengo que realizar a la hora del ataque.
+		
+		if (dynamic_cast<cMago*>((*miTropa)[i]->getGuerreros()) != NULL) //si mi tropa es de magos
+			AT_ZONA = (*miTropa)[i]->CalcularAT() + FuerzaExtra;
+		else
+			Fuerza += (*miTropa)[i]->CalcularAT() + FuerzaExtra; //voy acumulando los aumentos que tengo que realizar a la hora del ataque.
 	}
 	return Fuerza;
 }
@@ -105,7 +106,7 @@ bool cJugador::RenunciarTurno(){
 	int aux;
 	cout << "Ingrese 0 para seguir atacando, 1 para terminar el turno: ";
 	cin >> aux;
-	return (aux==0)? false:true;
+	return (aux == 0) ? false : true;
 }
 
 void cJugador::setEstado(eEstadoJugador _Estado)

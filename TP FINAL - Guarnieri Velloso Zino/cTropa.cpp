@@ -62,10 +62,7 @@ unsigned int cTropa::AT_Extra(cTropa* otra) {
 	unsigned int ATExtra = 0;
 
 	for (unsigned int i = 0; i < Guerreros->getCA(); i++)
-	{
-		ATExtra += (*Guerreros)[i]->Ataque((*otra->Guerreros)[0]);
-	}
-		
+		ATExtra += (*Guerreros)[i]->Ataque((*otra->Guerreros)[0]); //uso la otra tropa para saber contra quien estoy combatiendo
 	
 	return ATExtra;
 }
@@ -85,21 +82,6 @@ bool cTropa::operator>(cTropa* otra)
 		return true;
 	if (AnalizarTipoGuerrero<cCaballero>((*Guerreros)[0]) && AnalizarTipoGuerrero<cArquero>(otra->Guerreros->BuscarXPos(0)))
 		return true;
-
-	/*if (AnalizarTipoTropa<cListaT<cMago>>(this->Guerreros) && AnalizarTipoTropa<cListaT<cCaballero>>(otra->Guerreros))
-		return true;
-	if (AnalizarTipoTropa<cListaT<cArquero>>(this->Guerreros) && AnalizarTipoTropa<cListaT<cMago>>(otra->Guerreros))
-		return true;
-	if (AnalizarTipoTropa<cListaT<cCaballero>>(this->Guerreros) && AnalizarTipoTropa<cListaT<cArquero>>(otra->Guerreros))
-		return true;*/
-
-
-	/*if (AnalizarTipoTropa<cMago>(this->Guerreros) && AnalizarTipoTropa<cCaballero>(otra->Guerreros))
-		return true;
-	if (AnalizarTipoTropa<cArquero>(this->Guerreros) && AnalizarTipoTropa<cMago>(otra->Guerreros))
-		return true;
-	if (AnalizarTipoTropa<cCaballero>(this->Guerreros) && AnalizarTipoTropa<cArquero>(otra->Guerreros))
-		return true;*/
 
 	return false;
 }
@@ -170,5 +152,25 @@ bool cTropa::RecibirDanio(int AT_Ataque) {
 		delete Guerreros; //bai bai
 		return true; //no tengo tropa
 	}
+	return false; //todavía tendo tropa ;)
+}
+
+bool cTropa::RecibirDanioXZona(int AT_Ataque)
+{
+	OrdenarXHP(); //ordeno de más vida a menod vida
+
+	for (unsigned int i = 0; i < Guerreros->getCA(); i++) //recorro la lista de guerreros
+	{
+		(*(*Guerreros)[i]) -= AT_Ataque; //le resto el AT con el que me atacaron (este AT es el del mago que ataca por zona)
+		if ((*Guerreros)[i]->VerificarVida()) //me fijo si estoy vivo
+			Guerreros->Eliminar(i); //si no lo estoy paso a mejor vida
+	}
+	
+	if (Guerreros->getCA() == 0) //me quede sin guerreros en la tropa
+	{
+		delete Guerreros; //bai bai
+		return true; //no tengo tropa
+	}
+
 	return false; //todavía tendo tropa ;)
 }

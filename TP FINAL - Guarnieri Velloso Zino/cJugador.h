@@ -41,7 +41,7 @@ public:
 	* @param pais que ataca, unidad de ataque
 	* @return int
 	*/
-	unsigned int AtaqueEfectivo(cListaT<cTropa>* TropasAt, cListaT<cTropa>* TropasDef);
+	unsigned int AtaqueEfectivo(cListaT<cTropa>* TropasAt, cListaT<cTropa>* TropasDef, unsigned int& AT_ZONA);
 	/**
 	* Defender
 	* el pais atacado se defiende, y recibe el AT del contrincante (el daño que le hace)
@@ -115,11 +115,14 @@ public:
 		return !(*this == Pais);
 	}
 
+
 	friend istream& operator>>(istream& in, cJugador &Jugador) {
 		cout << "\tIngrese su nombre de usuario: ";
 		in >> Jugador.Username;
 		return in;
 	}
+
+
 
 #pragma endregion
 

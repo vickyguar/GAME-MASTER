@@ -86,6 +86,10 @@ void cListaT<T>::operator+(T* newItem)
 	return;
 }
 
+
+
+
+
 template<class T>
 cListaT<T>::cListaT(cListaT<T>& ListaCopia)
 {
@@ -100,6 +104,9 @@ cListaT<T>::cListaT(cListaT<T>& ListaCopia)
 	{
 		Lista[i] = NULL;
 	}
+
+	//*this = *ListaCopia;
+
 	for (unsigned int i = 0; i < ListaCopia.CA; i++)
 	{
 		Agregar(ListaCopia[i]);
@@ -319,12 +326,12 @@ void cListaT<T>::operator-(T*obj)
 }
 
 template<class T>
-void cListaT<T>::operator=(cListaT<T>* ListaB)
+inline void cListaT<T>::operator=(cListaT<T>* Copia)
 {
-	if (this != &ListaB) {
-		this->cListaT(&ListaB);
+	for (unsigned int i = 0; i < Copia->CA; i++)
+	{
+		this->Agregar(Copia[i]);
 	}
-	return this;
 }
 
 template <class T>

@@ -19,12 +19,13 @@
 
 int main()
 {
-	PlaySound(TEXT("Cancion.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	//PlaySound(TEXT("Cancion.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	srand(time(NULL));
 
 	system("color 0C");
-	cout << Caratula("CARATULA.txt") << endl << endl;
-	cout << "PRESS A KEY TO START " << endl;
+	Caratula("CARATULA.txt");
+	cout << endl << endl;
+	cout << "\t\t\tPRESS A KEY TO START " << endl;
 	getchar();
 	
 	system("cls");

@@ -111,7 +111,7 @@ bool cJugador::RenunciarTurno(){
 
 void cJugador::setEstado(eEstadoJugador _Estado)
 {
-	Estado = _Estado;
+	this->Estado = _Estado;
 }
 
 void cJugador::AgregarTropas()

@@ -38,5 +38,6 @@ public:
 ostream& operator<<(ostream& out, cCaballero* obj)
 {
 	out << "CABALLERO " << endl;
+	return out;
 }
 #endif // !defined(EA_9AC6C449_ED7E_4e46_8F84_741DAFDA5EC4__INCLUDED_)

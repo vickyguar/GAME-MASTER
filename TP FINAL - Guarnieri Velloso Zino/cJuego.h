@@ -72,27 +72,14 @@ public:
 
 #pragma endregion
 
-	
-	void AsignarPaisesRandom(); //FUNCIONA
-
+	void AsignarPaisesRandom(); 
+	cJuego& operator++()
+	{
+		this->SetUpJugadores();
+		return *this;
+	}
 };
-//istream& operator>>(istream& in, cJugador* Jugador)
-//{
-//	int pospais = -1; //para inicializar
-//	unsigned int cont = 0;
-//	if (cont % 2 == 0) {
-//		cout << "\n ---- JUGADOR " << Jugador->getUsername() << " ---- " << endl;
-//		cout << " Introduzca el numero pais al que quiere atacar: \n";
-//		in >> pospais;
-//	}
-//	else {
-//		cout << "\n ---- JUGADOR " << Jugador->getUsername() << " ---- " << endl;
-//		cout << " Introduzca el numero pais desde el que quiere atacar: \n";
-//		in >> pospais;
-//	}
-//
-//	return in;
-//}
+
 
 bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais);
 static unsigned int CalcularResiduo(int Num1, int Num2)
@@ -107,23 +94,6 @@ static unsigned int CalcularResiduo(int Num1, int Num2)
 	else
 		throw new exception(" --- Division por cero --- ");
 }
-
-
-		/*cout << "\n ---- JUGADOR " << (*Jugadores)[pos]->getUsername() <<" ---- "<< endl;
-				cout<<" Introduzca el numero pais desde el que quiere atacar: \n";
-				cin >> pospais;
-				cPais* paisAtaque = (*Jugadores)[pos]->(*getListaPaises())[pospais];
-
-				cout << " Introduzca el numero pais al que quiere atacar: \n";
-				cin >> pospais;
-				//busca en la lista static, chequea limitrofes
-				//cPais*paisAtacado=
-
-				//TODO: METODO PARA ELEGIR TRES TROPAS QUE DEVUELVE cListaT TROPAS
-				cout << " Introduzca el numero de tropas con las que quiere atacar: \n";
-				cin >> pospais;
-				cPais* paisAtaque = (*Jugadores)[pos]->(*getListaPaises())[pospais];*/
-
 
 
 

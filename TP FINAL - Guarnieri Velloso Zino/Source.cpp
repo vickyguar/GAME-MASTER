@@ -55,7 +55,7 @@ int main()
 		{
 			string username;
 			cout << "Jugador " << (i + 1);
-			GAME_MASTER->SetUpJugadores();
+			++(*GAME_MASTER);
 		}
 		GAME_MASTER->AsignarPaisesRandom(); //asigno paises para cada jugador con sus respectivas tropas random
 	}
@@ -65,7 +65,7 @@ int main()
 	do
 	{
 		GAME_MASTER->AsignarTurno(); //Se asigna el turno, y se envía alusuario a jugar. 
-	/*	try
+	  /*	try
 		{
 			cJugador* aux = GAME_MASTER->BuscarXEstado(eEstadoJugador::ATACANDO);
 		}

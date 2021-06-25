@@ -8,6 +8,8 @@ cMundo::cMundo()
 
 cMundo::~cMundo()
 {
+	if(ListaPaises!=NULL)
+		delete ListaPaises;
 }
 
 void cMundo::LeerArchivo(const char* Filename)

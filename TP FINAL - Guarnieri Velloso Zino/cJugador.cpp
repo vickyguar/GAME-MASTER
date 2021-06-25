@@ -72,7 +72,7 @@ void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde e
 			do
 			{
 				system("cls");
-				//cout << *this << endl;
+				cout << To_string() << endl;
 				cout << "Ingrese el numero de un pais limitrofe de " << PaisOrigen->getClave() << ":";
 				cin >> pos; //es la posicion de la lista del jugador
 				try
@@ -121,7 +121,7 @@ void cJugador::AgregarTropas()
 {
 	unsigned int pos = 0;
 	unsigned int aux = Paises->getCA() / 2; // la cantidad de tropas que voy a agregar (las extras)
-	bool Dominio = true;
+	bool Dominio = false;
 	cout << Username << " tenes " << aux << " TROPA/S NUEVAS PARA AGREGAR yey!" << endl;
 
 	for (unsigned int i = 0; i < aux; i++)
@@ -130,11 +130,9 @@ void cJugador::AgregarTropas()
 		{
 			cout << "Ingrese el numero del pais en donde quiere agregar la tropa #" << i + 1 << ": ";
 			cin >> pos;
-			if (pos < cPais::getListaPaises()->getCA())
+			if (pos < cPais::getListaPaises()->getCA()&&pos>0)
 				Dominio = VerificarMiPais((*cPais::getListaPaises())[pos]);
-		} while ((pos < 0 || pos >cPais::getListaPaises()->getCA()) || !Dominio); //TODO: funcion verificar
-		
-	 //si es true es porque es un pais mio y agrego las tropas (SOBRECARGA DEL == porque nunca ibamos a igualar 2 jugadores)
+		} while (!Dominio); //si es true es porque es un pais mio y agrego las tropas (SOBRECARGA DEL == porque nunca ibamos a igualar 2 jugadores)
 		(*cPais::getListaPaises())[pos]->AsignarTropas(); //le agrego una nueva tropa al pais elegido
 	}
 }
@@ -193,20 +191,27 @@ bool cJugador::VerificarMiPais(cPais*ptr)
 
 bool cJugador::VerficarAtaque(cPais* Pais)
 {
-	cListaT<cPais> CopiaLista(*Pais->GetListaLimitrofes()); //me copio los paises limitrofes a una lista para no perderlos
-
+	cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(Pais->GetListaLimitrofes()));
+	//me copio los paises limitrofes a una lista para no perderlos
+	
 	for (unsigned int i = 0; i < Paises->getCA(); i++) //recorro mi lista de paises
 	{
-		for (unsigned int k = 0; k < CopiaLista.getCA(); k++) //recorro los limitrofes
+		for (unsigned int k = 0; k < CopiaLista->getCA(); k++) //recorro los limitrofes
 		{
-			if (VerificarMiPais((CopiaLista)[k]))//si tengo un limitrofe
-				CopiaLista - (CopiaLista)[k]; //lo saco de la lista
+			if (VerificarMiPais((*CopiaLista)[k]))//si tengo un limitrofe
+				CopiaLista->Eliminar(k); //lo saco de la lista
 		}
 	}
-	if (CopiaLista.getCA() == 0) //si la lista de limitrofes esta vacia (o sea que tengo todos los limitrofes de ese pais)
+	if (CopiaLista->getCA() == 0) //si la lista de limitrofes esta vacia (o sea que tengo todos los limitrofes de ese pais)
+	{	
+		delete CopiaLista;
 		return false; //no puedo atacar desde el pais que me llego por parametro
+	}
 	else
+	{	
+		delete CopiaLista;
 		return true; //puedo atacar yey :)
+	}
 }
 
 bool cJugador::VerifcarPaisDispo()

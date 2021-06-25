@@ -42,9 +42,9 @@ unsigned int cPais::CalcularAT_Tropas(cListaT<cTropa>* Tropas)
 
 bool cPais::VerificarLimitrofes(cPais* PaisLimitrofe) {
 
-	for (unsigned int i = 0; i < ListaLimitrofes.size(); i++)
-		if (PaisLimitrofe->Nombre == ListaLimitrofes[i])
-			return true;
+	for (unsigned int i = 0; i < ListaLimitrofes.size(); i++) //recorro los limitrofes (las claves)
+		if (PaisLimitrofe->Nombre == ListaLimitrofes[i]) //son limitrofes?
+			return true; //son limitrofes.
 
 	return false;
 }

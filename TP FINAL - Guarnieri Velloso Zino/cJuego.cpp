@@ -13,35 +13,61 @@ unsigned int cJuego::Rondas = 0;
 
 bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais) {
 
-	if (pospais < 0 || pospais > cPais::getListaPaises()->getCA())
+	if (pospais < 0 || pospais >= cPais::getListaPaises()->getCA())
 	{
 		cout << "El pais de donde quiere atacar es invalido." << endl;
-		return true;
+		return false; //no puedo a tacar
 	}
-	else if (!Jugador->VerificarMiPais((*cPais::getListaPaises())[pospais]))
+	if (!Jugador->VerificarMiPais((*cPais::getListaPaises())[pospais]))
 	{
 		cout << "El pais seleccionado no te pertenece." << endl;
-		return true;
+		return false; //no puedo atacar
 	}
-	else if ((*cPais::getListaPaises())[pospais]->getTropas()->getCA() <= 1) 
+	if ((*cPais::getListaPaises())[pospais]->getTropas()->getCA() <= 1) 
 	{
-		cout << "El pais no tiene limitrofes a los cuales puedas atacar." << endl;
-		return true;
+		cout << "El pais no tiene tropas suficientes para atacar." << endl;
+		return false; //no puedo atacar
 	}
-	return false;
+	return true;
+}
+
+bool VerificarPaisDestino(cJugador* Jugador, cPais* DeDondeAtaco, unsigned int pospais) {
+
+	if (pospais < 0 || pospais >= cPais::getListaPaises()->getCA())
+	{
+		cout << "El pais a donde quiere atacar es invalido." << endl;
+		return false; //no puedo a tacar
+	}
+	if (Jugador->VerificarMiPais((*cPais::getListaPaises())[pospais]))
+	{
+		cout << "El pais seleccionado te pertenece, no podes atacar a un pais tuyo." << endl;
+		return false; //no puedo atacar
+	}
+	if(!DeDondeAtaco->VerificarLimitrofes((*cPais::getListaPaises())[pospais])) //Verificar limitrofes devuelve true si son limitrofes
+	{
+		cout << "Los paises elegidos no son limitrofes." << endl;
+		return false; //no puedo atacar
+	}
+	return true; //puedo continuar con la batalla
 }
 
 cPais* PosPaisAtaque(cJugador* Jugador) {
 	unsigned int pospais = -1;
+	bool PaisesLim = true;
 	if (Jugador->VerifcarPaisDispo())
 	{
-		bool PaisesLim = true;
 		do {
 			cout << "\n ---- JUGADOR " << Jugador->getClave() << " ---- " << endl;
 			cout << " Introduzca el numero pais desde el que quiere atacar: ";
 			cin >> pospais;
-			PaisesLim = Jugador->VerficarAtaque((*cPais::getListaPaises())[pospais]);
-		} while (VerificarPaisOrigen(Jugador, pospais)||!PaisesLim);
+
+			if (pospais < cPais::getListaPaises()->getCA() && pospais >= 0)
+			{
+				cPais* aux = (*cPais::getListaPaises())[pospais];
+				PaisesLim = Jugador->VerificarMiPais(aux); //el atacado es del atacante
+			}
+
+		} while (!VerificarPaisOrigen(Jugador, pospais)||!PaisesLim);
 	}
 	else
 	{
@@ -55,14 +81,16 @@ cPais* PosPaisAtaque(cJugador* Jugador) {
 cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
 	unsigned int pospais = -1;
 	bool Dominio=true;
+
 	do {
 		cout << " Introduzca el numero pais al que quiere atacar: ";
 		cin >> pospais;
 		if (pospais < cPais::getListaPaises()->getCA() && pospais>=0)
 		{
-			Dominio = Jugador->VerificarMiPais((*cPais::getListaPaises())[pospais]); //el atacado es del atacante
+			cPais* aux = (*cPais::getListaPaises())[pospais];
+			Dominio = Jugador->VerificarMiPais(aux); //el atacado es del atacante
 		}
-	} while (Dominio|| !Pais->VerificarLimitrofes((*cPais::getListaPaises())[pospais]));
+	} while (!VerificarPaisDestino(Jugador, Pais, pospais) || Dominio); //verificar destino devuelve true si esta todo ok!
 
 	return (*cPais::getListaPaises())[pospais];
 }
@@ -121,6 +149,9 @@ void cJuego::AsignarTurno(){
 
 	for (unsigned int i = 0; i < Jugadores->getCA(); i++)
 	{
+		system("cls");
+		ImprimirEstados();
+
 		JugadorAtacando(i);
 		try
 		{
@@ -174,7 +205,9 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		system("cls");
 
 		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
+
 		delete MiniListaTropas;
+
 		if ((*Jugadores)[0]->getEstado() == eEstadoJugador::GANADOR)
 		{
 			cant = TURNOS_MAX + 1; return;

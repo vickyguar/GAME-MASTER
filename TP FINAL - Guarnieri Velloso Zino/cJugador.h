@@ -88,7 +88,7 @@ public:
 
 #pragma region VERIFICACIONES
 
-	bool VerificarMiPais(cPais* ptr); //verifica si el pais es mio
+	bool VerificarMiPais(cPais* Pais); //verifica si el pais es mio
 	/*
 	* VerificarAtaque
 	* me fijo si hay limitrofes a los cuales atacar (recordar lo que paso con Chile)

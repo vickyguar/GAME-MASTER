@@ -149,3 +149,21 @@ void Instrucciones() {
 	cout << To_StringInstrucciones();
 	getchar();
 }
+
+string GANASTE() {
+
+	FILE* fp = fopen("GANASTE.txt", "r");
+	string cadena;
+	char buffer[200] = "";
+
+	if (fp != NULL) {
+		while (!feof(fp))
+		{
+			fgets(buffer, 199, fp); //leo por linea
+			cadena += buffer;
+		}
+		return cadena;
+	}
+	else
+		throw new exception(" --- Error al abrir el archivo ---");
+}

@@ -150,6 +150,7 @@ bool cTropa::RecibirDanio(int AT_Ataque) {
 		i++;
 
 	} while (AT_Ataque > 0 && i < Guerreros->getCA()); //esto se repite hasta que el AT que me mandaron sea 0 o se elimine toda la tropa
+
 	if (Guerreros->getCA() == 0) //me quede sin guerreros en la tropa
 	{
 		delete Guerreros; //bai bai

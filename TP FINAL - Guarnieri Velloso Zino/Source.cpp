@@ -31,6 +31,9 @@ int main()
 	system("cls");
 	system("color 07");
 
+	cout << GANASTE();
+	getchar();
+
 	bool ListoXaJugar = Menu();
 	bool SeguirJugando = false;
 	cJuego* GAME_MASTER;
@@ -83,7 +86,9 @@ int main()
 		if (GAME_MASTER->BuscarXEstado(eEstadoJugador::GANADOR) != NULL)
 		{
 			system("color E4");
-			cout << GAME_MASTER->BuscarXEstado(eEstadoJugador::GANADOR)->getClave() << " has logrado conquistar el MUNDO :)" << endl;
+			cout << GAME_MASTER->BuscarXEstado(eEstadoJugador::GANADOR)->getClave() << endl;
+			cout << "\t" << GANASTE();
+			cout << "\t\t has logrado conquistar el MUNDO :)" << endl;
 		}
 	}
 	catch (runtime_error* ex)

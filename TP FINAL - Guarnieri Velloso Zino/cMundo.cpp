@@ -127,16 +127,26 @@ string MAPA(const char* filename) {
 
 void cMundo::Imprimir() const
 {
-	system("color 0C");
-	if (Nombre == "America Latina")
+	
+	if (Nombre == "America Latina") {
+		system("color 0C");
 		cout << MAPA("ARCHIVO1.txt");
+		Sleep(1000); 
+	}
 
-	if (Nombre == "Argentina y sus limitrofes")
+	if (Nombre == "Argentina y sus limitrofes") {
+		system("color 0C");
 		cout << MAPA("ARCHIVO2.txt");
-	if (Nombre == "Springfield")
-		cout << "MAPA :)" << endl;
+		Sleep(1000); 
+	}
+		
+	if (Nombre == "Springfield") {
+		system("color 06");
+		cout << MAPA("ARCHIVO4.txt");
+		Sleep(1000);
 
-	//Sleep(5000); 
+	}
+	
 	system("cls");
 	system("color 07");
 

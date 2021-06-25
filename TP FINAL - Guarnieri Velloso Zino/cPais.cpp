@@ -107,7 +107,7 @@ void cPais::RecibirDanio(unsigned int Daño, cListaT<cTropa>* miTropa)
 		}
 	}
 	if (miTropa->getCA() == 0 && Tropas->getCA() == 0) //si ya no tengo tropas (las que mande se murieron y en el pais tapoco tengo)
-		throw new exception(("Perdiste el dominio del pais: " + Nombre).c_str());
+		throw new exception(("Ganaste el dominio del pais: " + Nombre + " :)").c_str());
 	return;
 }
 

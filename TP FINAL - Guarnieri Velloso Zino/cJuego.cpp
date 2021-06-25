@@ -135,7 +135,9 @@ void cJuego::JugadorAtacando(unsigned int pos)
 	unsigned int cant = 0;
 	unsigned int pospais = 0;
 	
-	(*Jugadores)[pos]->setEstado();
+	eEstadoJugador aux = eEstadoJugador::ATACANDO;
+
+	(*Jugadores)[pos]->setEstado(aux);
 
 	cPais* paisAtaque = NULL;
 	do {
@@ -173,9 +175,8 @@ void cJuego::JugadorAtacando(unsigned int pos)
 	
 	if ((*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR && paisAtaque != NULL)
 	{
-		Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion)
-		eEstadoJugador aux = eEstadoJugador::ESPERANDO;
-		(*Jugadores)[pos]->setEstado(aux);
+		Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion
+		(*Jugadores)[pos]->setEstado();
 	}
 }
 
@@ -198,14 +199,14 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 	{
 		PaisAtacante->RecibirDanio(AT_Defensa_Base, Tropas);
 		PaisAtacado->RecibirDanio(AT_Efectivo, ListaTropaDef); 
-		//TODO: NO ESTA ENTRANDO AL CATCH
+
 	}
 	catch (exception* ex)
 	{
 		cout << ex->what() << endl; //SI ENTRA ES PORQUE PERDIO EL ATACADO DOMINIO DEL PAIS
 		JugadorAtacado->PerderPais(PaisAtacado);
 		JugadorAtacante->GanarPais(PaisAtacado);
-		JugadorAtacante->Reagrupar(PaisAtacante, PaisAtacado);
+		JugadorAtacante->Reagrupar(PaisAtacante);
 		if (JugadorAtacado->getCantPaises() == 0)
 			(*Jugadores) - JugadorAtacado; //BORRAMOS AL JUGADOR SI NO TIENE PAISES
 		if (JugadorAtacante->getCantPaises() == cPais::getListaPaises()->getCA()) {

@@ -75,7 +75,7 @@ void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde e
 				//cout << *this << endl;
 				cout << "Ingrese el numero de un pais limitrofe de " << PaisOrigen->getClave() << ":";
 				cin >> pos; //es la posicion de la lista del jugador
-			} while (Paises->BuscarXPos(pos) != NULL && !(PaisOrigen->VerificarLimitrofes((*Paises)[pos])));
+			} while (Paises->BuscarXPos(pos) == NULL && !(PaisOrigen->VerificarLimitrofes((*Paises)[pos])));
 		}
 
 		do

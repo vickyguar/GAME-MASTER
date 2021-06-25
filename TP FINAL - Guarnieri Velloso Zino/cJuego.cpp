@@ -190,8 +190,11 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		return;
 	else if (paisAtaque != NULL)
 	{
-		if(paisAtaque->getTropas()->getCA() > 1&&(*Jugadores)[pos]->getCantPaises()>1)
+		if (paisAtaque->getTropas()->getCA() > 1 && (*Jugadores)[pos]->getCantPaises() > 1) {
 			Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion
+			
+			paisAtaque->JuntarTropas();
+		}
 		(*Jugadores)[pos]->setEstado();
 	}
 }
@@ -276,8 +279,9 @@ void cJuego::Reagrupar(unsigned int pos, cPais* PaisAtacante)
 
 void cJuego::FindeRondaEntera()
 {
-	for (unsigned int i = 0; i < Jugadores->getCA(); i++)
+	for (unsigned int i = 0; i < Jugadores->getCA(); i++) {
 		(*Jugadores)[i]->AgregarTropas();
+	}
 	ImprimirEstados();
 	return;
 }

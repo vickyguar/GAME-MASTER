@@ -71,7 +71,10 @@ public:
 	* AsignarTropasRandom 
 	* al principio del juego, se le asigna a cada jugador un numero random de tropas en sus paises
 	*/
-	void AsignarTropas(cTropa* Tropa = NULL); //si no le paso nada es porque lo estoy llamando para comenzar el juego
+	void AsignarTropas(cTropa* Tropa = NULL);
+	void JuntarTropas();
+	void ValidarTropas(string ID1, string ID2);
+	//si no le paso nada es porque lo estoy llamando para comenzar el juego
 	cTropa* VerificarTropa(unsigned int NTropa);
 
 	cListaT<cTropa>* CrearMiniListaRandom();
@@ -91,6 +94,9 @@ public:
 
 	bool operator==(string Nombre);
 
+	bool MismoTipo(cGuerrero* Guerrero1, cGuerrero* cGuerrero2);
+
 };
 #endif // !defined(EA_B1B84F12_99FE_46f8_81E7_71FAB22C81F1__INCLUDED_)
+
 

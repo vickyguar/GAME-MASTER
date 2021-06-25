@@ -31,9 +31,6 @@ int main()
 	system("cls");
 	system("color 07");
 
-	cout << GANASTE();
-	getchar();
-
 	bool ListoXaJugar = Menu();
 	bool SeguirJugando = false;
 	cJuego* GAME_MASTER;

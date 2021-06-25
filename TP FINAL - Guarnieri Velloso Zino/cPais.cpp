@@ -58,6 +58,76 @@ void cPais::AsignarTropas(cTropa* Tropa)
 	}
 }
 
+
+void cPais::JuntarTropas() { //Pregunto aca las tropas!
+
+	bool Valido = true;
+	int opcion;
+	string ID1, ID2;
+	do {
+		cout << "\tDesea juntar dos tropas de " << this->getClave() << "?" << endl;
+		cout << "\t1: SI, 0: NO" << endl;
+		cin >> opcion;
+
+	} while (opcion == 1 || opcion == 0);
+
+	if (opcion == 0)
+		return;
+
+	cout << "\nIngrese el ID de las tropas que desea juntar: ";
+
+		do {
+			cout << "ID Tropa #1: ";
+			cin >> ID1;
+
+			cout << "ID Tropa #2: ";
+			cin >> ID2;
+
+			Valido = true;
+
+			try { ValidarTropas(ID1, ID2); }
+			catch (exception* ex) {
+				cout << ex->what();
+				delete ex;
+				Valido = false;
+			}
+
+		} while (!Valido);
+
+}
+
+
+void cPais::ValidarTropas(string ID1, string ID2) {
+	try {
+		Tropas->BuscarItem(ID1);
+		Tropas->BuscarItem(ID2);
+	}
+	catch (exception* ex) {
+		delete ex;
+		ex = new exception("Algun numero de tropa ingresado no pertenece al pais :(");
+
+	}
+
+	if (!MismoTipo((*Tropas->BuscarItem(ID1)->getGuerreros())[0], (*Tropas->BuscarItem(ID2)->getGuerreros())[0]))
+		throw new exception(("Las tropas" + ID1 + " y " + ID2 + " no son del mismo tipo").c_str());
+
+	return;
+}
+
+bool cPais::MismoTipo(cGuerrero* Guerrero1, cGuerrero* Guerrero2)
+{
+	if (dynamic_cast<cMago*>(Guerrero1) != NULL && dynamic_cast<cMago*>(Guerrero2) != NULL)
+		return true;
+
+	if (dynamic_cast<cCaballero*>(Guerrero1) != NULL && dynamic_cast<cCaballero*>(Guerrero2) != NULL)
+			return true;
+
+	if (dynamic_cast<cArquero*>(Guerrero1) != NULL && dynamic_cast<cArquero*>(Guerrero2) != NULL)
+		return true;
+
+	return false;
+}
+
 cTropa* cPais::VerificarTropa(unsigned int NTropa)
 {
 	cTropa* aux = NULL;

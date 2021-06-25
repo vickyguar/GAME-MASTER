@@ -225,9 +225,10 @@ void cJuego::JugadorAtacando(unsigned int pos)
 	{
 		if (paisAtaque->getTropas()->getCA() > 1 && (*Jugadores)[pos]->getCantPaises() > 1) {
 			Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion
-			
-			paisAtaque->JuntarTropas();
+			if (paisAtaque->getTropas()->getCA() > 1) //Repetimos la condicion porque la funcion reagrupar puede modificar la cantidad de tropas de paisAtaque
+				paisAtaque->JuntarTropas();
 		}
+
 		(*Jugadores)[pos]->setEstado();
 	}
 }

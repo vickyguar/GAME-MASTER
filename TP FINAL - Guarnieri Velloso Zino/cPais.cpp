@@ -66,34 +66,41 @@ void cPais::JuntarTropas() { //Pregunto aca las tropas!
 	string ID1, ID2;
 	do {
 		cout << "\tDesea juntar dos tropas de " << this->getClave() << "?" << endl;
-		cout << "\t1: SI, 0: NO" << endl;
+		cout << "\t1: SI" << endl << "\t0: NO" << endl;
 		cin >> opcion;
 
-	} while (opcion == 1 || opcion == 0);
+	} while (opcion != 1 && opcion != 0);
 
 	if (opcion == 0)
 		return;
 
-	cout << "\nIngrese el ID de las tropas que desea juntar: ";
+	cout << "\n\tIngrese el ID de las tropas que desea juntar: \n";
 
-		do {
-			cout << "ID Tropa #1: ";
-			cin >> ID1;
 
-			cout << "ID Tropa #2: ";
-			cin >> ID2;
+	cout << "\tID Tropa #1: ";
+	cin >> ID1;
 
-			Valido = true;
+	cout << "\n\tID Tropa #2: ";
+	cin >> ID2;
 
-			try { ValidarTropas(ID1, ID2); }
-			catch (exception* ex) {
-				cout << ex->what();
-				delete ex;
-				Valido = false;
-			}
+	Valido = true;
 
-		} while (!Valido);
+	try { ValidarTropas(ID1, ID2); }
+	catch (exception* ex) {
+		cout << ex->what();
+		delete ex;
+		Valido = false;
+	}
 
+	if (!Valido)
+		JuntarTropas();
+	
+	for (unsigned int i = 0; i < Tropas->BuscarItem(ID2)->getGuerreros()->getCA(); i++) {
+		(*Tropas->BuscarItem(ID1)->getGuerreros()) + Tropas->BuscarItem(ID2)->getGuerreros()->QuitarXPos(i);
+	}
+	
+	delete[] Tropas->BuscarItem(ID2);
+	//TODO:Sobrecarga igual
 }
 
 
@@ -109,7 +116,7 @@ void cPais::ValidarTropas(string ID1, string ID2) {
 	}
 
 	if (!MismoTipo((*Tropas->BuscarItem(ID1)->getGuerreros())[0], (*Tropas->BuscarItem(ID2)->getGuerreros())[0]))
-		throw new exception(("Las tropas" + ID1 + " y " + ID2 + " no son del mismo tipo").c_str());
+		throw new exception(("Las tropas " + ID1 + " y " + ID2 + " no son del mismo tipo").c_str());
 
 	return;
 }

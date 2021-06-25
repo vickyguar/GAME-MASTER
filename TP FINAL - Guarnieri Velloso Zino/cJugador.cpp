@@ -14,7 +14,7 @@ cJugador::cJugador(eEstadoJugador _Estado)
 {
 	cin >> *this; //Uso sobrecarga del cin
 	Estado = _Estado;
-	Paises = new cListaT<cPais>();
+	Paises = new cListaT<cPais>(false);
 }
 
 cJugador::~cJugador(){

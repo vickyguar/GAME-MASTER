@@ -29,17 +29,18 @@ unsigned int cJugador::AtaqueEfectivo(cListaT<cTropa>* miTropa, cListaT<cTropa>*
 
 	unsigned int Fuerza = 0; //la fuerza base
 	unsigned int FuerzaExtra=0; //mi fuerza extra
-	for (int i = 0; i < miTropa->getCA(); i++) //recorro mis tropas (las que mando a atacar)
+	for (int i = 0; i < miTropa->getCA(); i++) //recorro mis tropas
 	{
 		if (dynamic_cast<cCaballero*>((*miTropa)[i]->getGuerreros()) != NULL && Estado == eEstadoJugador::DEFENDIENDO) //si mi tropa son caballeros
-			dynamic_cast<cCaballero*>((*miTropa)[i]->getGuerreros())->Contrataque(); //hago un contra ataque
+			dynamic_cast<cCaballero*>((*miTropa)[i]->getGuerreros())->Contrataque(); //hago el contratauque
 
-		for (int k = 0; k < TropaEnemiga->getCA(); k++) //recorro las tropas enemigas
-		{
+		for (int k = 0; k < TropaEnemiga->getCA(); k++)
 			FuerzaExtra += (*miTropa)[i]->AT_Extra((*TropaEnemiga)[k]);
-			
-		}
-		Fuerza += (*miTropa)[i]->CalcularAT() + FuerzaExtra; //voy acumulando los aumentos que tengo que realizar a la hora del ataque.
+
+		if (dynamic_cast<cMago*>((*miTropa)[i]->getGuerreros()) != NULL) //si mi tropa es de magos
+			AT_ZONA = (*miTropa)[i]->CalcularAT() + FuerzaExtra; //tengo el at en zona de los magos
+		else
+			Fuerza += (*miTropa)[i]->CalcularAT() + FuerzaExtra; //voy acumulando los aumentos que tengo que realizar a la hora del ataque.
 	}
 	return Fuerza;
 }

@@ -55,16 +55,27 @@ void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde e
 		opcion = 1;
 	}
 
-	if (Destino == NULL) {
-		do {
-			cout << "Queres pasar tropas desde " << PaisOrigen->getClave();
-			cout << " a algun pais limitrofe?" << endl;
+	if (Destino == NULL) 
+	{
+		for (unsigned int k = 0; k < PaisOrigen->GetListaLimitrofes()->getCA(); k++) //recorro los limitrofes
+		{
+			if (VerificarMiPais((*PaisOrigen->GetListaLimitrofes())[k]))//si tengo un limitrofe
+			{
+				condicion = true; break;
+			}
+		}
+		if (condicion)
+		{
+			do {
+				cout << "Queres pasar tropas desde " << PaisOrigen->getClave();
+				cout << " a algun pais limitrofe?" << endl;
 
-			cout << "1: SI" << endl << "0: NO" << endl; //TODO: la opcion de no se la tiramos no cuando gana un pais sino cuando termina su turno
-			cin >> opcion; 
-		} while (opcion != 0 && opcion != 1);
+				cout << "1: SI" << endl << "0: NO" << endl; //TODO: la opcion de no se la tiramos no cuando gana un pais sino cuando termina su turno
+				cin >> opcion;
+			} while (opcion != 0 && opcion != 1);
+		}
 	}
-
+	condicion = false;
 	if (opcion)
 	{
 		if (Destino == NULL)
@@ -130,7 +141,7 @@ void cJugador::AgregarTropas()
 		{
 			cout << "Ingrese el numero del pais en donde quiere agregar la tropa #" << i + 1 << ": ";
 			cin >> pos;
-			if (pos < cPais::getListaPaises()->getCA()&&pos>0)
+			if (pos < cPais::getListaPaises()->getCA()&&pos>=0)
 				Dominio = VerificarMiPais((*cPais::getListaPaises())[pos]);
 		} while (!Dominio); //si es true es porque es un pais mio y agrego las tropas (SOBRECARGA DEL == porque nunca ibamos a igualar 2 jugadores)
 		(*cPais::getListaPaises())[pos]->AsignarTropas(); //le agrego una nueva tropa al pais elegido
@@ -191,17 +202,16 @@ bool cJugador::VerificarMiPais(cPais*ptr)
 
 bool cJugador::VerficarAtaque(cPais* Pais)
 {
-	cListaT<cPais>* CopiaLista = new cListaT<cPais>(*(Pais->GetListaLimitrofes()));
+	cListaT<cPais>* CopiaLista = Pais->GetListaLimitrofes();
 	//me copio los paises limitrofes a una lista para no perderlos
 	
-	for (unsigned int i = 0; i < Paises->getCA(); i++) //recorro mi lista de paises
+	
+	for (unsigned int k = 0; k < CopiaLista->getCA(); k++) //recorro los limitrofes
 	{
-		for (unsigned int k = 0; k < CopiaLista->getCA(); k++) //recorro los limitrofes
-		{
-			if (VerificarMiPais((*CopiaLista)[k]))//si tengo un limitrofe
-				CopiaLista->Eliminar(k); //lo saco de la lista
-		}
+		if (VerificarMiPais((*CopiaLista)[k]))//si tengo un limitrofe
+			CopiaLista->Eliminar(k); //lo saco de la lista
 	}
+		
 	if (CopiaLista->getCA() == 0) //si la lista de limitrofes esta vacia (o sea que tengo todos los limitrofes de ese pais)
 	{	
 		delete CopiaLista;

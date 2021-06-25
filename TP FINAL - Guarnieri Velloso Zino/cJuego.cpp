@@ -35,21 +35,19 @@ cPais* PosPaisAtaque(cJugador* Jugador) {
 	unsigned int pospais = -1;
 	if (Jugador->VerifcarPaisDispo())
 	{
+		bool PaisesLim = true;
 		do {
 			cout << "\n ---- JUGADOR " << Jugador->getClave() << " ---- " << endl;
 			cout << " Introduzca el numero pais desde el que quiere atacar: ";
 			cin >> pospais;
-		} while (VerificarPaisOrigen(Jugador, pospais));
+			PaisesLim = Jugador->VerficarAtaque((*cPais::getListaPaises())[pospais]);
+		} while (VerificarPaisOrigen(Jugador, pospais)||!PaisesLim);
 	}
 	else
 	{
 		throw new exception("PERDES EL TURNO POR NO SABER JUGAR, MALISIMA TU ESTRATEGIA");
 		return NULL;
 	}
-	/*if (!(Jugador->VerficarAtaque((*cPais::getListaPaises())[pospais])))
-	{
-		
-	}*/
 
 	return (*cPais::getListaPaises())[pospais];
 }
@@ -60,7 +58,7 @@ cPais* PosPaisAtacado(cJugador* Jugador, cPais* Pais) {
 	do {
 		cout << " Introduzca el numero pais al que quiere atacar: ";
 		cin >> pospais;
-		if (pospais < cPais::getListaPaises()->getCA() && pospais>0)
+		if (pospais < cPais::getListaPaises()->getCA() && pospais>=0)
 		{
 			Dominio = Jugador->VerificarMiPais((*cPais::getListaPaises())[pospais]); //el atacado es del atacante
 		}

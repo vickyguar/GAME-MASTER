@@ -138,7 +138,6 @@ void cMundo::Imprimir() const
 		Sleep(1000); 
 	}
 		
-
 	if (Nombre == "Springfield") {
 		system("color 06");
 		cout << MAPA("ARCHIVO4.txt");

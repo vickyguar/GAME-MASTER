@@ -11,7 +11,7 @@ enum class eOpcion {
 	SALIR = 0,
 	JUGAR,
 	IMPRIMIR_REGLAS,
-	IMPRIMIR_PERFILES
+//	IMPRIMIR_PERFILES
 };
 
 enum class eMundo {
@@ -51,7 +51,6 @@ string To_StringMenu() {
 	string output = "\t----- MENU -----\n";
 	output += "\t1. JUGAR\n";
 	output += "\t2. IMPRIMIR REGLAS\n";
-	output += "\t3. IMPRIMIR PERFILES\n";
 	output += "\t0. SALIR\n";
 
 	return output;

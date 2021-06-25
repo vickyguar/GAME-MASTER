@@ -63,7 +63,7 @@ eOpcion ElegirOpcion() {
 	cout << To_StringMenu() << endl;
 	scanf_s("%d", &opcion);  //TODO: Despues pasar a CIN
 	
-	if(opcion < eOpcion::SALIR || opcion > eOpcion::IMPRIMIR_PERFILES)
+	if(opcion < eOpcion::SALIR||opcion>eOpcion::IMPRIMIR_REGLAS)
 	{
 		cout << "Opcion invalida\n";
 		Sleep(2000); 

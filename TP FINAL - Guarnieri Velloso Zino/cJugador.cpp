@@ -25,16 +25,16 @@ cJugador::~cJugador(){
 	}
 }
 
-unsigned int cJugador::AtaqueEfectivo(cListaT<cTropa>* miTropa, cListaT<cTropa>* TropaEnemiga){
+unsigned int cJugador::AtaqueEfectivo(cListaT<cTropa>* miTropa, cListaT<cTropa>* TropaEnemiga, unsigned int& AT_ZONA){
 
-	unsigned int Fuerza = 0;
-	unsigned int FuerzaExtra=0;
-	for (int i = 0; i < miTropa->getCA(); i++)
+	unsigned int Fuerza = 0; //la fuerza base
+	unsigned int FuerzaExtra=0; //mi fuerza extra
+	for (int i = 0; i < miTropa->getCA(); i++) //recorro mis tropas (las que mando a atacar)
 	{
 		if (dynamic_cast<cCaballero*>((*miTropa)[i]->getGuerreros()) != NULL && Estado == eEstadoJugador::DEFENDIENDO) //si mi tropa son caballeros
-			dynamic_cast<cCaballero*>((*miTropa)[i]->getGuerreros())->Contrataque();
+			dynamic_cast<cCaballero*>((*miTropa)[i]->getGuerreros())->Contrataque(); //hago un contra ataque
 
-		for (int k = 0; k < TropaEnemiga->getCA(); k++)
+		for (int k = 0; k < TropaEnemiga->getCA(); k++) //recorro las tropas enemigas
 		{
 			FuerzaExtra += (*miTropa)[i]->AT_Extra((*TropaEnemiga)[k]);
 			
@@ -43,7 +43,6 @@ unsigned int cJugador::AtaqueEfectivo(cListaT<cTropa>* miTropa, cListaT<cTropa>*
 	}
 	return Fuerza;
 }
-
 
 void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde el ultio que ataque
 {

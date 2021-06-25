@@ -75,7 +75,7 @@ public:
 	cTropa* VerificarTropa(unsigned int NTropa);
 
 	cListaT<cTropa>* CrearMiniListaRandom();
-	void RecibirDanio(unsigned int Daño, cListaT<cTropa>* miTropa);
+	void RecibirDanio(unsigned int Daño, unsigned int AT_ZONA, cListaT<cTropa>* miTropa);
 
 
 #pragma region GETTERS & SETTERS

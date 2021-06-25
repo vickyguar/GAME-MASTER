@@ -214,7 +214,7 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 		if (JugadorAtacado->getCantPaises() == 0)
 			(*Jugadores) - JugadorAtacado; //BORRAMOS AL JUGADOR SI NO TIENE PAISES
 		if (JugadorAtacante->getCantPaises() == cPais::getListaPaises()->getCA()) {
-			aux = eEstadoJugador::GANADOR;
+			eEstadoJugador aux = eEstadoJugador::GANADOR;
 			JugadorAtacante->setEstado(aux); //PARA VER SI GANO EL ATACANTE VER QUE TENGA TODOS LOS PAISES DEL MUNDO
 		}
 	}	

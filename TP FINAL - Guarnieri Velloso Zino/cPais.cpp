@@ -95,15 +95,23 @@ cListaT<cTropa>* cPais::CrearMiniListaRandom()
 	return aux;
 }
 
-void cPais::RecibirDanio(unsigned int Daño, cListaT<cTropa>* miTropa)
+void cPais::RecibirDanio(unsigned int Daño, unsigned int AT_ZONA, cListaT<cTropa>* miTropa)
 {
 	for (int i = 0; i < miTropa->getCA(); i++) //recorro las tropas que mandan a combatir
 	{
+		if(AT_ZONA != 0)
+		{
+			if ((*miTropa)[i]->RecibirDanioXZona(AT_ZONA))
+			{
+				cTropa* aux = miTropa->QuitarXPos(i); //saco la tropa que murio de la minilista (la que llega por param)
+				Tropas->Quitar(aux->getClave()); //saco la tropa del pais porque murió en el campo
+				//delete aux;
+			}
+		}
 		if ((*miTropa)[i]->RecibirDanio(Daño)) //recibo el daño y si se muere toda la tropa
 		{
 			cTropa* aux = miTropa->QuitarXPos(i); //saco la tropa que murio de la minilista (la que llega por param)
 			Tropas->Quitar(aux->getClave()); //saco la tropa del pais porque murió en el campo
-			//delete aux;
 		}
 	}
 	if (miTropa->getCA() == 0 && Tropas->getCA() == 0) //si ya no tengo tropas (las que mande se murieron y en el pais tapoco tengo)

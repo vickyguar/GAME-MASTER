@@ -19,7 +19,7 @@
 
 int main()
 {
-	PlaySound(TEXT("Cancion.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	//PlaySound(TEXT("Cancion.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	srand(time(NULL));
 
 	system("color 0C");

@@ -102,7 +102,7 @@ public:
 	* @param: Pais
 	* @return bool
 	*/
-	bool VerifcarPaisDispo(cPais* Pais);
+	bool VerifcarPaisDispo();
 
 #pragma endregion
 

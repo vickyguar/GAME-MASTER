@@ -114,9 +114,9 @@ void cPais::RecibirDanio(unsigned int Daño, cListaT<cTropa>* miTropa)
 cListaT<cPais>* cPais::GetListaLimitrofes()
 {
 	cListaT<cPais>* ListaLimitrofesAux = new cListaT<cPais>(false);
-	for (int i = 0; i < ListaLimitrofes.size(); i++)
+	for (unsigned int i = 0; i < ListaLimitrofes.size(); i++)
 	{
-		for (int j = 0; j < ListaPaises->getCA(); j++)
+		for (unsigned int j = 0; j < ListaPaises->getCA(); j++)
 		{
 			if ((*ListaPaises)[j]->getClave()==ListaLimitrofes[i])
 				(*ListaLimitrofesAux) + (*ListaPaises)[j];

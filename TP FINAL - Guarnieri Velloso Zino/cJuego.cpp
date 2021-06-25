@@ -7,7 +7,7 @@
 
 #include "cJuego.h"
 #include "cJugador.h"
-
+#define  TURNOS_MAX 3
 unsigned int cJuego::Rondas = 0;
 
 bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais) {
@@ -38,11 +38,12 @@ cPais* PosPaisAtaque(cJugador* Jugador) {
 		cin >> pospais;
 	} while (VerificarPaisOrigen(Jugador, pospais));
 	
-	if (!(Jugador->VerficarAtaque((*cPais::getListaPaises())[pospais])) && Jugador->VerifcarPaisDispo((*cPais::getListaPaises())[pospais]))
+	if (!(Jugador->VerficarAtaque((*cPais::getListaPaises())[pospais])))
 	{
 		throw new exception("PERDES EL TURNO POR NO SABER JUGAR, MALISIMA TU ESTRATEGIA");
 		return NULL;
 	}
+	cout << (*cPais::getListaPaises())[pospais]->getClave();
 	return (*cPais::getListaPaises())[pospais];
 }
 
@@ -106,33 +107,36 @@ void cJuego::AsignarTurno(){
 		if (Rondas == 0)
 		{
 			unsigned int pos = rand() % Jugadores->getCA();
-			(*Jugadores)[pos]->setEstado();//TODO: try catch para operator
+			
 			TurnoPrevio = pos;
 			JugadorAtacando(pos);
 		}
 		if (TurnoPrevio < Jugadores->getCA())
 		{
 			TurnoPrevio++; //TODO: aca no imprime y debe imprimir
-			(*Jugadores)[TurnoPrevio]->setEstado();
+		
 			JugadorAtacando(TurnoPrevio);
 		}
 		else {
 			TurnoPrevio = 0;
-			(*Jugadores)[TurnoPrevio]->setEstado();
+			
 			JugadorAtacando(TurnoPrevio);
 		}
 		Rondas++; //ternimo la ronda, viene la siguente
 	}
-	else
+	else {
 		FindeRondaEntera();
+		return;
+	}
 }
 
 void cJuego::JugadorAtacando(unsigned int pos)
 {
 	unsigned int cant = 0;
 	unsigned int pospais = 0;
-	bool renunciar = false;
-	(*Jugadores)[pos]->setEstado(eEstadoJugador::ATACANDO);
+	
+	(*Jugadores)[pos]->setEstado();
+
 	cPais* paisAtaque = NULL;
 	do {
 		try
@@ -145,6 +149,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 			delete ex;
 			break; //para que rompa el do-while ya que el jugador no puede atacar con nada
 		}
+		cant++;
 
 		cPais* paisAtacado = PosPaisAtacado((*Jugadores)[pos], paisAtaque);
 		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false, 3); //le pusimos false :)
@@ -152,18 +157,25 @@ void cJuego::JugadorAtacando(unsigned int pos)
 
 		Batallar((*Jugadores)[pos], paisAtacado, paisAtaque, MiniListaTropas); //Todo lo que le pasamos a batallar est� chequeado
 
-		cant++;
+		system("cls");
+
 		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
 		delete MiniListaTropas;
-		renunciar=(*Jugadores)[pos]->RenunciarTurno();
-		if ((*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR)
-			cant = 4;
-	} while (cant < 3 || !renunciar);
+		if((*Jugadores)[pos]->getEstado()== eEstadoJugador::GANADOR)
+			cant = TURNOS_MAX + 1;
+
+		if (cant < TURNOS_MAX) {
+			if ((*Jugadores)[pos]->VerifcarPaisDispo() || (*Jugadores)[pos]->RenunciarTurno())
+				cant = TURNOS_MAX + 1;
+		}
+		
+	} while (cant < TURNOS_MAX);
 	
 	if ((*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR && paisAtaque != NULL)
 	{
 		Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion)
-		(*Jugadores)[pos]->setEstado(eEstadoJugador::ESPERANDO);
+		eEstadoJugador aux = eEstadoJugador::ESPERANDO;
+		(*Jugadores)[pos]->setEstado(aux);
 	}
 }
 
@@ -171,7 +183,10 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 	
 	cListaT<cTropa>* ListaTropaDef = PaisAtacado->CrearMiniListaRandom();
 	cJugador* JugadorAtacado = DuenioPais(PaisAtacado); //Buscamos el due�o del pais atacado
-	JugadorAtacado->setEstado(eEstadoJugador::DEFENDIENDO);
+
+	eEstadoJugador aux = eEstadoJugador::DEFENDIENDO;
+	JugadorAtacado->setEstado(aux);
+
 	unsigned int AT_Efectivo = JugadorAtacante->AtaqueEfectivo(Tropas, ListaTropaDef); //calcula el da�o base que se va a realizar
 	
 	if (JugadorAtacado == NULL)
@@ -193,8 +208,10 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 		JugadorAtacante->Reagrupar(PaisAtacante, PaisAtacado);
 		if (JugadorAtacado->getCantPaises() == 0)
 			(*Jugadores) - JugadorAtacado; //BORRAMOS AL JUGADOR SI NO TIENE PAISES
-		if (JugadorAtacante->getCantPaises() == cPais::getListaPaises()->getCA())
-			JugadorAtacante->setEstado(eEstadoJugador::GANADOR); //PARA VER SI GANO EL ATACANTE VER QUE TENGA TODOS LOS PAISES DEL MUNDO
+		if (JugadorAtacante->getCantPaises() == cPais::getListaPaises()->getCA()) {
+			aux = eEstadoJugador::GANADOR;
+			JugadorAtacante->setEstado(aux); //PARA VER SI GANO EL ATACANTE VER QUE TENGA TODOS LOS PAISES DEL MUNDO
+		}
 	}	
 }
 

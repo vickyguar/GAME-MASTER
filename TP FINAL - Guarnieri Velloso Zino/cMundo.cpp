@@ -129,7 +129,7 @@ void cMundo::Imprimir() const
 	if (Nombre == "Argentina y sus limitrofes")
 		cout << MAPA("ARCHIVO2.txt");
 
-	Sleep(5000); 
+	//Sleep(5000); 
 	system("cls");
 	system("color 07");
 

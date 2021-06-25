@@ -108,11 +108,12 @@ unsigned int ElegirMundo()
 	cout << "\n\t---- MUNDOS -----" << endl;
 	cout << "\t1. ARGENTINA Y LIMITROFES" << endl;
 	cout << "\t2. AMERICA LATINA" << endl;
-	cout << "\t3. NARNIA" << endl;
+	cout << "\t3. SPRINGFIELD" << endl;
+	//cout << "\t4. SPRINGFIELD" << endl;
 	cout << "\tIngrese opcion: "; 
 	cin >> Mundo;
 
-	if (Mundo < (unsigned int)eMundo::AGENTINA || Mundo > ((unsigned int)eMundo::AMERICA_LATINA)+1)
+	if (Mundo < (unsigned int)eMundo::AGENTINA || Mundo > 4/*((unsigned int)eMundo::AMERICA_LATINA)+1*/)
 		Mundo = ElegirMundo();
 
 	system("cls");

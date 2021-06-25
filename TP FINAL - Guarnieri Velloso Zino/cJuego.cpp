@@ -8,6 +8,7 @@
 #include "cJuego.h"
 #include "cJugador.h"
 #define  TURNOS_MAX 3
+#define RONDAS_MAX 10
 unsigned int cJuego::Rondas = 0;
 
 bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais) {
@@ -32,16 +33,23 @@ bool VerificarPaisOrigen(cJugador* Jugador, unsigned int pospais) {
 
 cPais* PosPaisAtaque(cJugador* Jugador) {
 	unsigned int pospais = -1;
-	do {
-		cout << "\n ---- JUGADOR " << Jugador->getClave() << " ---- " << endl;
-		cout << " Introduzca el numero pais desde el que quiere atacar: ";
-		cin >> pospais;
-	} while (VerificarPaisOrigen(Jugador, pospais));
-	
-	/*if (!(Jugador->VerficarAtaque((*cPais::getListaPaises())[pospais])))
+	if (Jugador->VerifcarPaisDispo())
+	{
+		do {
+			cout << "\n ---- JUGADOR " << Jugador->getClave() << " ---- " << endl;
+			cout << " Introduzca el numero pais desde el que quiere atacar: ";
+			cin >> pospais;
+		} while (VerificarPaisOrigen(Jugador, pospais));
+	}
+	else
 	{
 		throw new exception("PERDES EL TURNO POR NO SABER JUGAR, MALISIMA TU ESTRATEGIA");
 		return NULL;
+	}
+	
+	/*if (!(Jugador->VerficarAtaque((*cPais::getListaPaises())[pospais])))
+	{
+		
 	}*/
 
 	return (*cPais::getListaPaises())[pospais];
@@ -102,32 +110,49 @@ cJuego::~cJuego(){
 }
 
 void cJuego::AsignarTurno(){
-	if (Rondas % (Jugadores->getCA())!= 0||Rondas == 0)
-	{ //jfsjndsknnkf
-		if (Rondas == 0)
+
+	for (unsigned int i = 0; i < Jugadores->getCA(); i++)
+	{
+		JugadorAtacando(i);
+		try
 		{
-			unsigned int pos = rand() % Jugadores->getCA();
-			
-			TurnoPrevio = pos;
-			JugadorAtacando(pos);
+			if (BuscarXEstado(eEstadoJugador::GANADOR)) //hay un ganador
+			{
+				Rondas = RONDAS_MAX + 1;
+				return;
+			}
 		}
-		if (TurnoPrevio < Jugadores->getCA())
+		catch (exception* ex)
 		{
-			TurnoPrevio++; //TODO: aca no imprime y debe imprimir
-		
-			JugadorAtacando(TurnoPrevio);
+			delete ex; //todavia no hayun ganador
 		}
-		else {
-			TurnoPrevio = 0;
-			
-			JugadorAtacando(TurnoPrevio);
-		}
-		Rondas++; //ternimo la ronda, viene la siguente
 	}
-	else {
-		FindeRondaEntera();
-		return;
-	}
+	Rondas++;
+	FindeRondaEntera();
+	return;
+	//if (Rondas % (Jugadores->getCA()) == 0||Rondas == 0)
+	//{ //jfsjndsknnkf
+	//	if (Rondas == 0)
+	//	{
+	//		
+	//		
+	//		TurnoPrevio = pos;
+	//		JugadorAtacando(pos);
+	//	}
+	//	if (TurnoPrevio < Jugadores->getCA()-1)
+	//	{
+	//		TurnoPrevio++; //TODO: aca no imprime y debe imprimir
+	//	
+	//		JugadorAtacando(TurnoPrevio);
+	//	}
+	//	else {
+	//		TurnoPrevio = 0;
+	//		
+	//		JugadorAtacando(TurnoPrevio);
+	//	}
+	//	Rondas++; //ternimo la ronda, viene la siguente
+	//}
+	//else {
 }
 
 void cJuego::JugadorAtacando(unsigned int pos)
@@ -144,6 +169,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 	do {
 		try
 		{
+			
 			paisAtaque = PosPaisAtaque((*Jugadores)[pos]);
 		}
 		catch (exception* ex)
@@ -173,8 +199,9 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		}
 		
 	} while (cant < TURNOS_MAX);
-	
-	if ((*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR && paisAtaque != NULL)
+	if ((*Jugadores)[0]->getEstado() == eEstadoJugador::GANADOR) //tengo un ganador
+		return;
+	else if (paisAtaque != NULL)
 	{
 		if(paisAtaque->getTropas()->getCA() > 1)
 			Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion
@@ -264,6 +291,7 @@ void cJuego::FindeRondaEntera()
 {
 	for (unsigned int i = 0; i < Jugadores->getCA(); i++)
 		(*Jugadores)[i]->AgregarTropas();
+	ImprimirEstados();
 	return;
 }
 

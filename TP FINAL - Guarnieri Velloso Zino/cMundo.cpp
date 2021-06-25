@@ -54,6 +54,9 @@ void cMundo::SetNombreMundo(string str) {
 		this->setNombre("Argentina y sus limitrofes");
 	else if (str == "MUNDO 2.txt")
 		this->setNombre("America Latina");
+	else if (str == "MUNDO 3.txt")
+		this->setNombre("Springfield");
+	return;
 }
 
 
@@ -128,6 +131,8 @@ void cMundo::Imprimir() const
 
 	if (Nombre == "Argentina y sus limitrofes")
 		cout << MAPA("ARCHIVO2.txt");
+	if (Nombre == "Springfield")
+		cout << "MAPA :)" << endl;
 
 	//Sleep(5000); 
 	system("cls");

@@ -17,11 +17,10 @@ cJugador::cJugador(eEstadoJugador _Estado)
 	Paises = new cListaT<cPais>();
 }
 
-
 cJugador::~cJugador(){
 	if (Paises!= NULL)
 	{
-
+		delete Paises;
 	}
 }
 
@@ -49,6 +48,7 @@ void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde e
 {
 	int opcion = 0;
 	unsigned int pos = 0;
+	bool condicion = false;
 	//si me pasan un pais busco su posicion en la lista global para poder usar el mismo algoritmo
 	if (Destino != NULL) {
 		pos = cPais::getListaPaises()->getIndex(Destino->getClave());
@@ -75,7 +75,16 @@ void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde e
 				//cout << *this << endl;
 				cout << "Ingrese el numero de un pais limitrofe de " << PaisOrigen->getClave() << ":";
 				cin >> pos; //es la posicion de la lista del jugador
-			} while (Paises->BuscarXPos(pos) == NULL && !(PaisOrigen->VerificarLimitrofes((*Paises)[pos])));
+				try
+				{
+					cPais* aux = Paises->BuscarXPos(pos); //busco al pais
+				}
+				catch (exception* ex)
+				{
+					delete ex;
+					condicion = true; //es true cuando no encuentra el pais
+				}
+			} while (condicion && !(PaisOrigen->VerificarLimitrofes((*Paises)[pos])));
 		}
 
 		do
@@ -202,14 +211,12 @@ bool cJugador::VerficarAtaque(cPais* Pais)
 
 bool cJugador::VerifcarPaisDispo()
 {
+
+	for (unsigned int i = 0; i < Paises->getCA(); i++) //recorro la lista de mis paises
 	{
-		for (unsigned int i = 0; i < Paises->getCA(); i++) //recorro la lista de mis paises
-		{
-			if (((*Paises)[i]->getTropas()->getCA() > 1)) //tengo otro pais que tiene más de una tropa (puede atacar)
-				return true;
-		}
-		return false; //no tengo otro pais para atacar (F) :(
+		if (((*Paises)[i]->getTropas()->getCA() > 1)) //tengo al menos un pais que tiene más de una tropa (puede atacar)
+			return true;
 	}
+	return false; //no tengo otro pais para atacar (F) :(
+
 }
-
-

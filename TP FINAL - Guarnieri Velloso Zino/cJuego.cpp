@@ -38,12 +38,12 @@ cPais* PosPaisAtaque(cJugador* Jugador) {
 		cin >> pospais;
 	} while (VerificarPaisOrigen(Jugador, pospais));
 	
-	if (!(Jugador->VerficarAtaque((*cPais::getListaPaises())[pospais])))
+	/*if (!(Jugador->VerficarAtaque((*cPais::getListaPaises())[pospais])))
 	{
 		throw new exception("PERDES EL TURNO POR NO SABER JUGAR, MALISIMA TU ESTRATEGIA");
 		return NULL;
-	}
-	cout << (*cPais::getListaPaises())[pospais]->getClave();
+	}*/
+
 	return (*cPais::getListaPaises())[pospais];
 }
 
@@ -165,7 +165,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 			cant = TURNOS_MAX + 1;
 
 		if (cant < TURNOS_MAX) {
-			if ((*Jugadores)[pos]->VerifcarPaisDispo() || (*Jugadores)[pos]->RenunciarTurno())
+			if (!(*Jugadores)[pos]->VerifcarPaisDispo() || (*Jugadores)[pos]->RenunciarTurno())
 				cant = TURNOS_MAX + 1;
 		}
 		

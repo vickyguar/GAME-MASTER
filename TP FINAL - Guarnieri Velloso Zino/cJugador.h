@@ -80,7 +80,7 @@ public:
 
 #pragma region SETTES & GETTERS
 
-	void setEstado(eEstadoJugador _Estado = eEstadoJugador::ATACANDO);
+	inline void setEstado(eEstadoJugador Estado_ = eEstadoJugador::ATACANDO) { this->Estado = Estado_; };
 	eEstadoJugador getEstado();
 	string getClave();
 	unsigned int getCantPaises() { return Paises->getCA(); }

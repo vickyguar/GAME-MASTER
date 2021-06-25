@@ -32,7 +32,7 @@ cPais::~cPais(){
  * Es para unificar dos tropas o reagrupar
  */
 void cPais::ModificarTropa(cTropa* NumTropa1, cTropa* NumeroTropa2){
-
+	//TODO: MODIFICAT TROPA
 }
 
 unsigned int cPais::CalcularAT_Tropas(cListaT<cTropa>* Tropas)

@@ -102,8 +102,8 @@ cJuego::~cJuego(){
 }
 
 void cJuego::AsignarTurno(){
-	if (Rondas % (Jugadores->getCA())== 0)
-	{
+	if (Rondas % (Jugadores->getCA())!= 0||Rondas == 0)
+	{ //jfsjndsknnkf
 		if (Rondas == 0)
 		{
 			unsigned int pos = rand() % Jugadores->getCA();
@@ -138,6 +138,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 	eEstadoJugador aux = eEstadoJugador::ATACANDO;
 
 	(*Jugadores)[pos]->setEstado(aux);
+	//TODO:VER DE PASAR NUMERO
 
 	cPais* paisAtaque = NULL;
 	do {
@@ -151,14 +152,14 @@ void cJuego::JugadorAtacando(unsigned int pos)
 			delete ex;
 			break; //para que rompa el do-while ya que el jugador no puede atacar con nada
 		}
-		cant++;
+	
 
 		cPais* paisAtacado = PosPaisAtacado((*Jugadores)[pos], paisAtaque);
 		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false, 3); //le pusimos false :)
 		TropasdeBatalla(paisAtaque, MiniListaTropas);
 
 		Batallar((*Jugadores)[pos], paisAtacado, paisAtaque, MiniListaTropas); //Todo lo que le pasamos a batallar est� chequeado
-
+		cant++;
 		system("cls");
 
 		ImprimirEstados(); //en cada vuelta se imprimen los estados para saber que onda como viene el mundo
@@ -175,7 +176,8 @@ void cJuego::JugadorAtacando(unsigned int pos)
 	
 	if ((*Jugadores)[pos]->getEstado() != eEstadoJugador::GANADOR && paisAtaque != NULL)
 	{
-		Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion
+		if(paisAtaque->getTropas()->getCA() > 1)
+			Reagrupar(pos, paisAtaque);// le permitimos a los jugadores reagrupar al final del turno independientemente de si gano o no al pais al que batallo (desde el ultimo pais que atacaron a limitrofes de su posesion
 		(*Jugadores)[pos]->setEstado();
 	}
 }
@@ -204,9 +206,10 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 	catch (exception* ex)
 	{
 		cout << ex->what() << endl; //SI ENTRA ES PORQUE PERDIO EL ATACADO DOMINIO DEL PAIS
+		delete ex;
 		JugadorAtacado->PerderPais(PaisAtacado);
 		JugadorAtacante->GanarPais(PaisAtacado);
-		JugadorAtacante->Reagrupar(PaisAtacante);
+		JugadorAtacante->Reagrupar(PaisAtacante,PaisAtacado);
 		if (JugadorAtacado->getCantPaises() == 0)
 			(*Jugadores) - JugadorAtacado; //BORRAMOS AL JUGADOR SI NO TIENE PAISES
 		if (JugadorAtacante->getCantPaises() == cPais::getListaPaises()->getCA()) {
@@ -260,6 +263,7 @@ void cJuego::FindeRondaEntera()
 {
 	for (unsigned int i = 0; i < Jugadores->getCA(); i++)
 		(*Jugadores)[i]->AgregarTropas();
+	return;
 }
 
 cJugador* cJuego::BuscarXEstado(eEstadoJugador estado) const

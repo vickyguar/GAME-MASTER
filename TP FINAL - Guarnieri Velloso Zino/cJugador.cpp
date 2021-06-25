@@ -108,11 +108,6 @@ bool cJugador::RenunciarTurno(){
 	return (aux==0)? false:true;
 }
 
-void cJugador::setEstado(eEstadoJugador _Estado)
-{
-	Estado = _Estado;
-}
-
 void cJugador::AgregarTropas()
 {
 	unsigned int pos = 0;

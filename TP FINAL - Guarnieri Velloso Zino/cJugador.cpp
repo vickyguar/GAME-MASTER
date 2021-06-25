@@ -143,7 +143,9 @@ void cJugador::AgregarTropas()
 			cin >> pos;
 			if (pos < cPais::getListaPaises()->getCA()&&pos>=0)
 				Dominio = VerificarMiPais((*cPais::getListaPaises())[pos]);
+
 		} while (!Dominio); //si es true es porque es un pais mio y agrego las tropas (SOBRECARGA DEL == porque nunca ibamos a igualar 2 jugadores)
+
 		(*cPais::getListaPaises())[pos]->AsignarTropas(); //le agrego una nueva tropa al pais elegido
 	}
 }
@@ -194,6 +196,7 @@ bool cJugador::VerificarMiPais(cPais* Pais)
 	catch (exception* ex)
 	{
 		delete ex; //no lo encontré
+		cout << Pais->getClave() << " no le pertenece\n";
 		return false;
 	}
 	

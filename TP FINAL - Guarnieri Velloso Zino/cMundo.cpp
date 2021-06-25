@@ -131,24 +131,29 @@ void cMundo::Imprimir() const
 	if (Nombre == "America Latina") {
 		system("color 0C");
 		cout << MAPA("ARCHIVO1.txt");
-		Sleep(1000); 
+		Sleep(1000);
 	}
 
 	if (Nombre == "Argentina y sus limitrofes") {
 		system("color 0C");
+		PlaySound(TEXT("Vamos Vamos Argentina.wav"), NULL, SND_FILENAME | SND_ASYNC);
+		Sleep(1000);
 		cout << MAPA("ARCHIVO2.txt");
-		Sleep(1000); 
+		Sleep(6000);
 	}
-		
+
 	if (Nombre == "Springfield") {
 		system("color 06");
-		cout << MAPA("ARCHIVO4.txt");
+		PlaySound(TEXT("Los Simpson Intro.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		Sleep(1000);
-
+		cout << MAPA("ARCHIVO4.txt");
+		Sleep(4000);
 	}
-	
+
 	system("cls");
 	system("color 07");
+
+	return;
 
 }
 

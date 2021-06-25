@@ -20,7 +20,7 @@
 
 int main()
 {
-	//PlaySound(TEXT("Cancion.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("Cancion.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	srand(time(NULL));
 
 	system("color 0C");
@@ -82,6 +82,7 @@ int main()
 	{
 		if (GAME_MASTER->BuscarXEstado(eEstadoJugador::GANADOR) != NULL)
 		{
+			PlaySound(TEXT("We Are The Champion.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			system("color E4");
 			cout << "\t"<< GAME_MASTER->BuscarXEstado(eEstadoJugador::GANADOR)->getClave() << endl;
 			cout << GANASTE();

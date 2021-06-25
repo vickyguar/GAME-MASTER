@@ -21,6 +21,7 @@ cTropa::cTropa(){
 }
 
 cTropa::~cTropa(){
+	ContTropas--;
 	if (Guerreros != NULL)
 		delete Guerreros;
 }

@@ -85,7 +85,13 @@ void TropasdeBatalla(cPais* PaisAtaque, cListaT<cTropa>* TropasBatalla)
 			cout << " Introduzca el numero de tropa #" << i+1 << " :";
 			cin >> nTropa;
 			aux = PaisAtaque->VerificarTropa(nTropa);
+
+			if (aux == NULL) {
+				cout << "\tEsa tropa no existe o no le pertenece a " << PaisAtaque->getClave() << " :(\n\tDebera elegir otra\n";
+			}
+
 		} while (aux == NULL);
+
 		try { (*TropasBatalla) + aux; }
 		catch (exception* ex)
 		{

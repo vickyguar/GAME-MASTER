@@ -311,7 +311,7 @@ inline void cListaT<T>::operator-(T*obj)
 	{
 		string error = ex->what();
 		delete ex;
-		ex = new exception((error + " :: No se pudo eliminar con el operator al recibir un objeto").c_str());
+		ex = new exception((error + " :: No se pudo eliminar con el operator al recibir un objeto").c_str()); 
 		throw ex;
 
 	}

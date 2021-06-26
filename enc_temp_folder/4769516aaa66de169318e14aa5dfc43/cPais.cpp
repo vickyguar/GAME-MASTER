@@ -88,15 +88,8 @@ void cPais::JuntarTropas() { //Pregunto aca las tropas!
 	if (!Valido)
 		JuntarTropas();
 	
-	try
-	{
-		(*Tropas->BuscarItem(ID1)) += Tropas->BuscarItem(ID2);
-	}
-	catch (exception* ex)
-	{
-		delete ex;
-		return;
-	}
+	
+	(*Tropas->BuscarItem(ID1))+= Tropas->BuscarItem(ID2);
 	
 	
 	delete[] Tropas->BuscarItem(ID2);

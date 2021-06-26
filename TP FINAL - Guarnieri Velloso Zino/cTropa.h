@@ -61,6 +61,7 @@ public:
 	template<class TipoGuerrero>
 	bool AnalizarTipoGuerrero(cGuerrero* Guerrero1);
 
+	cTropa& operator+=(cTropa* TropaAnadida);
 	void OrdenarXHP();
 
 	string To_string();
@@ -71,8 +72,6 @@ bool cTropa::AnalizarTipoGuerrero(cGuerrero* Guerrero1) //Segun nuestra implemen
 {
 	return (dynamic_cast<TipoGuerrero*>(Guerrero1) != NULL); 
 }
-
-
 
 
 #endif // !defined(EA_48AC6C59_7B06_45a6_B915_81B52F35D200__INCLUDED_)

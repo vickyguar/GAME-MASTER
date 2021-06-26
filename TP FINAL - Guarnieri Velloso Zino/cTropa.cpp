@@ -21,7 +21,7 @@ cTropa::cTropa(){
 }
 
 cTropa::~cTropa(){
-	ContTropas--;
+	//ContTropas--;
 	if (Guerreros != NULL)
 		delete Guerreros;
 }
@@ -178,4 +178,14 @@ bool cTropa::RecibirDanioXZona(int AT_Ataque)
 	}
 
 	return false; //todavía tendo tropa ;)
+}
+
+cTropa& cTropa::operator+=(cTropa* TropaAnadida)
+{
+	for (unsigned int i = 0; i < TropaAnadida->getGuerreros()->getCA(); i++)
+	{
+		this->getGuerreros()->Agregar((*TropaAnadida->getGuerreros())[i]);
+		TropaAnadida->getGuerreros()->Eliminar(i);
+	}
+	return *this;
 }

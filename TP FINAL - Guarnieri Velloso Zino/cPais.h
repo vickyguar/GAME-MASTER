@@ -55,12 +55,6 @@ public:
 	*/
 	unsigned int CalcularAT_Tropas(cListaT<cTropa>* Tropas);
 	/**
-	* ModificarTropa
-	* transfiere unidades de una tropa a la otra TODO: se tiene que verificar que ambas sean del jugador
-	* @param tropa1, tropa2
-	*/
-	void ModificarTropa(cTropa* NumTropa1, cTropa* NumeroTropa2);
-	/**
 	* VerificarLimitrofes 
 	* verifica que 2 paises sean limitrofes. Se recorre la lista estatica y se la compara con la lista de limitrofes
 	* que tiene el pais
@@ -72,8 +66,19 @@ public:
 	* al principio del juego, se le asigna a cada jugador un numero random de tropas en sus paises
 	*/
 	void AsignarTropas(cTropa* Tropa = NULL);
+	/**
+	* JuntarTropas
+	* transfiere unidades de una tropa a la otra 
+	*
+	* @param tropa1, tropa2
+	*/
 	void JuntarTropas();
+	/**
+	*  ValidarTropas 
+	*  verifica que ambas sean del jugador e igual tipo
+	*/
 	void ValidarTropas(string ID1, string ID2);
+
 	//si no le paso nada es porque lo estoy llamando para comenzar el juego
 	cTropa* VerificarTropa(unsigned int NTropa);
 

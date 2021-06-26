@@ -196,7 +196,6 @@ bool cJugador::VerificarMiPais(cPais* Pais)
 	catch (exception* ex)
 	{
 		delete ex; //no lo encontré
-		cout << Pais->getClave() << " no le pertenece\n";
 		return false;
 	}
 	

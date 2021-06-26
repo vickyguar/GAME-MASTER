@@ -10,15 +10,14 @@ using namespace std;
 enum class eOpcion {
 	SALIR = 0,
 	JUGAR,
-	IMPRIMIR_REGLAS,
-//	IMPRIMIR_PERFILES
+	IMPRIMIR_REGLAS
 };
 
 enum class eMundo {
 
 	AGENTINA = 0,
-	AMERICA_LATINA
-	//NARNIA,
+	AMERICA_LATINA,
+	SPRINGFIELD
 };
 
 string Caratula(const char* Filename);

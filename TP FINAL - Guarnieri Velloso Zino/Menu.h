@@ -60,7 +60,7 @@ eOpcion ElegirOpcion() {
 	eOpcion opcion = eOpcion::SALIR;
 	
 	cout << To_StringMenu() << endl;
-	scanf_s("%d", &opcion);  //TODO: Despues pasar a CIN
+	scanf_s("%d", &opcion); 
 	
 	if(opcion < eOpcion::SALIR||opcion>eOpcion::IMPRIMIR_REGLAS)
 	{
@@ -85,7 +85,7 @@ bool Menu() {
 	case eOpcion::IMPRIMIR_REGLAS:
 		Instrucciones();
 		cout << " Presione cualquier tecla para volver al menu\n";
-		getchar();//TODO: jaja no me gusta el getchar
+		getchar();
 		system("cls");
 		Menu();
 		break;

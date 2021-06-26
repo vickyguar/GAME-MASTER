@@ -88,7 +88,7 @@ static unsigned int CalcularResiduo(int Num1, int Num2)
 	{
 		float Division = (float)Num1 / Num2;
 		int ParteEntera = Num1 / Num2;
-		int Residuo = (int)(Division - ParteEntera) * Num2;
+		int Residuo = (Division - ParteEntera) * Num2;
 		return Residuo;
 	}
 	else

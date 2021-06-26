@@ -133,7 +133,7 @@ void TropasdeBatalla(cPais* PaisAtaque, cListaT<cTropa>* TropasBatalla)
 
 cJuego::cJuego(unsigned int cantjugadores)
 {
-	Jugadores = new cListaT<cJugador>[cantjugadores];
+	Jugadores = new cListaT<cJugador>(cantjugadores);
 	Mundo = new cMundo(); 
 	TurnoPrevio = 0;
 }
@@ -200,7 +200,7 @@ void cJuego::JugadorAtacando(unsigned int pos)
 		cListaT<cTropa>* MiniListaTropas = new cListaT<cTropa>(false, 3); //le pusimos false :)
 		TropasdeBatalla(paisAtaque, MiniListaTropas);
 
-		Batallar((*Jugadores)[pos], paisAtacado, paisAtaque, MiniListaTropas); //Todo lo que le pasamos a batallar est� chequeado
+		Batallar((*Jugadores)[pos], paisAtacado, paisAtaque, MiniListaTropas); //lo que le pasamos a batallar esta chequeado
 		cant++;
 		system("cls");
 
@@ -257,8 +257,11 @@ void cJuego::Batallar(cJugador* JugadorAtacante, cPais* PaisAtacado, cPais* Pais
 
 	catch (exception* ex)
 	{
+		system("color 0A");
 		cout << ex->what() << endl; //SI ENTRA ES PORQUE PERDIO EL ATACADO DOMINIO DEL PAIS
 		delete ex;
+		Sleep(1000);
+		system("color 07");
 		JugadorAtacado->PerderPais(PaisAtacado);
 		JugadorAtacante->GanarPais(PaisAtacado);
 		JugadorAtacante->Reagrupar(PaisAtacante,PaisAtacado);

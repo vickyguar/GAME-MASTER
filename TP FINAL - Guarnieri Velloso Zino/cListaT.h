@@ -152,7 +152,7 @@ T* cListaT<T>::Quitar(const string Key)
 		throw ex;
 	}
 	T* aux = Lista[pos]; // si lo encuentra lo guardo
-	for (int i = pos; i < CA - 1; i++)
+	for (unsigned int i = pos; i < CA - 1; i++)
 	{
 		Lista[i] = Lista[i + 1]; //corro todo una posicion para arriba 
 	}
@@ -293,7 +293,10 @@ inline void cListaT<T>::operator-(unsigned int pos)
 	}
 	catch (exception* ex)
 	{
-		delete ex; //TODO: EXCEPCION 
+		string error = ex->what();
+		delete ex;
+		ex = new exception((error + " :: No se pudo eliminar con el operator al recibir una pos").c_str());
+		throw ex;
 	}
 }
 template<class T>
@@ -306,7 +309,11 @@ inline void cListaT<T>::operator-(T*obj)
 	}
 	catch (exception* ex)
 	{
-		delete ex; //TODO: EXCEPCION 
+		string error = ex->what();
+		delete ex;
+		ex = new exception((error + " :: No se pudo eliminar con el operator al recibir un objeto").c_str());
+		throw ex;
+
 	}
 }
 

@@ -9,14 +9,6 @@
 
 #define CANT 2
 #define RONDAS_MAX 10
-//TODO: COSASA A CAMBIAR EN EL UML
-// - agregar clase Mundo
-// - agregar metodos nuevos <3
-
-//TODO: sobre carga del ++
-//TODO: >= -> para tropa
-//TODO: == -> para las claves
-//TODO: constructores y destructores
 
 int main()
 {
@@ -42,7 +34,11 @@ int main()
 		
 		GAME_MASTER = new cJuego(CANT); 
 		//abro archivo y creo el mundo
-		GAME_MASTER->SetUpMundo(Mundo); //a esta altura ya tenemos la cantidad de paises
+		try { GAME_MASTER->SetUpMundo(Mundo); }
+		catch (exception* ex) { 
+			cout << ex->what(); 
+			delete ex; 
+		}//a esta altura ya tenemos la cantidad de paises
 
 		GAME_MASTER->getMundo()->Imprimir();
 
@@ -65,15 +61,6 @@ int main()
 	do
 	{
 		GAME_MASTER->AsignarTurno(); //Se asigna el turno, y se envía alusuario a jugar. 
-	  /*	try
-		{
-			cJugador* aux = GAME_MASTER->BuscarXEstado(eEstadoJugador::ATACANDO);
-		}
-		catch (runtime_error* ex)
-		{
-			delete ex;
-			SeguirJugando = true;
-		}*/
 
 	} while (GAME_MASTER->getRondas() <= RONDAS_MAX); //las condiciones serían: que haya un ganador o supere un maximo de 10 turnos (cuando hay un ganador se supera el nuemro de rondas)
 
@@ -86,16 +73,17 @@ int main()
 			system("color E4");
 			cout << "\t"<< GAME_MASTER->BuscarXEstado(eEstadoJugador::GANADOR)->getClave() << endl;
 			cout << GANASTE();
-			cout << "\t\t has logrado conquistar el MUNDO :)" << endl;
+			cout << "\n\t has logrado conquistar el MUNDO :)" << endl;
+			Sleep(8000);
 		}
 	}
 	catch (runtime_error* ex)
 	{
 		delete ex;
-		system("color E7"); //TODO: ver color
+		system("color E5");
 		cout << "Ningun jugador tuvo el potencial para conquistar el mundo" << endl;
 	}
 	
-	delete GAME_MASTER; //supongo que aca se borra todo lo creado (paises, jugadores, tropas, etc)
+	delete GAME_MASTER; //aca se borra todo lo creado (paises, jugadores, tropas, etc)
 	return 0;
 }

@@ -78,8 +78,6 @@ bool cTropa::operator>(cTropa* otra)
 	//ARQUERO VS MAGO -> fuerte arquero
 	//CABALLERO VS ARQUERO -> fuerte caballero
 
-	//TODO: PARA MI ACA ES COMPARAR CON LAS LISTAS
-
 	if(AnalizarTipoGuerrero<cMago>((*Guerreros)[0]) && AnalizarTipoGuerrero<cCaballero>(otra->Guerreros->BuscarXPos(0)))
 		return true;
 	if (AnalizarTipoGuerrero<cArquero>((*Guerreros)[0]) && AnalizarTipoGuerrero<cMago>(otra->Guerreros->BuscarXPos(0)))
@@ -185,7 +183,10 @@ cTropa& cTropa::operator+=(cTropa* TropaAnadida)
 	for (unsigned int i = 0; i < TropaAnadida->getGuerreros()->getCA(); i++)
 	{
 		this->getGuerreros()->Agregar((*TropaAnadida->getGuerreros())[i]);
-		TropaAnadida->getGuerreros()->Eliminar(i);
+		
 	}
+	/*for(unsigned int i =0; i < TropaAnadida->getGuerreros()->getCA();i++)
+		TropaAnadida->getGuerreros()->Eliminar(i);*/
+
 	return *this;
 }

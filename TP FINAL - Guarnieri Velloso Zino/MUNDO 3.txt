@@ -1,5 +1,4 @@
-Planta Nuclear-Escuela-Crusty's-Taberna de Mou
-Escuela-Taberna de Mou
-Planta Nuclear-Crusty's
-Escuela-Taberna de Mou
-Planta Nuclear-Escuela-Crusty's
+Planta Nuclear-Krusty's-Taberna de Mou
+Taberna de Mou-Krusty's
+Planta Nuclear-Taberna de Mou
+Krusty's-Planta Nuclear

@@ -70,7 +70,7 @@ void cJugador::Reagrupar(cPais* PaisOrigen,cPais*Destino) //este pais es desde e
 				cout << "Queres pasar tropas desde " << PaisOrigen->getClave();
 				cout << " a algun pais limitrofe?" << endl;
 
-				cout << "1: SI" << endl << "0: NO" << endl; //TODO: la opcion de no se la tiramos no cuando gana un pais sino cuando termina su turno
+				cout << "1: SI" << endl << "0: NO" << endl; //la opcion de no se la tiramos no cuando gana un pais sino cuando termina su turno
 				cin >> opcion;
 			} while (opcion != 0 && opcion != 1);
 		}
@@ -153,7 +153,7 @@ void cJugador::AgregarTropas()
 void cJugador::GanarPais(cPais* Pais)
 {
 	try { Paises->Agregar(Pais); } //AGREGO EL PAIS A LA LISTA DE JUGADOR
-	catch (exception* ex) { delete ex; }//TODO: ATENCION
+	catch (exception* ex) { delete ex; }
 }
 
 void cJugador::PerderPais(cPais* Pais)

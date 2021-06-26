@@ -17,8 +17,10 @@ cPais::cPais(string Nombre, vector<string> Limitrofes): ListaLimitrofes(Limitrof
 	*ListaPaises + this; //lo agrego a la lista
 }
 
-cPais::cPais(cPais& Pais)
+cPais::cPais(cPais& Pais) :ListaLimitrofes(Pais.ListaLimitrofes)
 {
+	this->Nombre = Pais.Nombre;
+	this->Tropas = Pais.Tropas;
 }
 
 cPais::~cPais(){
@@ -54,11 +56,11 @@ void cPais::AsignarTropas(cTropa* Tropa)
 
 void cPais::JuntarTropas() { //Pregunto aca las tropas!
 
-	bool Valido = true;
+	/*bool Valido = true;
 	int opcion;
 	string ID1, ID2;
 	do {
-		cout << "\tDesea juntar dos tropas de " << this->getClave() << "?" << endl;
+		cout << "\n\tDesea juntar dos tropas de " << this->getClave() << "?" << endl;
 		cout << "\t1: SI" << endl << "\t0: NO" << endl;
 		cin >> opcion;
 
@@ -87,20 +89,21 @@ void cPais::JuntarTropas() { //Pregunto aca las tropas!
 
 	if (!Valido)
 		JuntarTropas();
-	
-	try
-	{
-		(*Tropas->BuscarItem(ID1)) += Tropas->BuscarItem(ID2);
-	}
-	catch (exception* ex)
-	{
-		delete ex;
-		return;
-	}
-	
-	
-	delete[] Tropas->BuscarItem(ID2);
-	
+	else {
+
+		try
+		{
+			(*Tropas->BuscarItem(ID1)) += Tropas->BuscarItem(ID2);
+		}
+		catch (exception* ex)
+		{
+			delete ex;
+			return;
+		}
+
+
+		delete Tropas->BuscarItem(ID2);
+	}*/
 }
 
 
@@ -174,7 +177,7 @@ cListaT<cTropa>* cPais::CrearMiniListaRandom()
 
 void cPais::RecibirDanio(unsigned int Daño, unsigned int AT_ZONA, cListaT<cTropa>* miTropa)
 {
-	for (int i = 0; i < miTropa->getCA(); i++) //recorro las tropas que mandan a combatir
+	for (unsigned int i = 0; i < miTropa->getCA(); i++) //recorro las tropas que mandan a combatir
 	{
 		if(AT_ZONA != 0)
 		{
@@ -192,7 +195,7 @@ void cPais::RecibirDanio(unsigned int Daño, unsigned int AT_ZONA, cListaT<cTropa
 		}
 	}
 	if (miTropa->getCA() == 0 && Tropas->getCA() == 0) //si ya no tengo tropas (las que mande se murieron y en el pais tapoco tengo)
-		throw new exception(("Ganaste el dominio del pais: " + Nombre + " :)").c_str());
+		throw new exception(("\nGanaste el dominio del pais: " + Nombre + " :)").c_str());
 	return;
 }
 
